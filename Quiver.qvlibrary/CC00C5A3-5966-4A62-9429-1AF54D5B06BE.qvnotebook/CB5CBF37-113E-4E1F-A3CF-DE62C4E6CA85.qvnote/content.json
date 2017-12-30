@@ -1,0 +1,25 @@
+{
+  "title": "Deep Dive into Stateful Stream Processing in Structured Streaming",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](https://www.youtube.com/watch?v=hyZU_bw1-ow)"
+    },
+    {
+      "type": "markdown",
+      "data": "A basic Structured Streaming call:\n![IMAGE](quiver-image-url/06601CEC1A2F8CA7D41F20759DEC9DB9.jpg =600x400)"
+    },
+    {
+      "type": "text",
+      "data": "Spark automatically converts your SQL statement to a streamified form of itself, one that is aware of what state needs to be preserved for the query and the output mode. State is carried / updated from batch to batch, and is backed by checkpointing (secretly just a WAL) which will persist to some external data sink.<div><br></div><div>The semantics are also exactly-once!</div>"
+    },
+    {
+      "type": "markdown",
+      "data": "Watermarking:\n\n* only used in stateful operations, since only stateful things care about data completeness\n* Classic trade-off - bigger watermarks \\<=\\> more state in memory \\<=\\> higher chance of completeness.\n* Can also deduplicate - state is then a list of unique identifiers for previously-processed records\n\n![](quiver-image-url/481DCA3265E8C1FD04089B9E510EEDDB.jpg =600x400)\n\n* Stream joins - stream to stream will be in 2.3+ and stream to static dataset is available in 2.0+\n* State here is just the full records (no free lunch), so state accumulates. Need to add watermarks for data lateness, like:\n![IMAGE](quiver-image-url/BA3B50F10037E58DB61D8D50A72DA895.jpg =600x300)\n\n"
+    },
+    {
+      "type": "markdown",
+      "data": "\n\n"
+    }
+  ]
+}

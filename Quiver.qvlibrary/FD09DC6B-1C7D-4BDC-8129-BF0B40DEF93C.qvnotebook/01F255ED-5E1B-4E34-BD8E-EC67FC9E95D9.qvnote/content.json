@@ -1,0 +1,21 @@
+{
+  "title": "Memory Translation and Segmentation",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to article](http://duartes.org/gustavo/blog/post/memory-translation-and-segmentation)"
+    },
+    {
+      "type": "markdown",
+      "data": "* Memory requests flowing through the front side bus (FSB) come in as `physical addresses`, which are **final**. Incrementing addresses from 0 to max memory location.\n* The CPU and its process management, however, deals with logical address that must be translated to physical ones. The workflow is roughly:\n![IMAGE](quiver-image-url/78F01AF7A6E0979A33F26B1621AEB27F.jpg =669x268)\n* Without paging, the output of the segmentation unit is a physical address, but you still need at least two steps.\n* Why? Historical reasons."
+    },
+    {
+      "type": "markdown",
+      "data": "* x86 architectures use a `segment selector` stored in `segment registers` to tell an instruction **which region of memory to use**, like an pre-offset.\n  * So when memory addresses are referenced by an instruction, they're automatically interpreted as an address offset within the selected segment.\n* Segment registers existed for the stack (`ss`), program code (`cs`), and for data (`ds`,`es`)\n* Segment selection is _always on_, but it works different for _real_ vs _protected_ kernel modes"
+    },
+    {
+      "type": "markdown",
+      "data": "####Real mode\n* In real mode (eg. early boot), the segment selector is only 16 bits, confining it to 64k addresseable - we can scale it to be able to address more 64k segments of memory\n* Intel multiplies by 16 to scale, confining addresseable segments to 1MB\n\n![IMAGE](quiver-image-url/4EAB350CA505B82675339C9BCEE4418A.jpg =629x295)\n* Collisions: \"Real mode segment starts range from 0 all the way to 0xFFFF0 (16 bytes short of 1 MB) in 16-byte increments. To these values you add a 16-bit offset (the logical address) between 0 and 0xFFFF.\" -- calculate out and it becomes clear that multiple offset / logical address combinations can reference the same physical memory location (which sounds awful)\n\n####32-bit protected mode\n* Now we have segment descriptors, and the segment selector contains an index into a table of segment descriptors\n* Segment descriptors contain a `base address`, which specifies a 32-bit linear address for the beginning of a segment - `base address` + `logical address` = `physical address`.\n* Segment descriptors are held in the `Global Descriptor Table` (GDT) - each CPU contains a `gdtr` register which stores the linear address of the GDT\n* **BUT** - 32-bit registers and instructions can address the entire linear memory range, so why segment? Modern x86 processors bypass the segmenting for this reason in `flat mode`.\n* The entirety of 32-bit protected mode memory addressing:\n\n![IMAGE](quiver-image-url/C94DF69FFF292D2E2FCE501AD4FC87CA.jpg =667x521)\n\n* Segments used during boot: a flat code segment, a flat data segment, and a Task State Segment (`tss`, think process / pid management)\n* Modern CPU architectures work around segmentation to avoid unnecessary lookups when modern instructions can address all of memory - flat mode is standard!"
+    }
+  ]
+}

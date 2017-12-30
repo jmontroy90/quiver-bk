@@ -1,0 +1,29 @@
+{
+  "title": "Apache Spark Bench: Simulate, Test, Compare, Exercise, and Yes, Benchmark",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to talk](https://www.youtube.com/watch?v=GGO5q_TSdgI)\n\nGoals:\n1. I want to run a standard set of benchmarks with generated data against one instance of Spark, one time (this was the earliest goal).\n2. As a Spark developer, I want to run regression tests with my changes in order to prove some authoritative performance stats with my PR.\n3. As an enterprise user of Spark, I want to make my daily batch ingest job run faster by tuning parameters.\n4. As a DevOps professional, I want to see how performance changes for our daily jobs as I add more nodes to our prod cluster."
+    },
+    {
+      "type": "markdown",
+      "data": "A sample config file:\n\n![](quiver-image-url/9543E680FE9FC86D70A6B9BCEB3C7788.jpg =600x300)\n\nA single workload is the atomic unit of Spark-Bench - can do some IO, compute; all stages of workload are timed!\n\nWhat kind of workloads?\n\n![](quiver-image-url/4A55C825B1181824E1F08F9CBB0A0854.jpg =600x300)\n\nCan bring your own workload, which is huge.\n\n![](quiver-image-url/0754F1A918B07CEBE9E10C2163647DEE.jpg =600x300)"
+    },
+    {
+      "type": "markdown",
+      "data": "How do you compose workloads to simulate different stress scenarios?\n\n![](quiver-image-url/13A65C0F9B536E1A57B7D5D4692199CD.jpg =600x300)\n\nFor example:\n![IMAGE](quiver-image-url/BE8F44F918261F349E6548D897220BB7.jpg =600x300)\n![IMAGE](quiver-image-url/D289EED468636F4374905BDCE2EEE20E.jpg =600x300)"
+    },
+    {
+      "type": "markdown",
+      "data": "One more level of parallelism available to answer: how do I vary configuration over workload suites? Answer: a `spark-submit-config` allows you to tune a given Spark Submit (which could be running any number of workload suites) in any way you could tune a basic Spark Submit, AND allows you to specify parallelism. So this means - configure Spark version, memory params, configs, anything!"
+    },
+    {
+      "type": "markdown",
+      "data": "Examples:\n![IMAGE](quiver-image-url/922243F52C53B96E26758E2309D4AA9B.jpg =600x300)\n![IMAGE](quiver-image-url/A44C25B94CBE18FB293C87338E91AF4D.jpg =600x300)\n\nHow do we generate this last one in config?\n![IMAGE](quiver-image-url/B9F83CF95C1F51FE6F168BE361B306BB.jpg =600x300)"
+    },
+    {
+      "type": "markdown",
+      "data": "And my favorite feature: config cross products on Spark Submits!\n![Screen Shot 2017-11-21 at 11.19.36 AM.png](quiver-image-url/5D954C6214D0D5DBFE0F33052394E9DB.png =600x300)"
+    }
+  ]
+}

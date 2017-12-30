@@ -1,0 +1,25 @@
+{
+  "title": "Keynote - Databricks Delta",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to talk](https://www.youtube.com/watch?v=gg-lEJ4sBaA&t=1475s)\n\nDatabricks Delta seeks to unite the advantages of traditional data lakes with those of data warehouses - massive scale and open source-friendly, but with reliable performance for both massive scans as well as point look-ups."
+    },
+    {
+      "type": "text",
+      "data": "<img src=\"quiver-image-url/9714368F5E265664CD5338FDCBA9222E.png\" alt=\"Screen Shot 2017-11-17 at 1.07.12 PM.png\" width=\"617\" height=\"341\"><div><img src=\"quiver-image-url/A85D34235E8FA4884D6DA217323A94AF.png\" alt=\"Screen Shot 2017-11-17 at 1.07.21 PM.png\" width=\"618\" height=\"337\"><img src=\"quiver-image-url/8A85D55CB77201F4AE16C443EDEB248C.png\" alt=\"Screen Shot 2017-11-17 at 1.07.31 PM.png\" width=\"617\" height=\"347\"></div><div><img src=\"quiver-image-url/1D74827D00696E73E042082360720FCD.png\" alt=\"Screen Shot 2017-11-17 at 1.07.47 PM.png\" width=\"617\" height=\"342\"><br></div>"
+    },
+    {
+      "type": "text",
+      "data": "Databricks Delta was built as direct response to what Databricks pitched as the “failure of lambda” - they wanted to avoid this story:<div><br></div><div><img src=\"quiver-image-url/73E7809C71E7C4905D729A4036716413.png\" alt=\"Screen Shot 2017-11-17 at 1.08.02 PM.png\" width=\"615\" height=\"335\"><br></div>"
+    },
+    {
+      "type": "markdown",
+      "data": "It seems like Delta is mostly just a UI and some optimizations on top of [Apache Tajo](http://tajo.apache.org/)..."
+    },
+    {
+      "type": "text",
+      "data": "Delta is:<div><ul><li>Transactional - Spark jobs that impact your underlying data warehouse are ACID-compliant</li><li>Schematized and validated - bad records are actually rejected / marked for handling and reprocessing</li><li>Reactive - both for analytics (a transaction is committed = graph analytics update!) and for scale</li></ul></div>"
+    }
+  ]
+}

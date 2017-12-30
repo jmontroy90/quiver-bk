@@ -1,0 +1,38 @@
+{
+  "title": "Efficient Reconciliation and Flow Control for Anti-Entropy Protocols",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](https://www.cs.cornell.edu/home/rvr/papers/flowgossip.pdf)\n\nThis paper dives into some basics of gossip protocals, which are lightweight synchronous protocals for synchronizing state without a need for a strong consistency guarantees. "
+    },
+    {
+      "type": "text",
+      "data": "<div><i>\"First, it presents a new state reconciliation mechanism that is designed both for minimal CPU overhead and for situations in which only limited bandwidth is available (Section 3). Second, it proposes and analyzes a flow control scheme for gossip.\"</i></div>"
+    },
+    {
+      "type": "markdown",
+      "data": "###GOSSIP BASICS\nTwo classes:\n* Anti-entropy - gossip until newer information arrives\n  * More reliable\n* Rumer-mongering - gossip for set period of time\n  * Some probability of conveying information"
+    },
+    {
+      "type": "markdown",
+      "data": "###3. RECONCILIATION"
+    },
+    {
+      "type": "markdown",
+      "data": "####3.1 PRECISE RECONCILITION\n\n\"Note that, if implemented, both these orderings would require a synchronized clock among the members and that all updates be timestamped with this clock.\""
+    },
+    {
+      "type": "markdown",
+      "data": "####3.2 SCUTTLEBUTT RECONCILIATION\n"
+    },
+    {
+      "type": "text",
+      "data": "DONE!!!! NEED TO WRITE NOTES!!!!"
+    },
+    {
+      "type": "latex",
+      "language": "latex",
+      "data": ""
+    }
+  ]
+}

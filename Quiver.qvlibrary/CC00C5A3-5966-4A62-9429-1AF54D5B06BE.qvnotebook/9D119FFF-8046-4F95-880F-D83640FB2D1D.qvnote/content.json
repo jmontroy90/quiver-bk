@@ -1,0 +1,29 @@
+{
+  "title": "A Developer's View Into Spark's Memory Model",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to talk](https://www.youtube.com/watch?v=P1AuP7q731U)\n\nRemember - each node in a cluster can have multiple executors, where each executor is a single JVM instance with its own Memory Manager and thread pool. This talk dives into the Memory Manager and its Memory Model.\n\nSpark takes your data from a source, converts it to Spark's internal binary representation, and then applies operators on it. Memory pages associated with that representation and operators are managed by the Memory Manager."
+    },
+    {
+      "type": "markdown",
+      "data": "###Memory allocation:\n\n* Allocated in pages\n* Supports heap and off-heap allocation (off-heap here meaning JVM stack space per thread, which would be per task in Spark terminology)\n* Pages are not fixed size - lower and upper bounds\n* No pooling - pages are freed once they are no longer used\n\nPros / cons:\n![IMAGE](quiver-image-url/9BE257DC8EA0BBA185B579406C26CCD7.jpg =458x254)\n\nFor the fragmentation - think of trying to fill a grid with differently-sized squares. You're gonna end up with some gaps, ie fragmentation. Makes read-ahead more difficult!"
+    },
+    {
+      "type": "markdown",
+      "data": "##Internal Memory Format\n\nJava's Object memory model is incredibly bloated:\n\n![IMAGE](quiver-image-url/C7DEFD839347AA99D2FC134DD0C30A1A.jpg =458x254)\n\nThis bloated model also causes problems with the JVM's GC, and Spark's serialization between nodes for shuffles.\n\nSpark's internal binary format is able to treat things more efficiently than Java objects. Data types with a fixed size (int, float) can be allocated directly, while var-length types (strings) are given an offset on a page and a length (start point and end point).\n\n![IMAGE](quiver-image-url/257E73680880D5F36758CCAF0241F027.jpg =458x254)\n\nRemember - built-in Spark functions on RDDs are optimized to work directly on the efficient binary format, whereas lambdas require a conversion to a standard (bloated) Java object. Choose one or the other, but don't mix - and if you can, choose built-in!\n"
+    },
+    {
+      "type": "text",
+      "data": "If we want to be even more efficient, we have to be “cache-aware” in our application, and make use of L1/L2/L3 caches and try to think about pre-fetching. But which parts of our application should we focus on? Answer is - sorting and hashing! Two most commons algorithms employed by Spark."
+    },
+    {
+      "type": "markdown",
+      "data": "At the end of the day, improving the efficiency of these algorithms comes down to storing more data with your data pointers, in order to avoid random access patterns due to arbitrary pointer dereferencing. We call this *cache-aware sorting* and *cache-aware hash maps.*\n\n\n![](quiver-image-url/37EF1F9B39F12D79FA8408AC87E11AD5.jpg =458x254)\n\n![](quiver-image-url/1F750ECB535D73A48B0C4DCF2CFC3596.jpg =458x254)"
+    },
+    {
+      "type": "markdown",
+      "data": "##Future Work\n\n[SPARK-19489](https://issues.apache.org/jira/browse/SPARK-19489) - Stable serialization format for external & native code integration\n[SPARK-15689](https://issues.apache.org/jira/browse/SPARK-15689) - Data source API v2\n[SPARK-15687](https://issues.apache.org/jira/browse/SPARK-15687) - Columnar execution engine (closed, interestingly)"
+    }
+  ]
+}
