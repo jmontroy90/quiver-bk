@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 9 - LSP: The Liskov Substitution Principle",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "The LSP is stated formally as:\n> What is wanted here is something like the following substitution property: If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T.\n\nInformally:\n> Using a subtype instead of its parent shouldn't change the behavior of your code.\n\nThe most infamous example is the rectangle-square example; squares are the same on all four sides, rectangles have differing lengths and widths. Thus, this pseudocode fails:\n\n```\nRectangle r = new Square()\nr.setW(5);\nr.setH(2);\nassert(r.area() == 10);\n```\n\nIf you were stuck here, you would defend against this with a guard - `if (...)` - in the calling class, but this is clunky. Better to architect your classes such that this doesn't happen.\n\nHis big example basically shows how violations of LSP lead to crazy software patterns involving DAOs and pass-through methods, which adds complexity. Better to ensure that it's not possible to violate the LSP. How? Don't permit subclasses to override things in a way that breaks the behavior of the parent. Subclasses **ADD** behavior, and rope off any assumptions its parent made to keep things safe.\n\nAnother way of viewing this comes from functional programming: if a subclass overrides or implements a method from its parent, it might violate the implicit expectations of the parent method. One way expectations are violated is due to side effects -- we handle that by capturing side effects in data types, and handling them explicitly. The LSP feels similar - make the expectations of your parent methods explicit."
+    }
+  ]
+}

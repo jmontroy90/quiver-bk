@@ -1,0 +1,22 @@
+{
+  "title": "Day 29: Variance in Scala",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Variance is a complex subject, but it powers literally everything you do in Scala, and whether you realize it or not, you probably have some expectations of variance when you code every day.\n\nThe basic problem of variance is this: given a box type `C[_]`, **if T1 <: T2, is C[T1] <: C[T2]?** If it is, we call that behavior **covariance** — you can treat a box of children (`C[T1]`) identically to a box of their parents (cool sentences!). If not, the behavior is invariant — we need to treat boxes of children differently than boxes of parents!\n\nHere's an example:"
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "data": "// basic OOP hierarchy\ntrait BaseTrait\nclass Sub1 extends BaseTrait\nclass Sub2 extends BaseTrait\n\n// this is an invariant box, and so can't be reliably used in ways that expect covariance!\ncase class InvariantBox[T <: BaseTrait](f1: T)\ndef takeInvariant(fs: InvariantBox[BaseTrait]): Unit = println(fs)\n\ntakeInvariant(InvariantBox[Sub1](new Sub1)) // boom\ntakeInvariant(InvariantBox(new Sub1)) // NO BOOM - Scala is a sneaky sonuvabitch\nval ie = InvariantBox(new Sub1); takeInvariant(ie) // BUT THIS IS BOOM!\ntakeInvariant(InvariantBox[BaseTrait](new Sub1))\n\n// now we've said \"go ahead, treat Box[Parent] equally to Box[Child]\"!\ncase class CovariantBox[+T <: BaseTrait](f1: T)\ndef takeCovariant(fs: CovariantBox[BaseTrait]): Unit = println(fs)\n\n// now all work right away\ntakeCovariant(CovariantBox[Sub1](new Sub1))\ntakeCovariant(CovariantBox(new Sub1))\nval ce = CovariantBox(new Sub1); takeCovariant(ce)\ntakeCovariant(CovariantBox[BaseTrait](new Sub1))"
+    },
+    {
+      "type": "markdown",
+      "data": "This all maybe seems a little academic - where does this really matter? Well, Lists! That's pretty important, right? The signature of List objects in Scala is the following:\n\n`sealed abstract class List[+A] extends ...`\n\nThis is exactly identical to our case here! If `List` wasn't covariant on its generic, we wouldn't be able to do this (via the `apply` method):\n\n`val l = List(new Sub1, new Sub2, new Sub1, new BaseTrait {})`\n\nAnother example is with functions, which are all instances of `FunctionN` and are contravariant on their arguments and covariant on their return types:\n\n`trait Function1[-T1, +R] extends AnyRef { ... }`"
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

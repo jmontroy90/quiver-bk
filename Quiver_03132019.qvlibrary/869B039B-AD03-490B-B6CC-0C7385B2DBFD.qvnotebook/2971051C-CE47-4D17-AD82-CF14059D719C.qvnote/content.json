@@ -1,0 +1,58 @@
+{
+  "title": "Day 17: The adapter design pattern",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This pattern opens up the section on `Structural design patterns`! Structural design patterns are most concerned with stitching together components in a clear, extensible way.\n\nSay we want to stitch **existing** incompatible components together. The adapter pattern shines here.\n\nTake an already-existing `Logging` class like so:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "class Logger {\n  def log(message: String, severity: String): Unit = {\n    System.out.println(s\"${severity.toUpperCase}: $message\")\n  }\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "Now say we also have some functionality we want to inject and _adapt_ to this existing class, such as:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "trait Log {\n  def info(message: String)\n  def debug(message: String)\n  def warning(message: String)\n  def error(message: String)\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "We can create an `adapter class` out of these two like so:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "class AppLogger extends Logger with Log {\n  override def info(message: String): Unit = log(message, \"info\")\n\n  override def warning(message: String): Unit = log(message, \"warning\")\n\n  override def error(message: String): Unit = log(message, \"error\")\n\n  override def debug(message: String): Unit = log(message, \"debug\")\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "Two things to note:\n1) This seems a more typical Java-like way to add functionality via interfaces.\n2) Note that this example wouldn't work if the `Logger` class was final. One way to handle this is to slightly tweak your `is-a` / `has-a` relationship as such:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "class FinalAppLogger extends Log {\n  private val logger = new FinalLogger\n  \n  override def info(message: String): Unit = logger.log(message, \"info\")\n\n  override def warning(message: String): Unit = logger.log(message, \"warning\")\n\n  override def error(message: String): Unit = logger.log(message, \"error\")\n\n  override def debug(message: String): Unit = logger.log(message, \"debug\")\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "A small but subtle change. Scala also offers native adapter patterns via `implicit classes`:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "  implicit class FinalAppLoggerImplicit(logger: FinalLogger) extends Log {\n    \n    override def info(message: String): Unit = logger.log(message, \"info\")\n\n    override def warning(message: String): Unit = logger.log(message, \"warning\")\n\n    override def error(message: String): Unit = logger.log(message, \"error\")\n\n    override def debug(message: String): Unit = logger.log(message, \"debug\")\n  }"
+    },
+    {
+      "type": "markdown",
+      "data": "Now we can pretend we're just using a `FinalLogger` object! Implicit classes are nice, and ultimately just syntactic sugar for implicit coversions (via `def`s)."
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

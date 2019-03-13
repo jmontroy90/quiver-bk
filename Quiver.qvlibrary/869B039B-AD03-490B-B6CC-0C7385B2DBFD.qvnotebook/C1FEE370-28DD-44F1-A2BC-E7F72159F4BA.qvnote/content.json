@@ -1,0 +1,27 @@
+{
+  "title": "Day 5: Polymorphism",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "We define two kinds of polymorphism here:\n1) Subtype polymorphism\n2) Adhoc polymorphism\n\n#### Subtype polymorphism\nThis is your traditional top-down inheritence-based polymorphism. Some member field / method is defined in a super class, and subclasses either give or replace its implementation. This allows you to work with that field / method generically over all its subclasses simultaneously."
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "abstract class Item {\n  def pack: String\n}\n\nclass Fruit extends Item {\n  override def pack: String = \"I'm a fruit and I'm packed in a bag.\"\n}\n\nclass Drink extends Item {\n  override def pack: String = \"I'm a drink and I'm packed in a bottle.\"\n}\n\n// enables subtype polymorphism like this\n// note the type on shoppingBasket is explicitly the parent!\nval shoppingBasket: List[Item] = List(new Fruit, new Drink)\n\nshoppingBasket.foreach(i => System.out.println(i.pack))"
+    },
+    {
+      "type": "markdown",
+      "data": "#### Adhoc polymorphism\n\nThis is performed in Scala via the `type class` pattern (`shapeless` is a great library that provides a lot of power to this pattern). In short, instead of run-time top-down polymorphism, we use implicits and compile-time type resolution to provide a more flexible kind of polymorphism (think orthogonal to subtype polymorphism).\n\nIn short, we:\n1) Provide a behavior that our type class members will implement\n2) Provide an entrypoint method to the type class members\n3) Provide instances of that behavior for particular types of our type class"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "// define the behavior(s) of your type class\ntrait Adder[T] {\n  def sum(a: T, b: T): T\n}\n\n// provide entrypoint method\n// this makes use of context bounds and `implicitly`, feel free to ask for more info\ndef sum[T: Adder](a: T, b: T): T =\n    implicitly[Adder[T]].sum(a, b)\n    \n// provide type class instances for particular types\nimplicit val int2Adder: Adder[Int] = new Adder[Int] {\n  override def sum(a: Int, b: Int): Int = a + b\n}\n\nimplicit val string2Adder: Adder[String] = new Adder[String] {\n  override def sum(a: String, b: String): String = s\"$a concatenated with $b\"\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "This is \"adhoc\" because we can define as many and as complex type class instances as we went! Again, `shapeless` is great for this."
+    }
+  ]
+}

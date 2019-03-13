@@ -1,0 +1,13 @@
+{
+  "title": "Cache: A Place for Concealment and Safekeeping",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to article](http://duartes.org/gustavo/blog/post/intel-cpu-caches/) -- note, a lot of this is gone into in great detail in `What Every Programmer Should Know About Memory`, so make that your home."
+    },
+    {
+      "type": "markdown",
+      "data": "![IMAGE](quiver-image-url/66BD86DF8FA40FD9AB3A5C9DEF5EFFE3.jpg =687x461)\nBasic units:\n* `Line` - stores the actual cached data\n* `Tag` - stores the number of the line's page in memory\n* `Set` - a row in the cache\n* `Directory` + `Way` - each column is composed of a directory and way\n  * The `directory` stores all tags\n  * The `way` stores all lines\n  \nThis cache here is 8-way set associative with 64-byte lines and 64 sets, meaning it stores 8 * 64 * 64 = 32k of data.\n\nThis cache considers main memory in 4k pages, which means that each set handles exactly 64 bytes of a given page. More specifically, set 0 handles bytes 0 - 63 of **any** given page, set 1 handles bytes 64 - 127, and so on.\n\nThis is what is meant by 8-way set associative - way 1 + set 2 might have bytes 128 - 191 from page 27, but way 2 + set 2 might have bytes 128 - 191 from page 302.\n\nThis means that when memory at a given address is requested, the CPU can (_in parallel_) search all 8 sets corresponding to the particular memory address, and (via a quick calculation) the particular bytes within a 4k page. If there's a cache miss, it moves on to L2 and then main memory.\n\nThis is why data access patterns are important - caching + pre-fetching are powerful allies for speed increases! Say you have an array of 64-byte objects that spreads across a couple of 4k pages - this means that bytes from that array can all be stored in different ways in the same set. If the set gets filled (all eight slots), eviction has to occur, but this is a reasonably fast operation given predictable data access patterns.\n\nLastly, the directory also stores the state of the cache line, which can be one of the `MESI` states:\n* Modified\n* Exclusive\n* Shared\n* Invalid\n\nThese states are crucial to synchronization between caches. In addition, Intel L1 and L2 caches are inclusive, which means the contents of L1 are duplicated into L2 - things evicted out of L1 might need to live just beyond the scope of what L1 can provide, which is why redundancy is good. Again, given predictable data access patterns, this is even more powerful."
+    }
+  ]
+}

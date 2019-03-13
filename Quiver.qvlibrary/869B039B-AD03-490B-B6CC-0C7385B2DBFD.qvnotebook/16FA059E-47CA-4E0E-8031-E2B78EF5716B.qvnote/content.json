@@ -1,0 +1,18 @@
+{
+  "title": "Day 3: ADTs",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "#### ADTs - Sum and Product\nAn algebraic data type is a functional-adjacent, type-safe approach that pairs nicely with pattern matching. An ADT encompasses two approaches:\n1) Sum ADT - a `case object` for each constructed member of a particular ADT\n2) Product ADT - a `case class` with parameters for extending the domain of your ADT members\n\nADTs are expressed in Scala with `sealed traits` and `case classes / objects`. Examples:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "// This is a pure sum ADT\nsealed abstract trait Month \ncase object January extends Month \ncase object February extends Month \n\n// This is a product ADT\nsealed case class RGB(red: Int, green: Int, blue: Int) \n\n// And this is a hybrid approach\ncase class Point(x: Double, y: Double) \n\nsealed abstract trait Shape \ncase class Circle(centre: Point, radius: Double) extends Shape \ncase class Rectangle(topLeft: Point, height: Double, width: Double) extends Shape"
+    },
+    {
+      "type": "markdown",
+      "data": "Pattern matching against these ADTs is made safe and useful in part because of the `sealed` keyword - this guarantees that the ADT won't be extended to further members outside of the file it's defined in. The compiler can also do some fancy assumptions with this - if you see a `Warning:(19, 5) match may not be exhaustive.`, this is a pattern match against an ADT where not all possible members are covered.\n\nPattern matching against ADTs allows you to get away with a different kind of compile-time type safety, one that is much looser than strict object-oriented generics and polymorphism. At any point, you can match against an object and see what it is, and then use it as if it's that. In some ways, that feels like a `cast` all over the place, but it's made much safer by having that `sealed` keyword to make it a true ADT.\n\nAs usual, a hybrid approach is best."
+    }
+  ]
+}

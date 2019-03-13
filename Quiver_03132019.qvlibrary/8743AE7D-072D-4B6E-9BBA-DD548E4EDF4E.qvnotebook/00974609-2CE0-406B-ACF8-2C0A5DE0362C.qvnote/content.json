@@ -1,0 +1,13 @@
+{
+  "title": "Chapter 2 - A Tale of Two Values",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "\"I have two kinds of problems, the urgent and the important. The urgent are not important, and the important are never urgent.\" — Dwight D. Eisenhower\n\nIn order:\n1. Urgent and important\n2. Not urgent and important\n3. Urgent and not important\n4. Not urgent and not important\n\nDon't swap 2 and 3, and don't confuse 3 with 1! Technical people can evaluate architectural needs better than business people - it's literally our trade.\n\nIf architecture is deprioritized, changes over time get harder and more expensive to make. It shouldn't start with \"we need this now\" and end with \"why are you saying this will take so long\" — then you've failed as a software leader."
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

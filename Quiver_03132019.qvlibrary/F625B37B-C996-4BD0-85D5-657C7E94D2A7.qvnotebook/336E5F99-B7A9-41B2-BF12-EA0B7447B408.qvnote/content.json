@@ -1,0 +1,9 @@
+{
+  "title": "Strategic Scala Style: Principle of Least Power",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Strategic Scala Style: Principle of Least Power](http://www.lihaoyi.com/post/StrategicScalaStylePrincipleofLeastPower.html)\n\nI dunno, man. I'm not sure I like the reverence of singleton objects, but it is true for clients that it's the easiest thing. Like, which is easier to use, the collections library and its methods, or Scalatest? Extending classes or usability always gets tricky.\n\nBut when writing libraries — I still think there's a lot of value in exposing intermediate classes / functionality as small method that compose, and allow the user to work with them in a \"communal grounds\" sort of way.\n\nThis is still a good article though — one day I'll write notes on this, but not today."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "variance and classes",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "How does variance and context bounds work on subclassing? Which types persist that variance / context bound info?\n\n```abstract class JoinKey[InputType <: Product : ClassTag : TypeTag : RowReaderFactory] extends ValidRDDType[InputType] {\n    def parseChangeStream(df: DataFrame, columns: Seq[String], keyspace: String, table: String)(implicit spark: SparkSession): RDD[(ChangeStreamMessage, Option[InputType])]\n  }\n```\n\n\n  "
+    }
+  ]
+}

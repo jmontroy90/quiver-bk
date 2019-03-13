@@ -1,0 +1,9 @@
+{
+  "title": "Plain Functional Programming",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=YXDm3WHZT5g)\n\nBasically, Odersky freestyles about algebraic effects, i.e. capturing effects (like Try or Option or Future) in your type system. Implicit types allow him to keep his imperative code exactly the same while still stacking effects on top. \n\nThe cost for this is that the implicits (per the name) are sneaking around a lot of stuff in ways that make it hard to immediately understand. Plus, his `require` function is overloaded, and his `attempt` function **introduces** implicit context, so it's not really \"for free\". \n\nTo be fair, the actual functions remain sorta untouched. But then again they don't, he's calling a different function for `require` and invoking the functions differently, in almost a way that wraps the whole call in a context. \n\nBut he also doesn't have to manage those effects with monads as you might expect, which can get pretty hairy even with for-comprehensions.\n\nHe also talked about Kliesli Triples a bunch, which I don't understand yet.\n\nI have mixed feelings about all this, but I'm happy to attribute a lot of it to lack of exposure for now."
+    }
+  ]
+}

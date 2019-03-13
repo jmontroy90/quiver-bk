@@ -1,0 +1,27 @@
+{
+  "title": "Dotty / Scala 3 new features",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "##### Types: Union, Intersection, Literal types, Enums"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "// Union types\ncase class UserName(name: String) {\n  def lookup(admin: Admin): UserData\n}\n\ncase class Password(hash: Hash) {\n  def lookup(admin: Admin): UserData\n}\n\ndef help(id: UserName | Password) = {\n  val user = id match {\n    case UserName(name) => lookupName(name)\n    case Password(hash) => lookupPassword(hash)\n  }\n  // ...\n}\n\n// Intersection types\ntrait Resettable {\n  def reset(): this.type\n}\n\ntrait Growable[T] {\n  def add(x: T): this.type\n}\n\ndef f(x: Resettable & Growable[String]) = {\n  x.reset()\n  x.add(\"first\")\n}\n\n// Literal types\nval t: 42 = 42\nval x: \"Jedi\" = \"Jedi\"\n\n// Enums\nenum Color(val rgb: Int) {\n  case Red   extends Color(0xFF0000)\n  case Green extends Color(0x00FF00)\n  case Blue  extends Color(0x0000FF)\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "##### Trait parameters\n\nTraits will have parameters! Linearization will be unaffected. Rules:\n1) Only classes can pass arguments to parent traits. Traits themselves can pass arguments to neither classes nor traits.\n2) If a class C implements a parameterized trait T, and its superclass does not, then T must appear as a parent trait of C with arguments. By contrast, if the superclass of C also implements T, then C may not pass arguments to T.\n3) Arguments are evaluated immediately before initialization (except for call-by-name args, of course)"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "// `U` may NOT pass args to `T`\ntrait T(x: A)\ntrait U extends T\n\n// per rule 2, this is illegal! `C` must provide for the args of `T`\nclass C extends U\n\n// this is better. BOTH OF THESE HAVE THE SAME LINEARIZATION!\nclass C extends T(e) with U\nclass C extends U with T(e)\n\n// C l(U) T -> C U T T -> C U T\n// C T l(U) -> C T U T -> C U T\n"
+    },
+    {
+      "type": "markdown",
+      "data": "##### Opaque Types\nSee the section in \"Strings are Evil\".\n\n##### Tasty\n[Read here](https://www.scala-lang.org/blog/2018/04/30/in-a-nutshell.html)\n\nEssentially a typed AST for cross-platform compilation and metaprogramming via Macros. Allows for one common syntax for all functionality that requires knowledge of types and code before compile-time (implicits injected, types resolved).\n"
+    }
+  ]
+}

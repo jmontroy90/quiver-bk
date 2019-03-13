@@ -1,0 +1,69 @@
+{
+  "title": "Day 15: The builder design pattern",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "The **builder pattern** allows the user more flexibility in how an object is constructed - useful when building individual constructors would be laborious or rigid. The typical pattern in Java OOP usually involves two classes, one that can build the other. So, for example, you might have a `PersonBuilder` class that builds `Person` objects, where `PersonBuilder` would have methods like `setFirstName` and `setAge` and some kind of `build()` for actually producing a `Person` object."
+    },
+    {
+      "type": "markdown",
+      "data": "In Scala, we can represent the builder pattern in three ways:\n1) Classic mutability - a builder and a target. Not recommended due to aforementioned mutability. A variation on the builder pattern could be okay for sets / collections of things mutability updated, though, right?\n2) Case classes with defaults. Within that - one variation validates its parameters and one doesn't.\n3) Use generalized type constraints."
+    },
+    {
+      "type": "markdown",
+      "data": "#### Java-Like Approach -- Classic Mutability\nBasic code example:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "class Person(builder: PersonBuilder) {\n  val firstName = builder.firstName\n  val lastName = builder.lastName\n  val age = builder.age  \n}\n\nclass PersonBuilder {\n  var firstName = \"\"\n  var lastName = \"\"\n  var age = 0\n  def setFirstName(firstName: String): PersonBuilder = {\n    this.firstName = firstName\n    this\n  }\n  \n  def setLastName(lastName: String): PersonBuilder = {\n    this.lastName = lastName\n    this\n  }\n  \n  def setAge(age: Int): PersonBuilder = {\n    this.age = age\n    this\n  }\n  def build(): Person = new Person(this)\n}\n\nval person: Person = new PersonBuilder()\n  .setFirstName(\"Ivan\")\n  .setLastName(\"Nikolov\")\n  .setAge(26)\n  .build()"
+    },
+    {
+      "type": "markdown",
+      "data": "A couple things to note:\n* All fields have defaults.\n* Each setter feels pretty boilerplate-y.\n* The actual usage is fluent and looks nice, but requires adding too much code for each new field.\n* No constructors needed!"
+    },
+    {
+      "type": "markdown",
+      "data": "#### Case Class Approach\nInstead of all the above boilerplate, use Scala's features!"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "case class Person(\n  firstName: String = \"\",\n  lastName: String = \"\",\n  age: Int = 0\n)"
+    },
+    {
+      "type": "markdown",
+      "data": "This accomplishes the same as the first option, but is much cleaner. The first option _could_ allow some variation after an object is constructed by reconstructing it with a set member field - which a case class can't do. But we should prefer immutability as much as possible! When someone looks at an object, they shouldn't have to guess what sort of state it carries, based on what has been mutably transformed after the fact."
+    },
+    {
+      "type": "markdown",
+      "data": "#### Generalized Type Constraints\nLet's use a type-safe builder pattern to validate our dependencies in objet construction! But before we do, here's a simple bit of validation using `require`:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "case class Person(\n  firstName: String = \"\",\n  lastName: String = \"\",\n  age: Int = 0\n) {\n  require(firstName != \"\", \"First name is required.\")\n  require(lastName != \"\", \"Last name is required.\")\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "This will fail objects at **runtime** that don't meet the requirements. This is nice and simple, but maybe we want compile-time requirement safety. How can we do that? Well, buckle your seatbelts, because we gotta do some evidence and type constraints."
+    },
+    {
+      "type": "markdown",
+      "data": "Let's start with an ADT that will help us determine whether or not a `Person` object has a last name and / or first name. We'll also change our `PersonBuilder` to a parameterized class with covariance to this ADT, with a private constructor, a companion object, and a couple other defaults."
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "sealed trait BuildStep\nsealed trait HasFirstName extends BuildStep\nsealed trait HasLastName extends BuildStep\n\nclass Person(\n  val firstName: String,\n  val lastName: String,\n  val age: Int\n)\n\nclass PersonBuilder[PassedStep <: BuildStep] private (\n  var firstName: String,\n  var lastName: String,\n  var age: Int\n) {\n  protected def this() = this(\"\",\"\",0)\n  \n  protected def this(pb: PersonBuilder[_]) = this(\n    pb.firstName,\n    pb.lastName,\n    pb.age\n  )\n  \n  def setFirstName(firstName: String): PersonBuilder[HasFirstName] = {\n    this.firstName = firstName\n    new PersonBuilder[HasFirstName](this)\n  }\n\n  def setLastName(lastName: String)(implicit ev: PassedStep =:= HasFirstName): PersonBuilder[HasLastName] = {\n    this.lastName = lastName\n    new PersonBuilder[HasLastName](this)\n  }\n\n  def setAge(age: Int): PersonBuilder[PassedStep] = {\n    this.age = age\n    this\n  }\n\n  def build()(implicit ev: PassedStep =:= HasLastName): Person = new Person(\n    firstName,\n    lastName,\n    age\n  )\n}\n\nobject PersonBuilder {\n  def apply() = new PersonBuilder[BuildStep]()\n}\n"
+    },
+    {
+      "type": "markdown",
+      "data": "Okay, this is all kinda complicated and hasn't gotten us anything yet. Here's the main thing to remember: **we use type constraints to enforce builder safety at compile time, but at a cost!** Let's break it down by line numbers.\n\n_L1:3_ — We use an ADT to determine the kinds of relationships that will be enforced. This ADT could be extended.\n\n_L11:15_ — we now have a private class constructor, and use aux constructors to build a `PersonBuilder` object that's covariant on our previously-defined ADT.\n\n_L24:27_ — `setFirstName` does one key thing: it returns a `PersonBuilder[_]` parameterized to our ADT via `HasFirstName`. This is useful when...\n\n_L29:32_ — ...when `setLastName` asks for parameter evidence! This is a type-safe, compile-time way to prove to Scala that some type requirement (here, that we've passed through `setFirstName` **strictly before** we call `setLastName`) has been satisfied. We meet the fun `=:=` operator, too — for more info on generalized type constraints like this, see [this article](http://blog.bruchez.name/2015/11/generalized-type-constraints-in-scala.html).\n\nSo, pros and cons (see if you can tell how I feel about this):\n\n**Pros:**\n1) This is compile-time type safety.\n2) It introduces some neat Scala concepts?\n\n**Cons:**\n1) It's way overly complicated. Have fun on your code review.\n2) It relies on the order in which you chain your methods for the type evidence relationships to work here. It shouldn't matter whether your library user calls `setFirstName` or `setLastName` first, but here, it does.\n2) It handles a use case that's really strange and shouldn't really exist — just, like, don't give your library users the option to construct the case class without a first and last name, right?\n3) What the heck is the difference between `<:` and `<:<`? (Answer: see that article above again.)"
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

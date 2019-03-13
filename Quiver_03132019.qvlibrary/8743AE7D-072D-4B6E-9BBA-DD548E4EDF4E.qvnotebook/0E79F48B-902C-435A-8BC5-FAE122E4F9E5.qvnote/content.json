@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 8 - OCP: The Open-Closed Principle",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Stated simply, the Open-Closed Principle (OCP) states:\n> A software artifact should be open for extension but closed for modification.\n\nIf you have to change huge swaths of original code when you **add** something, no bueno.\n\nThe example is this: let's say we have a financial data reporter that does a bunch of things to display on the web. Now stakeholders want the same report as a PDF, with some variations in display.\n\nHow much old code should end up changing for this? Ideally, none. The OCP dictates how.\n\nLook at this diagram:\n\n![IMAGE](quiver-image-url/B09BD4644917231010AEEEF2D1A25E1F.jpg =900x284)\n\nThis is where you might end up after applying SRP. Good boundaries already. Here's the next step, by applying OCP:\n\n![IMAGE](quiver-image-url/39B705777B7DE454F528A0133439AB31.jpg =421x284)\n\nHere's the crucial OCP thing - each component (controllers, interactors) depends on other components in a **unidirectional manner**! So all of these components extend each other, but only in one direction. This is a way of managing **information hiding**, and is important for component / dependency separation.\n\nIn short - lower-level concepts like _Views_ depend on more general _Presenters_. _Presenters_ depends on _Controllers_, and so on. You end up with a hierarchy of levels, where more specific objects extend more general ones without having to modify them ever. \n\nThus, changes in specific objects like Views will have no impact on general ones like Interactors. This is all enabled by unidirectional communication in how the classes communicate and inherit."
+    }
+  ]
+}

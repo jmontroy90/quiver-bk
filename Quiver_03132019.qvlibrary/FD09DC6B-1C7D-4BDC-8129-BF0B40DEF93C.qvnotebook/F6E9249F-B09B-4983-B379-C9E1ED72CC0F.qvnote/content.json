@@ -1,0 +1,13 @@
+{
+  "title": "How Computers Boot Up",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to article](http://duartes.org/gustavo/blog/post/how-computers-boot-up/)"
+    },
+    {
+      "type": "markdown",
+      "data": "The boot process in diagram:\n![IMAGE](quiver-image-url/41F0F8240A664982F18829DE4CDFE96E.jpg =674x242)\n\n1) CPU is found and working - one CPU is chosen to be the `bootstrap processor` (BSP). All other processors are designated `application processors`, and remain idle.\n2) The BSP is launched into real mode with memory paging disabled - only 1MB of memory, because remember memory segmentation!\n    * Side note - how does the segmentation work exactly in terms of segment size vs addressable memory slots? When we say 1MB, do we mean 1MB divided into 64k (for example) slots, so the `GDT` would store 1024 / 64 segment descriptors? I'm fuzzy on the exact details.\n3) The registers have well-defined values post boot-up, so the instruction pointer (`EIP`) is combined with a _reset vector_ to begin processing at **0xFFFFFFF0**. The motherboard ensures that this address is mapped to the entry point for **`BIOS`** instructions. The are being jumped to looks like this:\n\n![IMAGE](quiver-image-url/6E48EA139E1AF3CBB9F8142525BE38C8.jpg =337x547)\n\n4) BIOS will kick off the _Power-on Self Test_ (`POST`), which will check for devices, accessories, video cards, etc. It will also build some data tables for these devices, to be used later by the kernel.\n5) BIOS will now search for a boot device and read the first 512-byte sector - this area is called the `Master Boot Record` (MBR). BIOS will simply load the (tiny) MBR into memory and begin executing it.\n6) Usually the MBR instructions will read its partition table to find the active partition, and will run the code in the first sector of that partition, called the `boot sector`. This partitioning allows for multiple OSes and probably devices and gosh partitioning is everywhere.\n7) Linux boot loading doesn't always follow that exact formula, but generally things like `GRUB` or `LILO` will find some boot sector (may or may not be part of a partition), and generally read some config and instructions to continue booting.\n\nOne final cool note - remember in real mode, only up to 1MB is addressable, but your average Linux kernal is much bigger than that. Boot loaders will use something called `unreal mode` (not an official name) that is basically a constant switching between real mode and protected mode (where up to 4GB on a 32-bit architecture is addressable). This allows the boot loader to continue shoving the kernel into main memory while still landing in real mode at the end."
+    }
+  ]
+}

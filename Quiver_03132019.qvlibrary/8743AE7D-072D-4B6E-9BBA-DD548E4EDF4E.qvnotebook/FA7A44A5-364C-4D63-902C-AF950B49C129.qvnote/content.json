@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 11 - DIP: The Dependency Inversion Principle",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Summary quote:\n> The Dependency Inversion Principle (DIP) tells us that the most flexible systems are those in which source code dependencies refer only to abstractions, not to concretions.\n\nThis whole chapter is full of choice quotes - here's another:\n> In a statically typed language, like Java, this means that the use, import, and include statements should refer only to source modules containing interfaces, abstract classes, or some other kind of abstract declaration. Nothing concrete should be depended on.\n\nThe idea is that referring to volatile classes leads to frequent refactors and furthers your risk of breaking changes. \"Volatile\" is the key word here - `java.lang.String` may be concrete, but it's incredibly stable, so we don't need to go crazy.\n\nSome rules for DIP:\n1) **Don't refer to concrete classes**. Prefer abstract interfaces, as they should be slower to break (abstract factories?).\n2) **Don't derive from volatile concrete classes**. Inheritance is a really strong tool - if you change upstream concrete classes, you've got a lot of downstream breaks!\n3) **Don't override concrete functions.** What contract did the original function fulfill? Are you still fulfilling that via LSP? It's tricky!\n\nAll this is enabled by **Abstract Factories**. We invert control here and create a boundary between concrete and abstract classes:\n\n![IMAGE](quiver-image-url/99242E5670A7F537BC8600EBAB80AA9F.jpg =466x284)\n\nThe application generates an implementation for the service, but does so through an abstract factory that itself has a concrete implementation."
+    }
+  ]
+}

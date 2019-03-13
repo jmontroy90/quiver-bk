@@ -1,0 +1,27 @@
+{
+  "title": "Day 33: The observer design pattern",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "The observer design pattern is pub-sub. When some state changes in some subject object `A`, notify observer objects `B...Z` about the changes. The correct way to do this natively in Scala is via Akka, but we can mimic the functionality here to show the pattern off.\n\nGiven these `Observer` and `Observable` traits:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "// what do we do when notified of a change?\ntrait Observer[T] {\n  def handleUpdate(subject: T)\n}\n  \n// observability is just keeping track of of who observes you. this is synchronous!\ntrait Observable[T] {\n  this: T =>\n\n  private val observers = ListBuffer[Observer[T]]()\n\n  def addObserver(observer: Observer[T]): Unit = {\n    observers += observer\n  }\n\n  def notifyObservers(): Unit = {\n    observers.foreach(_.handleUpdate(this))\n  }\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "Let's take an easy example of notifying all `User`s that are following a given `Post`. Every time a comment is made on the post, we want all users following that post to be notified. So:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "case class Comment(user: User, text: String)\n\ncase class Post(user: User, text: String)\n  extends Observable[Post] {\n  \n  val comments = ListBuffer[Comment]()\n  \n  def addComment(comment: Comment): Unit = {\n    comments += comment\n    notifyObservers()\n  }\n}\n\ncase class User(name: String)\n  extends Observer[Post] {\n    override def handleUpdate(subject: Post): Unit = {\n      println(s\"Hey, I'm ${name}. The post got some new comments: ${subject.comments}\")\n    }\n}"
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

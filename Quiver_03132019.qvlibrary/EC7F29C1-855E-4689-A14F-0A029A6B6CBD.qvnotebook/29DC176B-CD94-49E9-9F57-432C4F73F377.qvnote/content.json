@@ -1,0 +1,17 @@
+{
+  "title": "Paxos Made Simple",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/paxos-simple-Copy.pdf)"
+    },
+    {
+      "type": "markdown",
+      "data": "Paxos is a distributed consensus algorithm developed by an obnoxious twat who described his original algorithm with an extensive Greek parliament analogy. This is his paper coming to terms with the fact that he’s a twat.\n\n### 2. The Consensus Algorithm\n##### 2.1 The Problem\nIf a bunch of values are proposed by `N` processes, how do you choose a value such that:\n1) Only a value that was proposed is chosen\n2) Only one value is chosen\n3) Processes never learn a value that wasn't chosen\n\nWe have three kinds of **agents** in a system like this: `proposers`, `acceptors`, and `learners`. Agents communicate via messages, asynchronously and non-Byzantine. Messages can be dropped, lost, take arbitrarily long, but are never corrupted. Likewise, agents can die and restart at will, but they must not lose their state (\"what was chosen?\") on a restart.\n\n##### 2.2 Choosing a Value\nAn acceptor (or set of acceptors, requiring a majority) receives a value from a proposer. Requirement 1:\n> P1. An acceptor must accept the first proposal that it receives.\n\nBut what if multiple values are proposed simultaneously, and each acceptor in a system accepts a different value? No quorum. So new requirement as a consequence: an acceptor must be able to accept multiple proposals, each with a different, incrementing proposal number.\n\nThe long-and-short of this is that an acceptor must remember two things:\n1) The highest-numbered proposal it's ever **accepted**\n2) The highest-numbered prepare request it's ever **received**\n\nA `prepare request` here is part of the two-phase aspect of this - a propose asks an acceptor to accept its proposal AND to send back a response promising to accept no lower-numbered proposals. The `commit` request comes later.\n\nThe actual two phases of 2PC are as such:\n\n> Phase 1: a proposer sends a `prepare` request to a quorum of acceptors with proposal number `n` and value `v`. For a given acceptor, if the proposal number `n` is higher than any other proposal number that acceptor has received, it accepts the proposal and promises to the acceptor to never accept a proposal of a lower number.\n\n> Phase 2: if a proposer receives a quorum of prepare responses from acceptors, it sends commit messages to all those acceptors containing a proposal number `n` and value `v` that is the **highest** of any prepare responses sent back to the proposer.\n\nThis second phase is how information gets updated!\n"
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

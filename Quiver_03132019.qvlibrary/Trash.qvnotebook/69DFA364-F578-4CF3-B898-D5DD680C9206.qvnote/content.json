@@ -1,0 +1,9 @@
+{
+  "title": "proto3 - schema versioner",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**message_differencer.cc** — one existing solution in C++ for diffing two messages. How does it do it, and can we appropriate anything?\n* Early exit - compare two hashed strings and if the same, exit?\n* This all says the underlying descriptor / type has to be the same - we don't want that, we want an arbitrary comparison"
+    }
+  ]
+}

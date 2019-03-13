@@ -1,0 +1,9 @@
+{
+  "title": "Jet 2018 achievements",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "1) Schema Registry\n2) Bundle Deploy\n3) Splunk / Groovy Deploy Logging\n4) Sample Repo\n5) HLL advancements / RVI workflows\n6) cqlsh Docker container\n7) Structured Streaming POC\n8) git2consul"
+    }
+  ]
+}

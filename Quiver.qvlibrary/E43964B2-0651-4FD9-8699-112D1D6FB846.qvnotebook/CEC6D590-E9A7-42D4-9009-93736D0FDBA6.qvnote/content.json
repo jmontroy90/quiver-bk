@@ -1,0 +1,9 @@
+{
+  "title": "Effective Scala",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Main takeaway - the Berliner Pattern! Scala is a hybrid language, and as such the \"third way\" that combines \"better Java\" with \"worse Haskell\" is one that takes advantage of both worlds. Their pattern consists of:\n* thin outer layer for IO, \"wild west\"\n* functional inner layer for application flow, most of your program\n* imperative / mutable / Java-esque core within some bounded contexts (functions), for speed and algorithms\n\nAs long as your mutability is well-contained (single thread, single scope), it can be very advantageous to performance to allow modification!\n\nI dig this pattern."
+    }
+  ]
+}

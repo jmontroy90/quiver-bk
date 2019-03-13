@@ -1,0 +1,18 @@
+{
+  "title": "Day 12: The static factory method",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This is a simple, kinda limited pattern, but it's interesting. It allows for initialization via a singleton and pattern matching. I imagine it'd be good if you had radically different construction demands for some subtypes that can be differentiated \"intentionally\". Or maybe if you've got a clashing constructor on type, but clearly-delineated differences in use case within that type (like the String case below). Example:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "trait Animal\nclass Bird extends Animal\nclass Mammal extends Animal\nclass Fish extends Animal\n\nobject Animal {\n  def apply(animal: String): Animal = animal.toLowerCase match {\n    case \"bird\" => new Bird\n    case \"mammal\" => new Mammal\n    case \"fish\" => new Fish\n    case x: String => throw new RuntimeException(s\"Unknown animal: $x\")\n  }\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "The clear problem here is the same with any pattern match on an ADT — any new type members need to be handled within the pattern match for completeness. Still, if the parent type is `sealed`, this could be useful.\n\nThis stands separate from the original factory method, as that was concerned with subtype polymorphism and how different classes can coordinate their subtype polymorphism. This is just straight-up pattern matching for constructors."
+    }
+  ]
+}

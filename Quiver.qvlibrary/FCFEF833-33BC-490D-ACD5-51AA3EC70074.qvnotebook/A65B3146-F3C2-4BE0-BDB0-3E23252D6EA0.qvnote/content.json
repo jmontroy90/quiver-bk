@@ -1,0 +1,13 @@
+{
+  "title": "Thrift: Scalable Cross-Language Services Implementation",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](https://thrift.apache.org/static/files/thrift-20070401.pdf)"
+    },
+    {
+      "type": "markdown",
+      "data": "Basic data types are what you'd expect. No unsigned integers originally.\n\nStructs, container types (list, set, map), exceptions, and services are all detailed as basic types (and have corresponding codegen to all supported languages). Field numbering is HIGHLY encouraged, but (at least in the original paper) can be omitted for auto-assigning.\n\nTransports are implemented across target languages for sockets (`TSocket`), files, memory, and so on. "
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 10 - ISP: The Interface Segregation Principle",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Simple principle here - don't depend on interfaces you don't need. Example moving from:\n\n![IMAGE](quiver-image-url/DA237158129E4B2AD981F0601AB69843.jpg =250x142)\n\nto:\n\n![IMAGE](quiver-image-url/67AF8A47241E8F09B828B16C01157F01.jpg =209x142)\n\nThat way, individual users only depend on code they actually use, and aren't forced into recompiles, redeploys, or (worst case) cascading failures based on a break in a component you don't even use!"
+    }
+  ]
+}

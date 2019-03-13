@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 6 - Functional Programming",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "No mutability. We remove all concurrency issues if nothing can be changed! Event sourcing says great, let's make our data stores CR-only and compute state from transactions. If we need to cache state for computation or storage reasons, fine. \n\nTransactional memory - compare-and-set - works to fight mutability issues by segregating mutability down to one basic component. This is fun because it sorta echoes the Berliner pattern!"
+    }
+  ]
+}

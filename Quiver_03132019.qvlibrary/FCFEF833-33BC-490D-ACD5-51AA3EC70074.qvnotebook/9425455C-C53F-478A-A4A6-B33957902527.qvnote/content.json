@@ -1,0 +1,17 @@
+{
+  "title": "Schema Registry Dev Workflow",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": ""
+    },
+    {
+      "type": "markdown",
+      "data": "Storm workflow:\n* Soft guarantee for all types to be contained within `ValueObjects.fs`\n* `Storm.<package-name>.Api` is usually a holding namespace for metadata, interface types, etc., but again, just a soft guarantee\n* In `.fsproj` file, we've got a line that loads types:\n  > `<Compile Include=\"ValueObjects.fs\" />`\n* Basic idea - load a fixed-name **not named ValueObjects** `.fs` file containing all generated types via the above `Compile Include` statements. One per file, which is one line per type.\n* First stab at this will just be a dumb bash script; also we need to mock out the actual `protoc --fsharp_out` call for now.\n* John plans to mock out this functionality in a bash script possibly to demo on Thursday; need to coordinate with Laurence on what that could look like re: plugins rather than bash. Hopefully the bash will be re-usable somehow."
+    },
+    {
+      "type": "markdown",
+      "data": "We also discussed two kinda fundamentally approaches in terms of the long-term success of this project:\n1) **Google approach** — no breaking / major version changes for Protos (eg. int32 -> string, re-use tag nums); if absolutely necessary, create a new field, create a new type; two fields to reflect new version within one type, and over time phase out old field. Still requires person-to-person communication and cross-team coordination.\n2) **Jet POC approach** — versioning fundamental to schema management; allows for multiple co-existing versions (major and minor differences) of same types, such that different producers / consumers can make their own decisions about migration timelines and internal data types;\n\nTo be clear, the scope of our POC is limited to the second approach, but we **cannot** go into any next phase with blinders on to the long-term problems of version-heavy management. Both approaches have heavy drawbacks and implied hacks."
+    }
+  ]
+}

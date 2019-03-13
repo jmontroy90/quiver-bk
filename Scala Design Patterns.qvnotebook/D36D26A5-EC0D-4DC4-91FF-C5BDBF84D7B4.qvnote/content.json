@@ -1,0 +1,40 @@
+{
+  "title": "Day 23: The proxy design pattern",
+  "cells": [
+    {
+      "type": "text",
+      "data": "The proxy design pattern is yet another wrapper pattern meant to simplify / control access to a class. The example here shows how access to an existing, eagerly-evaluated class (here, one that loads a potentially huge text file) can be wrapped with a proxy to turn that eager evaluation into on-demand, lazy evaluation.<div><br></div><div>Say we’ve got the below interface and expensive, existing implementation:</div>"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "trait FileReader {\n  def readFileContents(): String\n}\n\n// read `filename` on instantiation and cache it for fetching on [[readFileContents]\nclass FileReaderReal(filename: String) extends FileReader {\n  val contents = {\n    val stream = this.getClass.getResourceAsStream(filename) \n    val reader = new BufferedReader(new InputStreamReader(stream))\n    try {\n      reader.lines().iterator().asScala.mkString(System.getProperty(\"line.separator\"))\n    } finally {\n      reader.close()\n      stream.close()\n    }\n  }\n  \n  System.out.println(s\"Finished reading the actual file: $filename\")\n  \n  override def readFileContents(): String = contents\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "Now let's add a **proxy** implementation to turn this from eager to lazy:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "class FileReaderProxy(filename: String) extends FileReader {\n  private var fileReader: FileReaderReal = null\n  \n  override def readFileContents(): String = {\n    if (fileReader == null) {\n      fileReader = new FileReaderReal(filename)\n    }\n    fileReader.readFileContents()\n  }\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "What have we achieved here? Not a huge amount that couldn't have been done in the original implementation. `contents` could've just been a lazy val, which, heck, if you look at the Scala implementation of `lazy val`, you'll see the pretty immediate similarity:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "final class LazyCell {\n  @volatile var bitmap_0: Boolean = false\n  var value_0: Int = _\n  private def value_lzycompute(): Int = {\n    this.synchronized {\n      if (!bitmap_0) {\n        value_0 = <RHS>\n        bitmap_0 = true\n      }\n    }\n    value_0\n  }\n  def value = if(bitmap_0) value_0 else value_lzycompute()\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "This is a bit fancier and accounts for concurrency on the JVM properly, but it's essentially the same \"if not initialized, initialize and return; otherwise return\" as the proxy example here.\n\nBut we can imagine other use cases, maybe.\n* If we can't modify the original implementation for whatever reason (compatibility, breaking change, not our library, etc.), the proxy pattern is allowing us to modify behaviors without modifying the original class.\n* This wrapper might've also brought together disparate components, but then we're pretty close to the facade design pattern.\n* This also feels similar to the bridge design pattern, but where the bridge pattern allows for deconstructing of many implementations of a component, and the facade pattern allows for the joining of multiple separate components, this pattern is mostly just to wrap and change the behavior of an existing component. \n* It was couched as similar to the decorator pattern, and it definitely is. Just not changing methods this time."
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

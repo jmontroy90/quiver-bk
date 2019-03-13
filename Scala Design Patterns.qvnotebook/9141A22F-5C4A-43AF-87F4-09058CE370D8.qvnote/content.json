@@ -1,0 +1,18 @@
+{
+  "title": "Day 19: The bridge design pattern",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "The bridge design pattern allows us to design libraries with loosely coupled components we can then evolve independently. In short:\n* Identify a component `A` that has multiple implementations\n* Ascertain whether a distinct component `B` within `A` also has multiple implementations\n* Instead of evolving `A` because of permutations in `B` (leads to class explosion), separate out `B` and inject it into `A` as needed at object creation time.\n* This injection is accomplished via constructors in Java, and via self types in Scala. Both accomplish the same thing, but stackable traits are cleaner for adhoc function enhancement at object creation over exploding a constructor.\n\nCode example: say we have a `PasswordConverter` class that is implemented multiple ways, and also uses a `Hasher` that can be implemented multiple ways (SHA256, MD5). Instead of coupling them directly, we use self types to loosely couple them and inject them as needed:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "// component `B` — hasher\ntrait Hasher {\n  def hash(data: String): String\n}\n\ntrait Sha1Hasher extends Hasher {\n  override def hash(data: String): String = s\"SHA1-$data\"\n}\n\ntrait Sha256Hasher extends Hasher {\n  override def hash(data: String): String = s\"SHA256-$data\"\n}\n\ntrait Md5Hasher extends Hasher {\n  override def hash(data: String): String = s\"MD5-$data\"\n}\n\n// component `A` which uses `B` — password converter\nabstract class PasswordConverter {\n  self: Hasher =>\n  \n  def convert(password: String): String\n}\n\nclass SimplePasswordConverter extends PasswordConverter {\n  self: Hasher =>\n  \n  override def convert(password: String): String = hash(password)\n} \n\nclass SaltedPasswordConverter(salt: String) extends PasswordConverter {\n  self: Hasher =>\n  \n  override def convert(password: String): String = hash(s\"${salt}:${password}\")\n}\n\n// top-level injection and management of loosely-coupled components\nval p1 = new SimplePasswordConverter with Sha256Hasher\nval p2 = new SimplePasswordConverter with Md5Hasher\nval p3 = new SaltedPasswordConverter(\"8jsdf32T^$%\") with Sha1Hasher\nval p4 = new SaltedPasswordConverter(\"8jsdf32T^$%\") with Sha256Hasher"
+    },
+    {
+      "type": "markdown",
+      "data": "The old-school Java equivalent to this is to use constructors instead of self types. This works fine, but requires you to evolve the constructor of your class `A` to accept as many features as needed. This isn't as nice as just tacking on a bunch of stackable traits!"
+    }
+  ]
+}

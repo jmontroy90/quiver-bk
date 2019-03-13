@@ -1,0 +1,9 @@
+{
+  "title": "sbt 1",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "`sbt 1` changes / interface points should be minimal."
+    }
+  ]
+}

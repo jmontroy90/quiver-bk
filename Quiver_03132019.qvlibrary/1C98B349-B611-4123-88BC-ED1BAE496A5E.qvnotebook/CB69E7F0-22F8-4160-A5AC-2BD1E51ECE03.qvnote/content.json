@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 9: Reading and Writing Data",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to chapter](https://www.safaribooksonline.com/library/view/cassandra-the-definitive/9781491933657/ch09.html#chp-readwrite)\n\n## Writes\n\nRecall: all writes in Cassandra are fast, append-only upsert operations. No disk reads or seeks! This is because of the `memtable` / `SSTable` underlying structure. **Important**: all operations are upserts because either the partition key / token doesn't exist in a table, OR it overwrites a previously existing key. \n"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "High Performance Systems in Scala",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "##### Excessive Object Instantion\n\n* Via instantiation overhead and GC — will slow down your program.\n* Maybe move off heap, or do no-pause GC algorithms?\n* Other approach: use a value class to remove heap allocation of an Option.\n* `javah` seems to analyze heap allocations for a given app!\n\n##### Cache-oblivious algorithms\n\n* tl;dr — main memory access is slow, and if you can take advantage of minimizing cache misses, scanning your cache lines well, and taking advantage of main memory's pre-fetching patterns, we can just do better.\n* This reminds me of Spark's cache-aware algorithms, where pointers caused a break in scan patterns\n* Some [MIT OpenCourseware lectures on this](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-design-and-analysis-of-algorithms-spring-2015/lecture-videos/lecture-24-cache-oblivious-algorithms-searching-sorting/).\n\n##### Synchronisation\n* False sharing - two indepedent variables land on the same cache line, which means the cache line will be invalidated every time either variable is modified. Per MESI synchronisation protocols, these modifications / variables will ping-pong via the L3 cache and cause a ton of protocol traffic on your bus.\n* To avoid this — `AtomicLong(3).withPadding(128LeftRight)`. Oof - this padding guarantees that adjacent independent variables won't land on the same cache line, preventing synchronisation thrashing.\n* Akka uses things like this for actor / thread affinity — the memory access patterns of one thread should align with one actor's problem domain!\n\n\nhttps://github.com/ktoso/sbt-jol\nhttps://github.com/ktoso/sbt-jmh\n\n"
+    }
+  ]
+}

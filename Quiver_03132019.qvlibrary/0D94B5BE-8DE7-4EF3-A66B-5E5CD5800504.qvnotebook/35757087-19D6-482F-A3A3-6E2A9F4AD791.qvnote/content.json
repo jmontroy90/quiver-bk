@@ -1,0 +1,9 @@
+{
+  "title": "Tuning Java Resources with Cassandra",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to article](https://docs.datastax.com/en/cassandra/3.0/cassandra/operations/opsTuneJVM.html)\n\nG1 vs. CMS are your two options for Cassandra >3.0. **G1 is a better general-purpose, future-proofed GC algorithm that works well for larger heaps and minimal operational overhead.**\n\nRemember - you can't allocate all node memory to heap, because the filesystem does paging AND some things are cached off heap. Let the filesystem help you!\n\nThe following Cassandra components are stored in memory:\n\n* Bloom filters\n* Partition summary\n* Partition key cache\n* Compression offsets\n* SSTable index summary\n* Memtables\n* Gathered replicas for read / anti-entropy repair\n\nOff-heap memory is also used as such:\n* Page cache\n* The Bloom filter and compression offset maps reside off-heap.\n* Cached rows in native memory, outside the Java heap"
+    }
+  ]
+}
