@@ -1,0 +1,33 @@
+{
+  "title": "Beyond Unit Tests: End to End Testing for Spark Workflows",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to talk](https://www.youtube.com/watch?v=L8lANUOa2g0)"
+    },
+    {
+      "type": "markdown",
+      "data": "Typical data engineer day - tiny bug causes cascading, interdependent failures which dictate backfilling and re-runs for a whole DAG / lineage. We know this story. Also, cluster / dependency upgrades, different JARs on classpath, etc. How do we avoid these things? Use a testing framework that allows you to configure for many different environments and dependencies! LinkedIn accomplishes this with [Azkaban](https://azkaban.github.io/)."
+    },
+    {
+      "type": "markdown",
+      "data": "###Using Azkaban\nAzkaban provides a DSL that compiles from JSON-like syntax into usable properties files. A few features include:\n* Workflow + Suite + Assertion definitions\n* Configuration overrides"
+    },
+    {
+      "type": "text",
+      "data": "Example workflow definition in Azkaban DSL:<div><br><div><img src=\"quiver-image-url/E0943ABE5255F951DF361DB854B804DE.png\" alt=\"Screen Shot 2017-11-17 at 2.45.52 PM.png\" width=\"208\" height=\"286\"><br></div></div>"
+    },
+    {
+      "type": "text",
+      "data": "Example configuration override:<div><img src=\"quiver-image-url/0ECC0CC37177FA673C180303E4C2B0A4.jpg\" width=\"1686\" height=\"750\"><br></div>"
+    },
+    {
+      "type": "text",
+      "data": "Example assertion workflow:<div><img src=\"quiver-image-url/D364EDCA80840E954781832A483DEF93.jpg\" width=\"530\" height=\"284\"><br></div>"
+    },
+    {
+      "type": "text",
+      "data": "Notes on test data - must be:<div><ul><li>Representative of real data - real data is often too large, or biased depending on collection method</li><li>Smaller in size</li><li>Automated generation</li><li>Sharable - not email!</li><li>Discoverable - where do you get it? Kafka Tool?</li></ul></div>"
+    }
+  ]
+}

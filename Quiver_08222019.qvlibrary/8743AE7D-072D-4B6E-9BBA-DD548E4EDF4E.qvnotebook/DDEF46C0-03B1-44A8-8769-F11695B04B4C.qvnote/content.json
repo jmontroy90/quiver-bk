@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 12 - Components",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This chapter is a history of code components. Your basic code packaging includes JARs, WARs, DLLs, Gems, and so on.\n\nHow did we get here? Originally, code was loaded and started _at a particular point in memory_. Then as code grew, we separated out libraries from applications, and loaded in compiled code at a point on disk into a point in memory, to use with our application.\n\nThis process expanded as codebases grew, and led to *dynamic code linkers* -- all the overhead of where, when, and how to load code was managed for you. Sometimes this brought on too much overhead in the 80s, but then Moore's Law on computing power kicked in. Now it's easy for us to use dynamic linkers."
+    }
+  ]
+}

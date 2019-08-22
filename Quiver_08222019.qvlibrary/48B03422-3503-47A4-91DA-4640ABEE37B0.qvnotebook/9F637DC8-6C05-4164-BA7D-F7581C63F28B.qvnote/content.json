@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 14: Init Containers",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Init containers run in order as part of a pod. They’re meant to manage dependencies for long-lived applications, like applying schemas for a database or cloning a repo. They should be idempotent, run quickly, and quit successfully.\n\nResource management is based on the highest usage between init containers and your application containers. Application containers run in parallel, so their total resource usage is the sum across all of the app containers. **Warning**: if you have high resource usage init containers and low resource app containers, your total allocation will be based on the init containers, wasting resources.\n\nUse init containers to separate concerns. Any initialization, configuration, they go there.\n\nThere are lots of ways to do init stuff, of course, but init containers are pod-specific and are meant for developers trying to separate concerns. Things like **admission webhooks** are for administrators. These webhooks consist of a **mutating webhook** (\"change resources to enforce custom defaults\") and a **validating webhook** (\"reject resources to enforce custom admission policies\"). They all run against the Admission controller which intercepts all events and registers HTTP callbacks for them."
+    }
+  ]
+}

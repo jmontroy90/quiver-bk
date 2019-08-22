@@ -1,0 +1,9 @@
+{
+  "title": "Envoy - Ansible",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**TO ANSWER**\n1) What is jaeger?\n\n\n**ANSWER ME**\n1) Where are logs on the node?\n\t* By default on the data drive, /datadrive/var/log/envoy\n2) How does Envoy start?\n\t* It uses a \"envoy-hot-restarter\" script via systemd to bootstrap Envoy's default start script.\n3) What components are configured as part of Envoy's Ansible runs?\n\t* Envoy -- logs, confs\n\t* Jaeger -- logs, confs, BUT ONLY IF `tracing_enabled` == true\n\t* systemd -- for both Envoy and Jaeger\n\t* Rocket Skates -- validate + restart scripts for the Rocket Skates agent, installed as part of site.yml\n\t* Consul service registration + healthchecks for Envoy, Jaeger, Prometheus, Rocket Skates\n\t* logging - logrotate conf + corresponding cron, rsyslog\n\t* gremlin -- installed as part of site.yml\n4) What are access logs?\n\t* They literally contain a record for all ingress traffic / requests per team, rotating through two files per team daily. The traffic is routed with filter matches that catch traffic based on a pattern match like `prefix_match: \"phased-{{ superhero }}-\"`\n5) What are outliers?\n\tSee: https://www.envoyproxy.io/docs/envoy/v1.5.0/intro/arch_overview/outlier\n\t* Basically, detection and removal of bad nodes in an upstream cluster, whether's that due to increased latency, consecutive 5xx's returned, and so on.\n6) What's the difference between the `datadrive_log_dir` and the `log_dir`?\n\t* The `datadrive` is typically external, persistent storage mounted onto the node. Logs survive hardware moves.\n\n\nFACTS:\n\t1) Envoy depends on Consul, and imports + users one of its handlers for restarting a Consul agent. This dependency is managed only by the ordering / commons of `site.yml`."
+    }
+  ]
+}

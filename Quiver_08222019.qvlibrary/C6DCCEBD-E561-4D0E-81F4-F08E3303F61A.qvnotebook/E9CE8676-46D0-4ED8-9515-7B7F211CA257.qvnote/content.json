@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 3",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Go has Arrays, slices, and Maps. Why? Let's find out.\n\n## 3.1 - Data-Oriented Design\n"
+    }
+  ]
+}

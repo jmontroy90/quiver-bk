@@ -1,0 +1,17 @@
+{
+  "title": "Getting Physical With Memory",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](http://duartes.org/gustavo/blog/post/getting-physical-with-memory/)"
+    },
+    {
+      "type": "markdown",
+      "data": "Here’s an Intel Core 2.\n\n![](quiver-image-url/FE457CE7A4D03C088EC68A2A80C0DEF4.jpg)\n\nAll requests are mediated by the Front Side Bus, which is a big part of how cache coherency is maintained. The pins shown here are all pins related to I/O (memory and disk), and they are used in FSB transactions. \n\nA transaction goes through five phases, mediated by `agents`: arbitration, request, snoop, response, and data (_look this stuff up!_). This post focuses on requests, which is managed via two packets emitted from the requester (typically a CPU, reading an instruction that requests a particular memory location). These two packets are:\n1) A packet containing the physical address emitted via the 33 address pins (can address 64GB), and 5 request pins (answering: what kind of transaction?).\n2) A second packet in the next clock cycle containing metadata like the Attribute Signal and others seen below.\n    * The signals specify behaviors like \"uncacheable\" and \"write-back\", which is made available to the FSB and thus allows for synchronization between CPU caches.\n\nFirst packet:\n![IMAGE](quiver-image-url/263E185C8A7DD54D99CD60A4D58EDAE7.jpg =681x278)\nSecond packet:\n![IMAGE](quiver-image-url/2D5BC7CE5DC9FBD689BFADE09D7C5552.jpg =681x343)\n\nTypically, requests from main memory are considered as _write-back_ - this is the most performant. If a given byte is requested, the entire surrounding cache line (64 bytes, for example) is read into the cache. If that byte is modified, the write goes to the cache line, but is **not** flushed to main memory until necessary. At that point, the whole cache line is written into memory.\n\nNote that all FSB agents must listen to _all_ transactions in order to maintain cache coherency - this naturally makes the FSB a bottleneck. To quote: \"Thus bus contention becomes a severe problem as more cores and processors are added to Intel computers. The Core i7 solves this by having processors attached directly to memory and communicating in a point-to-point rather than broadcast fashion.\" This is NUMA architecture, right?"
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

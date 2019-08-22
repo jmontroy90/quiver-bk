@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 1: Cloud-Native Mindset",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "> The microservice architecture tackles software complexity through modularisation of business capabilities and trading code complexity for operational complexity.\n\n### Pods\nPods are multiple containers deployed **on a single host**. They can interact with each other through standard, isolated means, but obviously compete for underlying resources.\n\nPods are \"the unit of deployment, placement and scaling\", and couple the lifecycles of containers together. Pods are colocated and deployed atomically (all or nothing on one host!), and they share socket spaces like normal Unix processes.\n\n### Services\nPods are allocated a single IP on a single node. If that node falls over, a new IP is allocated for the same pod / application and you'd need to do some service discovery. This is where Kubernetes Services come in - service discovery and load balancing as pods move around behind them!\n\n### Labels\nLabels are used to group pods together, and can be accessed programmatically and reached externally. \"type:backend\" and \"app:customer\" are two examples. In other words, labels are good for query matching, and then doing something with the matched pod results. They're also good for scheduling and scaling.\n\n### Annotations\nLike labels, but for internal metadata - build id, branch names, etc.\n\n### Namespaces\n> The most common example of Namespaces is using them to represent the different software environments such as development, testing, integration testing or production.\n\nNamespaces provide `ResourceQuotas` and uniqueness of services within themselves. Namespaces provide no network boundaries, IPs are all reachable.\n\nThis is just a small fraction of components available for Kubernetes, gotta learn em all!"
+    }
+  ]
+}

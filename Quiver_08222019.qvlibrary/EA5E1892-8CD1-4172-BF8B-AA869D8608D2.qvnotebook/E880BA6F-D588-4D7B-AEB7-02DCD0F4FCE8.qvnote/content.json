@@ -1,0 +1,18 @@
+{
+  "title": "Runtime Reflection",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "We focus here on runtime reflection, i.e. the world of TypeTags, ClassTags, and Mirrors. Compile-time reflection is more for macros and metaprogramming (see `scala-meta` for possibly better, hipper solutions).\n\nMain underpinnings:\n* Java type information is erased at runtime in the JVM (type erasure) - this is why we need to do any of this.\n* The JVM works in general via ClassLoaders - we're primarily working with these. There are Java ClassLoaders and Scala ClassLoaders; naturally the Scala ones are better at dealing with Scala-specific syntax (think abstract types, traits)\n\nTwo types of universes from which you can get reflection-esque information:\n* `scala.reflect.runtime.universe` for runtime reflection\n* `scala.reflect.macros.Universe` for compile-time reflection\n\nWe can instantiate types at runtime using mirrors and classloaders. Follow along in a REPL:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "import scala.reflect.runtime.universe._\n\ncase class Person(name: String)\n\n// you now have access to everything\nval mirror = runtimeMirror(getClass.getClassLoader)\n\n// basically - save the compile-time info on the class and constructor of `Person`, such that a runtime mirror can inspect what the ClassLoader has to offer and see if there's anything usable\nval compilePerson = typeOf[Person].typeSymbol.asClass\nval compilePersonConstructor = typeOf[Person].decl(termNames.CONSTRUCTOR).asMethod\n\n// now, checking your loaded runtime for matching classes\nval runtimePerson = mirror.reflectClass(compilePerson)\nval runtimePersonConstructor = runtimePerson.reflectConstructor(compilePersonConstructor)\n\n// success!\nval runtimePersonObject = runtimePersonConstructor(\"Mike\")"
+    },
+    {
+      "type": "markdown",
+      "data": "#### TypeTags, ClassTags, so on\n\nTypeTags, ClassTags, and WeakTypeTags are all generated at compile time (via context bounds or implicit parameters) to carry compile-time type information into the JVM runtime (remember, erasure). They entirely replace Manifests, which should be considered deprecated.\n\nAt a glance:\n* TypeTag — carry over all type information for anything, including generics\n\n"
+    }
+  ]
+}

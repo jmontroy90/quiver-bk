@@ -1,0 +1,9 @@
+{
+  "title": "Workshop Day 1: Property-based Testing",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Supplementary: Going Events-First](http://www.russmiles.com/essais/going-events-first-for-microservices-with-event-storming-and-ddd)\n* DDD is **not** about domain objects. These get tangled up across domain boundaries, grandfathered into new apps, distributed in an uncontrolled, unmanaged fashion; they're payloads, entities, case classes, etc. \n* Instead, we focus on events that shape these entities — **event sourcing** allows us to define _what can happen_ early in our planning process, without having to be tethered to _what it happens to_! This is an `events-first design`.\n* Aside - this kinda feels like structural realism. But that's a philosophical answer; in practice, people work with entities. Can we reify events into entities? That's kinda what physics does too, maybe.\n\nI switched sessions. Event storming is not what I thought I was getting into."
+    }
+  ]
+}

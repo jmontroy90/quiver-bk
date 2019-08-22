@@ -1,0 +1,9 @@
+{
+  "title": "MSP - March 2019",
+  "cells": [
+    {
+      "type": "text",
+      "data": "Go uses duck typing for interfaces! It’s statically checked, but still, damn. This feels like it undermines expectations, like especially in a language without a strong functional undercurrent, with mutability and mixed evaluation semantics, I dunno what the fuck your code that “fits my interface” actually does broh. “Up to practice” indeed."
+    }
+  ]
+}

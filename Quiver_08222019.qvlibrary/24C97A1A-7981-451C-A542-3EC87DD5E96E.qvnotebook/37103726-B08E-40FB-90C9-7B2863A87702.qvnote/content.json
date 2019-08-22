@@ -1,0 +1,9 @@
+{
+  "title": "Advanced Go Concurrency Patterns",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=QDDwwePbDtw)\n\n\"Do not communicate by sharing memory; instead, share memory by communicating.\"\n\nThis means message passing / channels > MutEx, CAS, latches, semaphores, etc."
+    }
+  ]
+}

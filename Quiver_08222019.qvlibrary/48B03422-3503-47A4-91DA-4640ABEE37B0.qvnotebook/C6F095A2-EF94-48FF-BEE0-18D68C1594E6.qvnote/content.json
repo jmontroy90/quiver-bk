@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 16: Adapter",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "An adapter is just a sidecar that standardizes formats. Sidecars are the general category, adapaters might take metrics from Python apps or Java apps and convert them all to JSON while the app container is running."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "sd",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "1) TFS Listener Service - manages commit / merge events by listening to githooks\n2) Schema Store Service - used to provide schema artifacts from our Store and reconcile dependencies\n3) .NET / JVM (F# / Scala) plugins - used to interface with the Schema Store Service\n4) Team use case - message passing\n5) Team use case - HTTP (edited)\n\n* TFS Listener Service:\n\t* Set up commit listener and parse JSON at endpoint\n\t* Parse out changes and relevant message formats + gRPC formats from / triggered by a commit message\n\t* Compare and version TFS changes prompted by commit hook\n\n* Schema Store Service:\n\t* Data model in DocDB\n\t* Namespacing for something added (minor / major versions)\n\t* Determine what kind of artifact we store\n\t* Interacting with service via HTTP and Proto to get a dependency-free schema (particular version)\n\t* Interacting with service for interdependent schemas\n\n* .NET / JVM plugins\n\t* Requirements.txt in a development environment (F#)\n\n* Message passing\n\t* Understand one topic use case in a Schema Registry world - homogenous streams, ordering, composite schemas, dev work once artifact is pulled\n\n* HTTP endpoints\n\t* Understand one topic use case in a Schema Registry world - HTTP libraries / Swagger, verbs, data structure propagation, composite schemas, dev work once artifact is pulled"
+    }
+  ]
+}

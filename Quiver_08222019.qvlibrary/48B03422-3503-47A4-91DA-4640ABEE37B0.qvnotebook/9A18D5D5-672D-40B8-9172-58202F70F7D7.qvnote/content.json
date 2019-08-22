@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 15: Sidecar",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "A sidecar is a hopefully little helper container that exists alongside your application containers. They communicate with your app through some shared storage or IPC / RPC. Typical tasks for them include logging, configuration, proxying, monitoring, and so on. The pod encapsulates both your app and its sidecars. That way, you can keep your containers pure in intention, instead of doing image inheritence.\n\nThis creates a git synchronization sidecar for an HTTP server. The containers communicate through shared mounted directories:\n```\napiVersion: v1\nkind: Pod\nmetadata:\n  name: web-app\nspec:\n  containers:\n  - name: app\n    image: docker.io/centos/httpd\n    ports:\n    - containerPort: 80\n    volumeMounts:\n    - mountPath: /var/www/html\n      name: git\n  - name: poll\n    image: axeclbr/git\n    volumeMounts:\n    - mountPath: /var/lib/data\n      name: git\n    env:\n    - name: GIT_REPO\n      value: https://github.com/mdn/beginner-html-site-scripted\n    command:\n    - \"sh\"\n    - \"-c\"\n    - \"git clone $(GIT_REPO) . && watch -n 600 git pull\"\n    workingDir: /var/lib/data\n  volumes:\n  - emptyDir: {}\n    name: git\n```\n![IMAGE](quiver-image-url/0B45EB14B5C2614062C29CECDDB6E514.jpg =824x478)"
+    }
+  ]
+}

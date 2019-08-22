@@ -1,0 +1,13 @@
+{
+  "title": "CRDTs Illustrated",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=9xFfOhasiOE)"
+    },
+    {
+      "type": "markdown",
+      "data": "Two kinds of CRDTs!\n1) **Op-based (CmRDT)** — all ops must be commutative, unique, and in order.\n2) **State-based (CvRDT)** — all merges must be idempotent, commutative, associative; partial order among states shold exist, and merge ops should increase along this order\n\nExamples: counters, sets\n\nRules for op-based CRDT:\n1) Ops must commute to qualify as a valid CRDT!\n2) Ops must be either exactly-once or simply idempotent.\n3) Ops must be applied in order.\n\nCommutivity example:\n![IMAGE](quiver-image-url/40D02F4A276E05CD258F410531F491CB.jpg =912x404)\n\n`Observed-remove Set` — add a marker to set elements to help concurrency control.\n\n![IMAGE](quiver-image-url/1497E9D24A55F1A9A2D18F0F4D9B0DCE.jpg =928x256)\n\n`State-based` — we need associativity and commutivity for idempotence in these counter examples.\n* Use dual counters (positive / negative)\n* Version vectors (basically monotonic counter on symbol to perform idempotency over time)"
+    }
+  ]
+}

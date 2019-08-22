@@ -1,0 +1,9 @@
+{
+  "title": "Jenkins2 / VSTS",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# Guardians-Specific\n\n* VSTS for builds, Jenkins2 for deploys, Flash now owns Jenkins1\n* Side note: Artifactory is in the devops Azure subscription\n* VSTS pools - Linux, Windows, only qa and dev; now configurable tags on pipelines for filesystem, OS, and environment\n\n#### PIPELINE GENERATOR\n\n* **Old Way**: pipeline generator grabs old YAML, which points you to a repo's `deploy.Jenkinsfile` (or equivalent)\n* **New Way**: Generate YAML via pipeline generator UI, copy that YAML into the `jenkins-jobs` repo, then the Pipeline Generator picks up the YAML per usual\n\tdeclarative pipelines with rerunning in the middle of jenkins2 pipelines is coming\n\n#### Links\n[Splunk - Guardians Pipeline Generator](https://www.splunk.jet.network/en-US/app/search/guardians_pipeline_generator)\n\n[Wiki - Pipeline Generator](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/664471532/Pipeline+Generator)\n[Wiki - VSTS Usage Guide](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/653852853/Azure+DevOps+VSTS+Usage+Guide)\n\n[TFS - Pipeline Generator](https://jet-tfs.visualstudio.com/Jet/Jet%20Team/_git/golang-guardians-pipeline-generator)\nhttp://guardians-pipeline-generator.nomad.eastus2.qa.jet.network/ui/\t\n"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Repo: marquis",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### Concerns\n* All errors are logged, not handled. We need proper alerting to ensure we don't silently miss failed deletes.\n  * Example: all CRUD operators in `concord_sync.go`\n* No operations are atomic. This could lead to partial failures and incomplete state.\n  * Example: `concord_sync.go:syncClusters():154-155`\n* Tests are "
+    }
+  ]
+}

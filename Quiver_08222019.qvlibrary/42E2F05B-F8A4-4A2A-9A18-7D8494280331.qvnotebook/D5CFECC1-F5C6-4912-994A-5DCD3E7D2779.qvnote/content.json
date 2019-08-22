@@ -1,0 +1,9 @@
+{
+  "title": "Good Talks",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Life of a (Kubernetes) Packet](https://www.youtube.com/watch?v=0Omvgd7Hg1I) -- routing between pods via netns, veths; overlays (e.g. flannel); Services and kube-proxy / iptables / Kubernetes DNS; external traffic and the imbalance problem; DNAT and SNAT;"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Bash",
+  "cells": [
+    {
+      "type": "code",
+      "language": "sh",
+      "data": "# Full curl command\ncurl -XPOST \\\n    -H \"Content-Type: application/x-www-form-urlencoded\" \\\n    -H \"Accept-Language: en-us\" \\\n    -H \"Accept: */*\" \\\n    --data \"tid=983704098\" \\\n    https://parcel-app.notjet.net/v11/codereadr/load-scan?key=whatever\n"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Maglev: A Fast and Reliable Software Network Load Balancer",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/44824.pdf)"
+    },
+    {
+      "type": "markdown",
+      "data": "LOOK UP:\n* VIP vs vHost\n* REREAD SECTION 3.4 CLOSELY\n* 5-tuple hashing\n* Thus we developed the packettracer tool, similar to X-trace [21].\n* ECMP"
+    },
+    {
+      "type": "markdown",
+      "data": "**Some Good Quotes**\n\nThrough consistent\nhashing and connection tracking, Maglev provides reliable packet delivery despite frequent changes and unexpected failures.\n\n\nMaglev associates each VIP with a set of service\nendpoints and announces it to the router over BGP; the\nrouter in turn announces the VIP to Google’s backbone.\nAggregations of the VIP networks are announced to the\nInternet to make them globally accessible.\n\n\nWhen the router receives a VIP packet, it forwards\nthe packet to one of the Maglev machines in the cluster through ECMP, since all Maglev machines announce\nthe VIP with the same cost.\n\nWe use Direct Server Return (DSR) to\nsend responses directly to the router so that Maglev does\nnot need to handle returning packets, which are typically\nlarger in size. \n\n\nBoth the controller and the forwarder learn the VIPs to be served from configuration\nobjects, which are either read from files or received from\nexternal systems through RPC.\n\n\nAll VIP packets received by a Maglev machine are\nhandled by the forwarder. At the forwarder, each VIP\nis configured with one or more backend pools. Unless\notherwise specified, the backends for Maglev are service\nendpoints.\n\nEach backend pool, depending on its specific requirements, is associated with one or more health checking methods with which all its backends are verified;\npackets will only be forwarded to the healthy backends.\nAs the same server may be included in more than one\nbackend pool, health checks are deduplicated by IP addresses to avoid extra overhead.\n\n\nOnce a packet is matched to a VIP, we need to choose a\nbackend for the packet from the VIP’s backend pool. For\nconnection-oriented protocols such as TCP, it is critical\nto send all packets of a connection to the same backend.\nWe accomplish this with a two part strategy. First, we\nselect a backend using a new form of consistent hashing\nwhich distributes traffic very evenly. Then we record the\nselection in a local connection tracking table."
+    }
+  ]
+}

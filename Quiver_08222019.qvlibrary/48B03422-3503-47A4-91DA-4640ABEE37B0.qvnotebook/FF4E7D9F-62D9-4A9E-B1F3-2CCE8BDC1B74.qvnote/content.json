@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 8: Periodic Job",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "The `CronJob` type is for periodic, scheduled jobs. It uses Cron syntax, of course, and is pretty simple.\n\n![IMAGE](quiver-image-url/B45CA50EC3B4CA56AA2D422ADF16130A.jpg =1774x866)\n\nSome interesting spec options:\n* `.spec.schedule` -- the Crontab schedule\n* `.spec.startingDeadlineSeconds` -- how late a scheduled run is allowed to kick off after its scheduled time\n* `.spec.concurrencyPolicy` -- what to do with overlapping Cron jobs. \n    * `Allow` will kick off the next scheduled job even if the prior hasn't finished\n    * `Forbid` will skip the next if the current hasn't finished\n    * `Replace` will replace any current run"
+    }
+  ]
+}

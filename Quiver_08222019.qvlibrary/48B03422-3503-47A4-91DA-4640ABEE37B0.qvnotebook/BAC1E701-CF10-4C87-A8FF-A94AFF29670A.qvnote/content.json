@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 7: Batch Job",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "A couple different kinds of Pod creation types:\n* **Bare Pod** -- an unmanaged Pod that runs until completion and is not restarted\n* **ReplicaSet** -- a stable set of Pods running continuously\n* **DaemonSet** -- a set of Pods that run on every single Kubernetes node, used for platform capabilities like logging, storage containers, etc.\n\nA new kind of spec is the **Job** type, which defines a level of _completions_ and _parallelism_ . _Jobs_ are part of the normal Kubernetes metadata cycle, and can handle single jobs, multiple completions, and work queue-style parallelism.\n\n![IMAGE](quiver-image-url/BD224BCDE46253DC099BE8E2669044E0.jpg =1191x404)"
+    }
+  ]
+}

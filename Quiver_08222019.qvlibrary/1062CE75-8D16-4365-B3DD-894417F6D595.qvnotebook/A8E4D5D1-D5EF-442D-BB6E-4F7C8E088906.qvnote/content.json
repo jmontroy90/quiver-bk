@@ -1,0 +1,9 @@
+{
+  "title": "Possible Tickets",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**Rocket Skates** -- I see the cert info in Vault and Consul KV post-creation, but #gog-certs never came in!\n\n**Rocket Skates** -- Why did I have to bounce `rocket-skates-agent` manually on Envoy nodes to have a new cert placed there? Is this some order of operations thing?\n\n**Cable** -- Why do we need to force a cable refresh for new VMs in scalesets?\n\n**Envoy** -- For a new node, had to change ownership of `/datadrive/var/log/envoy/access_logs/ingress_stats_proxy.log`: root:root -> envoy:envoy"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Testing Apache Spark—Avoiding the Fail Boat Beyond RDDs",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to talk](https://www.youtube.com/watch?v=rPXmo99sOMo&t=565s)"
+    },
+    {
+      "type": "markdown",
+      "data": "Mostly the talk dealt with *spark-testing-base* and the different options it offers for testing RDDs, DataFrames, Streams, and also went into checking Spark counters as part of your testing (bytes read, time, shuffle bytes). Light on actual content, read through the libraries to see how these libraries solved Spark problems.\n\n[Spark Validator](https://github.com/holdenk/spark-validator)\n[Spark Testing Base](https://github.com/holdenk/spark-testing-base)"
+    }
+  ]
+}

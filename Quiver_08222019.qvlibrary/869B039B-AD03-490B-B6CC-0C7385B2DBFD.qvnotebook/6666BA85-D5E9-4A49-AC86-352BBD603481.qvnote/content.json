@@ -1,0 +1,27 @@
+{
+  "title": "Day 7: Aspect-Oriented Programming",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "The term `aspect-oriented programming` (AOP) refers to good practices for writing cross-cutting code. Examples of such code might include:\n* Logging\n* Timing / benchmarking\n* Serializing\n\nWe'll focus on an example of timing different implementations of the same functionality here, per the chapter.\n\nImagine you're reading and parsing JSON, and you want to compare two implementations. You might try implementing timing without AOP as such (note this requires json4s):"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "case class Person(firstName: String, lastName: String, age: Int)\n\ntrait DataReader {\n  def readData(): List[Person]\n  def readDataInefficiently(): List[Person]\n}\n\nclass DataReaderImpl extends DataReader {\n  private def readUntimed(): List[Person] = List(Person(\"a\",\"b\",27))\n  \n  override def readData(): List[Person] = {\n    val startMillis = System.currentTimeMillis()\n    val result = readUntimed()\n    val time = System.currentTimeMillis() - startMillis\n    println(s\"readData took ${time} milliseconds.\")\n    result\n  }\n\n  override def readDataInefficiently(): List[Person] = {\n    val startMillis = System.currentTimeMillis()\n    (1 to 10000).foreach {\n      case num =>\n        readUntimed()\n    }\n    val result = readUntimed()\n    val time = System.currentTimeMillis() - startMillis\n    System.err.println(s\"readDataInefficiently took ${time} milliseconds.\")\n    result\n  }\n}\n\nval dataReader = new DataReaderImpl"
+    },
+    {
+      "type": "markdown",
+      "data": "Of course the main problem here is that our timing code is intermixed with our reading code, and totally clutters and duplicates. With AOP, let's try separating out our concerns better - leave the core reading alone, and mix in the timing functionality on top of the reads!"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "// first revert DataReaderImpl to no-logging state\nclass DataReaderImpl extends DataReader {\n  private def readUntimed(): List[Person] = List(Person(\"a\",\"b\",27))\n  \n  override def readData(): List[Person] = {\n    readUntimed()\n  }\n\n  override def readDataInefficiently(): List[Person] = {\n    (1 to 10000).foreach {\n      case num =>\n        readUntimed()\n    }\n    readUntimed()\n  }\n}\n\ntrait LoggingDataReader extends DataReader {\n\n  abstract override def readData(): List[Person] = {\n    val startMillis = System.currentTimeMillis()\n    val result = super.readData()\n    val time = System.currentTimeMillis() - startMillis\n    System.err.println(s\"readData took ${time} milliseconds.\")\n    result\n  }\n\n  abstract override def readDataInefficiently(): List[Person] = {\n    val startMillis = System.currentTimeMillis()\n    val result = super.readDataInefficiently()\n    val time = System.currentTimeMillis() - startMillis\n    System.err.println(s\"readDataInefficiently took ${time} milliseconds.\")\n    result\n  }\n}\n\nval dataReader = new DataReaderImpl with LoggingDataReader"
+    },
+    {
+      "type": "markdown",
+      "data": "What's happened here is much nicer — our timing code has been injected without interfering with the parent trait's implementations. This is enabled by the `super.readData()` calls, which is allowing us to essentially wrap the original function without changing how it's invoked (of course you could wrap in a separate function, but this is cleaner!).\n\nNotice here the `abstract override` override syntax - this will not work without it! Think about it this way - you're overriding a method **before** it gets initialized, so by definition you're overriding something abstract. Why / how are you overriding before initialization? Well, remember linearization:\n\n* `DataReaderImpl LoggingDataReader`\n* `l(DataReaderImpl) l(LoggingDataReader)`\n* `DataReaderImpl DataReader LoggingDataReader DataReader`\n* `DataReaderImpl LoggingDataReader DataReader`\n\nSo `LoggingDataReader` references via `super` the `readData()` of `DataReader`, which at that point of initialization (right to left) is still abstract. Then when `DataReaderImpl` provides an implementation, `LoggingDataReader`'s `super` call references and wraps **that** implementation. This is why the `abstract override` special syntax is necessary — the first concrete implementation is provided by `DataReaderImpl`, **NOT** `LoggingDataReader`!"
+    }
+  ]
+}

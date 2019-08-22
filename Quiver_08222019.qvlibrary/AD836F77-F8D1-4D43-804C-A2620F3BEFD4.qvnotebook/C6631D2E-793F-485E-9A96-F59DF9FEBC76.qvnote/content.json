@@ -1,0 +1,9 @@
+{
+  "title": "Apache Arrow (Jet.com)",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Imagine a machine learning world where our clients are using Python libraries and functions for complex operations. Arrow can help with this in Spark.\n\n* Row UDFs are lambdas, RBAR; very slow because no batching!\n* Group UDFs - like `groupBy` + `mapGroups`; poor performance because of serialization costs between Spark and Python.\n\nThis is really slow right now in PySpark. Why?\n\nSome problems out of the box:\n* Packing / unpacking nesting\n* SerDe\n* Boxing / unboxing, Python interpretation\n\n#### Apache Arrow\nCommon in-memory columnar format for data movement between systems:\n\n![IMAGE](quiver-image-url/4B1382DCC84DC058770EF30FC07CE51F.jpg =1218x686)\n* No SerDe! Common format, wire representations is identical to in-memory format\n* Good for CPU processing patterns - easy to predict for branching because vectorized, SIMD-friendly, cache locality\n\nPySpark - 53x speedup! :o\n\nFor Python UDFs, normal process is:\n\n![IMAGE](quiver-image-url/802334B3B7E7815C0F2B27229C618CE3.jpg =1214x680)\n\nWith Arrow, we can do:\n\n![IMAGE](quiver-image-url/A68B9935B048DAFE5438803D8349D168.jpg =1212x680)\n\nThere's still issues here - the Spark `Row` is, well, row-based, and Arrow is columnar, so there's still SerDe involved in that representation.\n"
+    }
+  ]
+}

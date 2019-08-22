@@ -1,0 +1,9 @@
+{
+  "title": "Day 30: The interpreter design pattern",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This is the worst. DSLs are the worst. Don't work on English sentences, write code with code, and if you need fancier stuff, use powerful code concepts, not fancy English concepts. I think the writer of this book agrees with me.\n\nAnywho. The interpreter pattern is modeling a domain with evaluated sentences that parse as syntax trees. Think Spark SQL's Catalyst engine as a form of this."
+    }
+  ]
+}
