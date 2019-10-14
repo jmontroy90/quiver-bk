@@ -1,0 +1,9 @@
+{
+  "title": "Tuning Garbage Collection for Apache Spark",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Tuning Java Garbage Collection for Apache Spark Applications](https://databricks.com/blog/2015/05/28/tuning-java-garbage-collection-for-spark-applications.html)\n\n\n* Two main algorithms: Concurrent Mark Sweep (CMS) and ParallelOld GC; upcoming on Hotspot JVM 1.6 is Garbage-First GC (G1GC)\n* For low latency, generally prefer CMS GC; for high throughput, Parallel GC; G1GC aims to achieve both\n* Refresher on basic normal JVM GC:\n\t* Splits between young and old generation (statically allocated)\n\t* Initial allocation in Eden\n\t* Minor GCs swap live objects between survivor spaces (S0 and S1), tracking how long they survive\n\t* After a number of minor GCs, remaining objects get put into the old generation\n\t* If the old geneation fills up, a major GC (stop-the-world, all execution threads paused) is triggered\n* G1GC changes this setup completely:\n\t* Partition heap into contiguous spaces of memory\n\t* Eden spaces and survivor spaces are allocated as needed, and minor GCs move live objects to new unallocated (unused?) spaces\n\t* Uses Remembered Sets (RSets) to track object references in regions, rather than doing a whole-heap scan\n\t* Out of box - just go with defaults, and turn on G1GC with `XX:+UseG1GC`\n* Make sure you explicitly clean up your cached RDDs!"
+    }
+  ]
+}

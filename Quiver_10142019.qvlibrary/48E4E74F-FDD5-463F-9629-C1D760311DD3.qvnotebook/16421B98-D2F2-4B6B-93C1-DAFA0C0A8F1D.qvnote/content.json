@@ -1,0 +1,9 @@
+{
+  "title": "Acronyms",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "| Acronym | Meaning | Notes |\n| - | - | - |\n| MTD | Multi-Traffic Detector | Torbit-specific, [More info here](https://confluence.walmart.com/display/PGPT/Multi+Traffic+Director)\n| GSLB | Global Server Load Balancer| \n| GTM | Global Traffic Management | Used in context of Akamai\n| MLS | Managed Log Search | This is a team, link pending\n"
+    }
+  ]
+}

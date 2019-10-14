@@ -1,0 +1,9 @@
+{
+  "title": "Simplicity is Complicated",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=rFejpH_tAHM)\n\nHe starts by recalling Sapir-Whorf and saying that language convergence will eventually cause language groupthink and stultify the problem-solving space. Language conversion usually occurs through adding features.\n\nWe focus on **readability** -- complexity leads to more decision-making and de-parsing of coding between divergent code styles. Features add complexity. Readability is good because \"it means reliable\" in terms of fixes, extensibility, and maintainability. I don't know if I quite agree with this.\n\nAnother argument for features is expressiveness - conciseness and expressiveness are of course not the same thing, and \"expressive\" solutions can often be unwiedly, unreadable, and computationally expensive (think FP and stack allocation!).\n\nPick the **right set of features** - what's the basis set of features in the vector space of all language features?\n\nHere are some features that hide complexity via simple front-ends:\n* **Garbage Collection** -- no user interface at all! No memory management at all!\n* **Concurrency** -- `goroutines` (execution), `channels` (communication), `select` (coordination)\n    *  No thread pools, thread ids, management, etc. -- three key strokes.\n*  **Constants** -- just numbers! They put in the overhead of all the type conversion / interplay rules between floats and ints and whatever, such that we can just do normal operations as if consts weren't strongly typed!\n*  **Interfaces** -- lots of complexity for corners like narrowing a type, assertions and downcasts, but the basic idea is simple -- structs hold data, interfaces hold behavior. Allows for extremely component-oriented library design.\n*  **Packages** -- scoping and importing is really complicated, but Go makes it easier!"
+    }
+  ]
+}

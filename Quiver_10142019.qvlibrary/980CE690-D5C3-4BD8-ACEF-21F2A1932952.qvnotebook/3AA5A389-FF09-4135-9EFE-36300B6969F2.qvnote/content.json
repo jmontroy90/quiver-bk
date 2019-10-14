@@ -1,0 +1,9 @@
+{
+  "title": "Apex Logging",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Apex has some really cool functionality for tracing, including \"before\", \"after\", \"errors\", \"execution time\":\n```\nfunc work(ctx log.Interface) (err error) {\n\tpath := \"Readme.md\"\n\tdefer ctx.WithField(\"path\", path).Trace(\"opening\").Stop(&err)\n\t_, err = os.Open(path)\n\treturn\n}\n\nfunc main() {\n\tlog.SetHandler(text.New(os.Stderr))\n\n\tctx := log.WithFields(log.Fields{\n\t\t\"app\": \"myapp\",\n\t\t\"env\": \"prod\",\n\t})\n\n\tfor range time.Tick(time.Second) {\n\t\t_ = work(ctx)\n\t}\n}\n```\n\nThis also demonstrates the handler interface as well as the stateful loggers including structured KVs on each log."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Motherboard Chipsets and the Memory Map",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to article](http://duartes.org/gustavo/blog/post/motherboard-chipsets-memory-map/)"
+    },
+    {
+      "type": "markdown",
+      "data": "A modern Intel architecture - learn this well:\n\n![IMAGE](quiver-image-url/E11F14945746FE8FE8DD50619FC140DE.jpg =668x468)\n\nRemember, the Front Side Bus is the main thru-point for all memory access. Without memory access, a CPU is idle and useless (data, instructions, some boot info - all disk / memory!). This access is facilitated through pins that correspond to bits (NFL) - for example, \"an Intel Core 2 QX6600 has 33 pins to transmit\", and \"64 pins to send or receive data (so data is transmitted in a 64-bit data path, or 8-byte chunks)\".\n\n**But!** Other hardware needs memory locations to use as well, so your main memory has to be allocated out to those devices. This is done via the memory address map, available to view with `cat /proc/iomem`. Her'es an Intel memory map:\n\n![IMAGE](quiver-image-url/62C22367C05D8D7561C4AE33016534DE.jpg =285x604)\n\nSo for example, a 32-bit CPU can address up to 4GB (in protected mode - real mode it's only 1MB), but we see that it's secretly only 3GB because of this memory map. The article gives an example of a Windows OS making only 2.4 / 4.0GB allocated to main memory.\n\nOne silver lining (and remember, this article is from 2008!) - 64-bit CPU architectures can address physical memory locations beyond actual extant memory in order to access allocated but unused memory taken up by other motherboard devices. This is called **reclaiming**."
+    }
+  ]
+}

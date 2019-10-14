@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 3 - Paradigm Overview",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Three paradigms:\n1) Structured programming — `goto` is bad, so let's eliminate it in favor of the familiar `if/then/else`. Work with control flow.\n2) Object-oriented programming — we don't need everything to be local to stack frames. Why not have objects on the heap that outlive the return of a function and its associated stack frame? Functions are now objects, local vars are instance variables.\n3) Functional programming — don't use assignment, but be immutable!\n\nAll these **take away** some patterns from programmers. This is fine."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Logging",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## Logging Levels\nMost people need logging in two scenarios:\n* `debug` -- tell me everything, I'm writing code or fixing a bug\n* `info` -- tell me what happens, high-level. `info` contains `error`.\n\n## Global or Local?\nPassing through loggers can be an irritating thing.\n* Do you need to control logging from struct to struct, or class to class?\n* Do you need to change levels?\n* Scala did a lot of injection of lazy vals via traits, Go sometimes has package-global state.\n\n## State Management\nHow do we manage call stacks? Fields for structured logging?\n\nLoggers like Apex allow us to include Fields on our logger as state to be included in all subsequent calls. This is a bit of mutability that can be tricky to manage.\n\n## Handlers\nLogs need middleware too. A simple `Handler` interface (like what Apex/log does) can help you register these handlers, which can manage text, sockets, JSON, \"discard\", etc.\n\n## Structured Logging\nStructured logging is best because we can index and query on structured KV fields. It's like querying a database of logs, more machine-friendly for things like Splunk."
+    }
+  ]
+}

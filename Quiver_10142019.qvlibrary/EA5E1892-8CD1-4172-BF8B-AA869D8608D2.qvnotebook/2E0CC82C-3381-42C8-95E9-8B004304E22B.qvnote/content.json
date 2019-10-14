@@ -1,0 +1,17 @@
+{
+  "title": "Everything You Ever Wanted to Know About Sealed Traits in Scala",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](https://underscore.io/blog/posts/2015/06/02/everything-about-sealed.html)"
+    },
+    {
+      "type": "markdown",
+      "data": "**Structural Recursion** — the idea that an ADT outlines exactly the necessary pattern match to exhaustively search the ADT. Sums are going to be new `case` branches, whereas products are element extraction / `unapply` methods. Of course you can attach conditionals to the elements, which blows up your pattern match, but generally, this works."
+    },
+    {
+      "type": "markdown",
+      "data": "**Important tip!** If you, for some reason, "
+    }
+  ]
+}

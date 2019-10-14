@@ -1,0 +1,9 @@
+{
+  "title": "Starting from Scratch with Scala Native",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Scala Native:\n* sbt plugin\n* Compiles to LLVM\n* Maybe good for CLI tools\n* No JVM, of course\n* Mutability rises up.\n\nEarly examples talk a lot of `CStrings` which are literally just C-style strings while he futzes with C libraries and functions like iolib.\n\nScala Native has an explicit stack allocation operator! Only lives for the scope of the calling function.\n> val short_lived_int: Ptr[Int] = stackalloc[Int]\n\nCan also do `malloc` stuff for heap allocation.\n\n**Look up `Zones` in Scala Native!**\n\nYou can use `extern` calls to bind any ANSI/POSIX C function to a Scala variable and use it as such!\n\nYou're working with pointers directly too, with associated dereferencing syntax as a bang: `val x: Ptr[Byte] = stackalloc[CChar](1024); !x`\n\nHis first example focused on using stack space for getting maxes from a file, which is obviously going to beat the crap out of an equivalent JVM example because the JVM manages heap space unnecessarily in this case.\n\nThe second example is sorting example, which requires him to use the heap (literally `malloc` / `realloc` calls in Scala Native). He also credit the JVM for its heap optimizations for known algorithms like sorting / looping, so let's see if we win with manual `malloc` / `free` calls (well, his `free` call is the program exiting).\n\nSpoilers: Scala Native wins again.\n\n\n"
+    }
+  ]
+}

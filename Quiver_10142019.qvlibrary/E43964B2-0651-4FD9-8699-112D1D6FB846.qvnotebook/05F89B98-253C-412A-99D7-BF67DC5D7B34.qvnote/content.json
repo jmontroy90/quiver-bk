@@ -1,0 +1,9 @@
+{
+  "title": "Category Theory",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Category theory == Arrow theory — we want to understand how things compose.\n\nObjects are types, arrows are functions.\n\n#### Monoids\nCategories have:\n* Composition (`f1 compose f2`)\n* Identity (`f1 compose id == f1`)\n* Associativity (`[f1 c f2] c f3 == f1 c [f2 c f3]`)\n\nCategory with one object == monoid\n\nTypeclass instances for a monoid:\n\n```\ntrait Monoid[A] {\n  def identity: A\n  def compose(x: A, y: A): A\n}\n\nimplicit val intMonoid: Monoid[Int] = new Monoid {\n  def identity: Int = 0\n  def compose(x: Int, y: Int): Int = x + y\n}\n// etc\n```\n\n`Functors`: context vs. content, i.e. lifting your contents into a box of context like `Try`, `Option`, `Future`.\n\nSame properties as a monoid, but just with boxes. We need a map function for functors, where we can use a type class again.\n\n`Applicatives` add an `ap` function and a `pure` function to your type class for functors. `Ap` will apply a function in a box to a value in a box, whereas `pure` lifts a type into a box.\n\n`Monads` allow you to sequence dependent effects / boxes using `flatten` functions. An `applicative monad` allows you to sequence independent effects through a monad (\"super-charged monad\").\n\nGot some pictures I'll update from my phone.\n\n\n\n"
+    }
+  ]
+}

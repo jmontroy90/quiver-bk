@@ -1,0 +1,9 @@
+{
+  "title": "Azure",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "#### [Virtual network traffic routing](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#custom-routes)\n\nYou don't need to define gateways for Azure to route traffic between subnets.\n\nAzure routes traffic for any address not specified by an address range within a virtual network, to the Internet, with one exception. If the destination address is for one of Azure's services, Azure routes the traffic directly to the service over Azure's backbone network, rather than routing the traffic to the Internet.\n\nWhen outbound traffic is sent from a subnet, Azure selects a route based on the destination IP address, using the longest prefix match algorithm.\n\n> This means with multiple route matches, the most specific / restrictive CIDR block wins (/24 wins over /16).\n\nIf multiple routes contain the same address prefix, Azure selects the route type, based on the following priority:\n1) User-defined route\n2) BGP route\n3) System route\n\nMany default routes are set up with a VNet initially, corresponding to address ranges for your subnets. They're overridden by the user. These overrides are either route tables (UDRs) or BGP (Border Gateway Protocol) routes. ExpressRoutes use BGP for routing.\n\nResearch: Virtual network gateway, Virtual appliance\n"
+    }
+  ]
+}

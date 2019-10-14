@@ -1,0 +1,9 @@
+{
+  "title": "Day 9: Creational Patterns Overview",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## Design pattern categories\n\nFive design pattern categories:\n1) Creational\n2) Structural\n3) Behavioral\n4) Functional\n5) Scala-specific design patterns\n\nThe first three categories cover the infamous **Gang of Four** design patterns.\n\nCreational patterns:\n* `abstract factory pattern` — one layer of abstraction above factories, i.e. put a common interface to your factories and initialize factories using that.\n* `factory method pattern` — instead of calling a concrete constructor, just call a method on a factory that (depending on specific runtime info like types) will give you the object you need\n* `lazy initialization pattern` — delay evaluation until needed. Much easier in Scala.\n* `singleton pattern` — one object, globally available. Again, easier in Scala.\n* `object pool pattern` — preallocate objects of a given type, using and deallocating as needed. Think database connections.\n* `builder pattern` — if you've got many permutations of constructor parameters, the builder pattern helps.\n* `prototype pattern` — use `clone()` to create an object from something else."
+    }
+  ]
+}

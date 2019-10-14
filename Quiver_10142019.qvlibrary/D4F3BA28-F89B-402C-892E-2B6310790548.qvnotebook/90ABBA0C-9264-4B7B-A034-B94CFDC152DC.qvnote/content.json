@@ -1,0 +1,9 @@
+{
+  "title": "Envoy - Terraform",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "ENVOY -- TERRAFORM + INFRA + DNS\n\nTHINGS TO REMEMBER:\n1) `guardians-dns` contains a couple interesting A records for Envoy:\n\t1) one wildcard \"notjet.net\" for the public IP resource on public Envoy RGs\n\t1) one wildcard \"jet.network\" for the private IP assigned to private LBs in private Envoy RGs\n\t1) one for \"eastus2.envoy\" instead of the normal \"#.envoy.eastus2\" corresponding to the deprecated private LB IP for private Envoy RGs\n\t\t* these should probs be deleted... \n2) tfstate is stored in an Azure blob container in the devops subscription! How is this handled differently in Terraform Enterprise?\n\nQUESTIONS:\n1) What is this? records/qa.jet.network/eastus2.envoy.yml:- a: 10.140.4.201\n\t* It corresponds to \"extra\" LB on the \"qa-msdn-eastus2-guardians-vmss-envoy-private\" resource group, which is called \"q2evyspu-private-lb\"\n\t* Should it be there? Does it need cleaning up?\n2) If cluster_size is consistently 0, how does the initial VMSS size get set?\n\t* So basically, we ignore the vars in the TF files for VMSSs ONLY for the cluster_size, and ONLY after the initial provisioning; that's why in envoy/private.tf, you have `lifecycle { ignore_changes = [\"sku.0.capacity\"] }`\n3) Can we clean up these deprecated records? Why are they here? Can I ask someone who did this?\n4) Why is there state in both vars and the tfstate?\n"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "X-Trace: A Pervasive Network Tracing Framework",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](https://people.eecs.berkeley.edu/~istoica/papers/2007/xtr-nsdi07.pdf)"
+    }
+  ]
+}

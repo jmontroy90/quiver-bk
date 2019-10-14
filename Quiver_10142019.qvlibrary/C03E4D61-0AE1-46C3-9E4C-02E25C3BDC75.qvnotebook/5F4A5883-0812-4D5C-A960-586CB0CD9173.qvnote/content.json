@@ -1,0 +1,9 @@
+{
+  "title": "Technologies I Own",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**Full Ownership**\n* Spark\n* Scala\n\n**Medium Ownership**\n* Cassandra\n* Kafka\n* Envoy\n* SQL Server\n* etcd / Raft\n* Go\n* Kubernetes\n\n**Future Ownership**\n"
+    }
+  ]
+}

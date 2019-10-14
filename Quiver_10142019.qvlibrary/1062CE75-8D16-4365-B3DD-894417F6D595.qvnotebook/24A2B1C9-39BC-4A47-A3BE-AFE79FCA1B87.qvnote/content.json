@@ -1,0 +1,9 @@
+{
+  "title": "Rocket Skates",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## Useful Queries\n\n##### Create Certificate via cURL\n```\ncurl -v -X POST 'https://guardians-rocket-skates.envoy.eastus2.qa.jet.network/cert' -d '{\"cn\":\"nova-toolbox.qa.notjet.net\",\"hosts\":[\"nova-toolbox.qa.notjet.net\"],\"letsencrypt_env\":\"prod\"}'\n```"
+    }
+  ]
+}

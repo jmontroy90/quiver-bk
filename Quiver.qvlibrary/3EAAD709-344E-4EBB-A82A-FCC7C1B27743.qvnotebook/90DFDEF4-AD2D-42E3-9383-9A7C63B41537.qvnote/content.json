@@ -1,0 +1,9 @@
+{
+  "title": "Dockerfile",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## Gotchas\n\n#### ARG / ENV\nFor multi-image builds, you can use `ARG` for build-time variables in things like `RUN`, `COPY`.\nA given `ARG` must be scoped under some `FROM` statement -- "
+    }
+  ]
+}

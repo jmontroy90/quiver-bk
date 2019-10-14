@@ -1,0 +1,21 @@
+{
+  "title": "Scala partial functions (without a PhD)",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](http://blog.bruchez.name/2011/10/scala-partial-functions-without-phd.html)"
+    },
+    {
+      "type": "markdown",
+      "data": "Why do we occassionally use a `case` statement without a corresponding `match`? Well, `case` statements are just partial functions in disguise!\n\nConsider two examples:\n> List(41, \"cat\") map { case i: Int ⇒ i + 1 }\n\n> List(41, \"cat\") collect { case i: Int ⇒ i + 1 }\n\nWhich one fails and which succeeds? Well, the `map` fails because it tries to apply the partial function to all elements, and the output is undefined for non-integers. A `collect` call is meant to handle partial functions, and discards elements for which the partial function is not defined.\n\nA pattern match is automatically invoking an instance of `PartialFunction`, which looks like:\n\n```\nval fraction: PartialFunction[Int, Int] = { \n  case d: Int if d != 0 => 42 / d \n}\n```\n\nThis essentially is defining the valid domain of the the function. Note that if you decouple your domain from your function processing, you could have a \"valid\" domain input that errors on application and is thus invalid. Example:\n\n```\n val liar: PartialFunction[Any, Int] = { \n  case i: Int => i\n  case s: String => s.toInt \n}\n```\n\n(This kinda feels like dishonesty on what your function is / how many functions you have. I'm sure there are many math hand-wringing to be had. Maybe the difference between \"undefined\" and \"invalid\".)\n\nNote that indexing a collection is basically a partial function! An `IndexOutOfBoundsException` is another way of saying that this domain input is undefined for this collection.\n\nAlso note that `lift` can help here. As the name suggests, the `lift` function on a collecion will attempt to safely access via an `Option` result. So out-of-bounds will yield a `None`."
+    },
+    {
+      "type": "markdown",
+      "data": ""
+    },
+    {
+      "type": "markdown",
+      "data": ""
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Kubernetes",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "* etcd is the backend for Kubernetes, all interactions with it flow through the kube-apiserver\n* the kubelet runs on the actual nodes (master + client) and is responsible for node-level actions\n* the controller-manager interacts with external stuff like Azure\n* etcd is highly available and has one leader, but follower instances on other kubernetes master nodes that coordinate.\n* guardians only runs prometheus on kubernetes\n\n\n"
+    }
+  ]
+}

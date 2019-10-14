@@ -1,0 +1,9 @@
+{
+  "title": "Maps",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "A map is an array where **you** specify the indexes -- guarantees on contiguous memory, constant-time access, and collision-free adds go away, but you have the freedom to store and retrieve things how you want, in a way you can later reproduce.\n\n### [Basic Usage](https://play.golang.org/p/ExN-PFlJFWg)\n\nYou make maps. They're composite types and reference types. A normal `var` initialization will lead to a `nil` map, which panics on assignment.\n\nMaps are NOT case-sensitive, and map literals can't have duplicate keys on initialization. Duplicate keys added post-initialization are totally fine.\n\nUse boolean guards to access safely: `value, ok := m[key]`\n\nUse `len` for size. There is no `cap`. Use `delete` (e.g. `func delete(m map[Type]Type1, key Type)`) to remove elements. **Slight gotcha**: you can `delete` from a `nil` map, an empty map, and on a key that doesn't exist. They're all silent no-ops.\n\nYou can key-value iterate over a map using `range`. The order is nondeterministic.\n\nMaps are reference types. They're a data structure that contains a reference to a backing implementation. If you assign an existing map to a new variable, both variables will reference (and be mutated by) the same backing map.\n\nThe default sizing and byte allocation of a map made with `make` and no size argument depends on the implementation, but typically around 48 bytes on a 64-bit architecture ([link here](https://stackoverflow.com/questions/46278003/how-much-memory-do-golang-maps-reserve))."
+    }
+  ]
+}

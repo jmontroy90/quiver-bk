@@ -1,0 +1,9 @@
+{
+  "title": "Brief History of HTTP",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**HTTP 0.9** came first in 1991:\n> * Client-server, request-response protocol.\n> * ASCII protocol, running over a TCP/IP link.\n> * Designed to transfer hypertext documents (HTML).\n> * The connection between server and client is closed after every request.\n\n**HTTP/1.0** introduced more metadata and such - headers, response codes, more than just HTML!\n> * Request may consist of multiple newline separated header fields.\n> * Response object is prefixed with a response status line.\n> * Response object has its own set of newline separated header fields.\n> * Response object is not limited to hypertext.\n> * The connection between server and client is closed after every request.\n\nThe request and response status are all still ASCII, in other words, but the response body (negotiated via `Content-Type`) could be anything.\n\nOther stuff: \"content encoding, character set support, multi-part types, authorization, caching, proxy behaviors, date formats, and more\".\n\n**HTTP/1.1** introduced a bunch more around protocol ambiguities and performance benefits:\n> * keepalive connections\n> * chunked encoding transfers\n> * byte-range requests\n> * additional caching mechanisms\n> * transfer encodings\n\n`Keep-Alive` was the big win, so much so that it was back-ported to HTTP 1.0 and enabled via a `Keep-Alive` header. No need to negotiate multiple TCP handshakes for multiple requests - do it once, send multiple requests, get multiple responses in chunks.\n\n**HTTP/2** was released in 2015 (after this book was written), spearheaded by Google (where this guy works), and focuses mostly on performance. All verbs, headers, content-types, etc. - those all stay compatible with HTTP/1.1, but now there's a lot more around performance. More on this to come."
+    }
+  ]
+}

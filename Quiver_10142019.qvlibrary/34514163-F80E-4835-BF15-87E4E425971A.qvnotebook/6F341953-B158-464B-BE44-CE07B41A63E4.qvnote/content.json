@@ -1,0 +1,9 @@
+{
+  "title": "Module 3: Network Topologies",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This focuses on network topologies, including their physical topologies (star, mesh) as well as their spatial categorization (LAN, WAN).\n\n## Star\n* Failures in one link don't impact other links\n* Centralized device (e.g. ethernet switch) is single point of failure\n* Popular in modern networks\n\n![IMAGE](quiver-image-url/51B8511B8F16369C37611C3425D50C01.jpg =1592x860)\n\n## Mesh\nLinks between centralized devices, e.g. switches in a WAN connecting multiple offices.\n\nA mesh requires lots of links! `(N * (N - 1)) / 2`.\n\nA full mesh has optimal direct links between every device, whereas a partial might have to route through an intermediate device. This makes partial meshes less expensive in terms of bandwidth / setup cost, but might be more expensive to maintain from a human resources perspective.\n\n"
+    }
+  ]
+}

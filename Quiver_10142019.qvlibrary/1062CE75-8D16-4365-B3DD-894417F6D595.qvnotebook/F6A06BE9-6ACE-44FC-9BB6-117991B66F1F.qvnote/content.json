@@ -1,0 +1,13 @@
+{
+  "title": "Ansible",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "1) What do we use Ansible for?\n> We use Ansible for post-provisioning scripts on nodes. Our `site.yml` runs through all playbooks and runs the appropriate ones based on node tags.\n\n2) Do we do any provisioning with Ansible, or just post-provisioning?\n> We used to provision via ARM directly in Ansible. We're moving to Terraform / Terraform Enterprise for all provisioning. "
+    },
+    {
+      "type": "markdown",
+      "data": "## General\n\nAnsible runs playbooks on hosts, and makes use of `group_vars` to assign variables per group of hosts, and `host_vars` to assign variables to particular hosts. These groups and hosts are all defined via inventory, which can be static in `/etc/ansible/hosts` OR dynamic via a Python script that fetches remote inventory and uses that.\n\nMultiple inventory sources can be combined and ordered for group / var combinations. Hosts can be in multiple groups."
+    }
+  ]
+}

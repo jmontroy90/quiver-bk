@@ -1,0 +1,9 @@
+{
+  "title": "Code Design / Architecture",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### Design\n\n* Functions are for behavior. If your functions contain excessive state, ask yourself why the state isn't an argument. If referring to encapsulated state (methods), be careful on how transparent your use of that state is.\n\n### Mental Models\nHow much does the programmer need to keep in their head to successfully develop within your system? Can you keep 10k lines of code in your head?"
+    }
+  ]
+}

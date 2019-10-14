@@ -1,0 +1,39 @@
+{
+  "title": "Concurrency on the JVM (Java perspective)",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to article series](http://tutorials.jenkov.com/java-concurrency/index.html)"
+    },
+    {
+      "type": "markdown",
+      "data": "Threads are great, but have costs:\n* Complexity of design / code\n    * How does logging work?\n    * How do threads communicate?\n    * How do exceptions on threads relate to other threads as well as the application?\n* Context switching - when you switch threads, you gotta save the program counter, pointers, thread stack, etc. somewhere and load all those things of the thread you're switching to. Expensive!\n* Thread overhead - threads have to be allocated and managed! That's why pooling is important, like any executing object.\n\n#### Concurrency Models\n1) *Parallel Workers* — have a delegator divvy off tasks to workers to perform those thread computations. The most common model. This is Spark.\n  * Why does this get tough? **Shared state**! Now we have deadlocks, race conditions, shuffles, waits, and so on. Solutions involve immutability (persistent data arrays), CRDTs, and so on, but this is all hard. Also - parallel workers are nondeterministic in their runtime and wait constraints! Think of a MapReduce job desperately stuck waiting for one mapper whose input partition was skewed. They're also unordered - think of trying to establish a global order between Kafka partitions. Ouch.\n2) *Assembly line* — this is also just reactive / event-driven architecture. Each worker serially works on a piece of the task, communicating with other workers asynchronously in a `shared-nothing` fashion. This is also the `actor` model (Akka). The actor model is related to the idea of `channels`, which is simply actors that don't pass messages directly to one another (asynchronously or not), but instead send messages to a channel that allows workers to subscribe as needed. In other words - Kafka!\n  * Advantages - no shared state, workers can be stateful / mutable (fast!), workers can act like they're single-threaded which can lead to better access patterns and caching on a node (\"mechanical sympathy\"), and - worth emphasizing - _job ordering is possible_!\n  * Disadvantages - your jobs get thin and spread out everywhere. Also callbacks can be tough.\n\nConclusion: if your job is embarrassingly parallel, make it so. If it's not, and some measure of ordering, coordination, and shared state is necessary, think event-driven!\n\n#### Same-threading\n\nSame-threading is an invented term referring to a \"one thread per core\" scenario. You don't have to worry about concurrency issues, locking, etc., and you get some dope memory access patterns by avoiding excessive context switching. And you can still communicate between threads pinned to different cores via immutable message passing, if you reeeeeaaally need to.\n\n#### Basics of Threads in Java\n\nThere are two ways to specify code to run in a thread:\n1) Extend `Thread` and override `run`\n2) Implement `Runnable` and pass that to a thread."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "data": "// run empty thread with no code on it\nThread thread = new Thread();\nthread.start()\n\n// extend Thread\npublic class MyThread extends Thread {\n  public void run(){\n     System.out.println(\"MyThread running\");\n  }\n}\n\n// implement Runnable\npublic class MyRunnable implements Runnable {\n\n  public void run(){\n     System.out.println(\"MyRunnable running\");\n  }\n}\n\nThread thread2 = new Thread(new MyRunnable());\nthread.start();\n\n// anonymous Runnable\nRunnable myRunnable = new Runnable() {\n  public void run(){\n    System.out.println(\"Runnable running\");\n  }\n}\n\n// you can also name threads\nMyRunnable runnable = new MyRunnable();\nThread thread = new Thread(runnable, \"New Thread\");\n\nthread.start();\nSystem.out.println(thread.getName());"
+    },
+    {
+      "type": "markdown",
+      "data": "Important - remember to call `start()` on your threads, NOT `run()`! \n\n#### Race Conditions / Critical Sections\nA critical section is a bit of code that can yield nondeterministic results depending on the order of threads executing the code concurrently. This is a `race condition`, and can be solved via locking as a first pass. Usually critical sections contain a reference to some mutable, shared state (or could be an effect like an exception).\n\nHere's a basic example of preventing race conditions in critical sections via the `synchronized` construct, which ensures that only one thread in a JVM is executing the enclosed code at a time (probably a semaphore behind the scenes?)."
+    },
+    {
+      "type": "code",
+      "language": "java",
+      "data": "public class TwoSums {\n    \n    private int sum1 = 0;\n    private int sum2 = 0;\n\n    private Integer sum1Lock = new Integer(1);\n    private Integer sum2Lock = new Integer(2);\n\n    public void add(int val1, int val2){\n        synchronized(this.sum1Lock){\n            this.sum1 += val1;   \n        }\n        synchronized(this.sum2Lock){\n            this.sum2 += val2;\n        }\n    }\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "#### Thread Safety and Shared Resources\n\nAll local primitives are `threadsafe` and stored in a thread's stack. All local objects, however, are stored in the shared heap"
+    },
+    {
+      "type": "text",
+      "data": ""
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

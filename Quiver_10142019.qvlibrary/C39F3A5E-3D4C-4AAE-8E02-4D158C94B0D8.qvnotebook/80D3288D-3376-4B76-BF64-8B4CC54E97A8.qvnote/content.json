@@ -1,0 +1,9 @@
+{
+  "title": "Absolute Unit (Test)",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=UKe5sX1dZ0k)\n\nTDD says: you're not allowed to write production code unless it's to fix a failing test. This can be hard if you don't know in advance what you're writing!\n\nWhat is the unit of code in Go? It's the **package** -- think of Go packages as individual, composable units of code, whose public API (\"exported functions\") define its behavior (\"what I do\", **not** \"how I do it\").\n\nWrite tests at the same time as your code. Test packages, and test behavior, not implementation. Don't pin to specific data if possible, and separate out your business logic from your implementatin logic. Above all else, use coverage reports!"
+    }
+  ]
+}

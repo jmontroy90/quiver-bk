@@ -1,0 +1,22 @@
+{
+  "title": "The underrated applicative functor",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[The underrated applicative functor](https://softwaremill.com/applicative-functor/)"
+    },
+    {
+      "type": "markdown",
+      "data": "Monads are about sequencing effects, right? Given a Monad and some Monadic transformations, the outcome of each transform step entirely depends on both what came before and what happens to the context. In short, the effects are _dependent_.\n\nQuestion: what if our transformations on quantities are _independent_? This is where an **applicative functor** is invaluable!\n\nExample of each:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "// monadic transformation, i.e. dependent\nfor {\n  myUser <- getBestUserOption()\n  userCompany <- getCompanyOption(myUser)\n} yield userCompany\n\n// applicative functor, i.e. independent\nfor {\n  myUser <- getBestUserOption()\n  myCompany <- getBestCompanyOption()\n} yield (myUser, myCompany)"
+    },
+    {
+      "type": "markdown",
+      "data": "The `cats` library has some niceness around this pattern, as well as more details (Semigroupal?). Niceness includes an operator for performing this, as well as `traverse` / `sequence` methods (we run into these a lot!).\n\nWhy care about this? Well, if we indicate an applicative functor instead of a monad, we've provided two bits of information to the user:\n* These operations are independent and thus can be parallelized.\n* This program can be evaluated statically.\n\nI think the second point just means that we can map input to output directly, whereas with a Monad our transformations have opinions about the input. But this is a little subtle and maybe not important for me right now.\n\nAlso, `|@|` = Macaulay Culkin operator. Woopie."
+    }
+  ]
+}

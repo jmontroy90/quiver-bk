@@ -1,0 +1,9 @@
+{
+  "title": "fp",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "What's the point of functional programming? At the end of the day, behind all the terms and fanciness, functional programming is about **expectations**. How can you compose things if some of them do things you not only don't know about, but maybe aren't even \"supposed\" to know about? How can you reuse them? When your expectations are violated, you are required to dive deeper, add more specific knowledge, look at implementations.\n\nWhat are some ways in which expectations can be violated?\n* **Side effects** - that function you called? It just spun up a new thread. It just sent out some RPC request to a payment server. It just mutated some global shared state without telling you it did so.\n* **Overrides** - this is more typically related to object-oriented principles (_SOLID_ helps!); in particlar, the Liskov Substitution principle states that for some subtype `T` of type `S`, any instance of `T` may be used in place of `S` without modifying desired properties of the program (correctness, task performed). "
+    }
+  ]
+}

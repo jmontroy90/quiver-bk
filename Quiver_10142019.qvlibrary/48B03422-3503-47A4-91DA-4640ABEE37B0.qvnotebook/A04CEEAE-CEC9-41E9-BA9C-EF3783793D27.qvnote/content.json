@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 17: Ambassador",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Same deal as Adapters - an Ambassador is dedicated to simplifying connectivity to the external world, with some fancy routing or whatever. That way an app container can just its thing, a sidecar would amplify its functionality, an adapter would standardize its outputs, and an ambassador / proxy would help it communicate with the external world. Envoy in a service mesh is an ambassador - all the discovery is managed by Envoy."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Simplicity: Foundations and Applications of Implicit Function Types",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=9Wp_riP8LQw)\n\nUsual riffs to start the video. Context is everywhere, global state is bad, explicit parameters get dull and error-prone, so we use implicits. Implicits are also Scala's means for type classes, which provides context to a class for a specific type.\n\nHere's a motivating example based on his work. Given:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "case class MagicMaker(theMagic: Int)\nimplicit val myMagic = MagicMaker(3)\n\ndef showMeMagic(implicit magic: MagicMaker): Int = magic.theMagic"
+    },
+    {
+      "type": "markdown",
+      "data": "We can refactor the function as such - note the type is \"showMeMagic2: MagicMaker => Int\"; no implicitness!"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "def showMeMagic2: MagicMaker => Int = { implicit magic: MagicMaker => magic.theMagic }"
+    },
+    {
+      "type": "markdown",
+      "data": "So in Scala 3, the type would be \"showMeMagic2: implicit MagicMaker => Int\"; that's it!\n\nTwo rules here: \n\t* `def f: implicit A => B` expands to just `f` upon invocation; in the future, it would expand to `f(a)`\n\t* Implicit functions are expanded on demand: `implicit A => B` goes to `implicit (_: A) => B`\n\nThis trades types for parameters! You can express parameters as types and essentially add context for free!\n\nSo magic would be:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "type Magic[T] = implicit MagicMaker => T\ndef showMeMagic: Magic[Int] = magic.theMagic"
+    },
+    {
+      "type": "markdown",
+      "data": "He then goes on into some terrible detail on some DOT Calculus / System F / Lambda calculus kind of stuff, which one day I'll look at but certainly not today."
+    },
+    {
+      "type": "markdown",
+      "data": "The examples he lists for use cases (see Scala Days EU 2018 talk on implicit function types for more specifics on these):\n* Builder pattern\n* Readers\n* Tagless interpreters\n* Free structures\n* Algebraic effects"
+    }
+  ]
+}

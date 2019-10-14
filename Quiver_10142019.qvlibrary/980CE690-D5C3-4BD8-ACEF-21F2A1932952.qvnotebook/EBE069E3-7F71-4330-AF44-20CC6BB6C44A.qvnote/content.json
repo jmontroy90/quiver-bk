@@ -1,0 +1,9 @@
+{
+  "title": "Cobra / Viper",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### Usage\n* Persistent flags don't seem to work on subcommands if the flag is set as optional on the top-level command. This is potentially a huge source of errors.\n* Annotations are used to group and organize commands. We use them in Sledge to initialize per-command dependencies more intelligently, like a form of DI."
+    }
+  ]
+}

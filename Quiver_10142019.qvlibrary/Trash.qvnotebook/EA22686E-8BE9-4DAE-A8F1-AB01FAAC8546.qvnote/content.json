@@ -1,0 +1,9 @@
+{
+  "title": "A Practical Quantum Instruction Set Architecture",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to paper](https://arxiv.org/pdf/1608.03355.pdf)\n\n_Goal_: Develop a hybrid classical / quantum architecture (the `Quantum Abstract Machine` or QAM) using an instruction language called `Quil` to form a Quantum Instruction Set Architecture.\n\n_(|\\( \\Psi \\)>, C, G, G', P, \\( \\kappa \\))_ — this describes the state of the QAM at any moment, where \\( \\Psi \\) is the state of a given qubit, C is classical memory, G and G' are static and parametric gates respectively, P is Quil instructions, and \\( \\kappa \\) is a program counter for iterating through instructions.\n\n\n\nA system with \\(n\\) bits has \\( 2^n \\) possible classical states, but a system with \\(n\\) qubits has a continuum of quantum states corresponding to various amplitude-weightings (superpositions) of the \\( 2^n \\) classical states."
+    }
+  ]
+}

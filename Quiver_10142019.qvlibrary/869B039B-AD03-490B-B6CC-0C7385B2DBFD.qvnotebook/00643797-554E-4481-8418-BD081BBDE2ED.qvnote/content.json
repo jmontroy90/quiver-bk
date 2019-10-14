@@ -1,0 +1,36 @@
+{
+  "title": "Day 32: The memento design pattern",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "The memento design pattern is all about restoring an object to a previous state. It consists of:\n1) **Originator** - an object we want to roll back\n2) **Caretaker** - the object that triggers a roll back\n3) **Memento** - an object that carries the actual prior state of the originator\n\nDo these all just sound like objects, some with mutable state? Well, Scala is a language that encourages immutability, so in this example we'll lean towards a \"Scala-esque\" approach that uses a stack for state management. Let's be real, though - a stack is just a fancy way to do mutability, i.e. \"I want to use the same reference for deterministically-changing information over time\". You better do your threading right, otherwise \"deterministically\" goes out the window.\n\nAnywho. Let's start with three traits for the above entities:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "trait Memento[T] {\n  protected val state: T\n  def getState(): T = state\n}\n\ntrait Caretaker[T] {\n  val states: mutable.Stack[Memento[T]] = mutable.Stack[Memento[T]]()\n}\n\ntrait Originator[T] {\n  def createMemento: Memento[T]\n  def restore(memento: Memento[T])\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "The `caretaker` manages our mutable stack of state here, whereas the `originator` handle interactions for managing new state.\n\nOur implementation makes the caretaker the point of interaction — an `originator` can deal with a single `memento` instance, whereas a `caretaker` deals with sets of them. It's a pretty standard one-to-many composition situation at the end of the day.\n\nWhat this means for the originator is this:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "class TextEditor extends Originator[String] {\n  private var builder: StringBuilder = new StringBuilder\n  \n  def append(text: String): Unit = {\n    builder.append(text)\n  }\n  \n  def delete(): Unit = {\n    if (builder.nonEmpty) {\n      builder.deleteCharAt(builder.length - 1)\n    }\n  }\n\n  override def createMemento: Memento[String] = new TextEditorMemento(builder.toString)\n\n  override def restore(memento: Memento[String]): Unit = this.builder = new StringBuilder(memento.getState())\n\n  def text(): String = builder.toString\n  \n  private class TextEditorMemento(val state: String) extends Memento[String]\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "In words - our actual `memento` is just a given string. The `originator` handles modifications of that string, and can save the current string state at any point. Now, we need a `caretaker` to **receive** the `createMemento` calls, and to pass in the memento to `restore`:"
+    },
+    {
+      "type": "code",
+      "language": "scala",
+      "data": "class TextEditorManipulator extends Caretaker[String] {\n  private val textEditor = new TextEditor\n  \n  def save(): Unit = {\n    states.push(textEditor.createMemento)\n  }\n  \n  def undo(): Unit = {\n    if (states.nonEmpty) {\n      textEditor.restore(states.pop())\n    }\n  }\n  \n  def append(text: String): Unit = {\n    save()\n    textEditor.append(text)\n  }\n  \n  def delete(): Unit = {\n    save()\n    textEditor.delete()\n  }\n  \n  def readText(): String = textEditor.text()\n}"
+    },
+    {
+      "type": "markdown",
+      "data": "Notice the layers of encapsulation here - these objects are all related, but they each have one more layer of responsibility here. \"i am one state\" -> \"i change and save one state\" -> \"i manage changes of multiple states\".\n\nDrawbacks of this pattern are the standard issues with both mutability and stacks (mutability):\n* Multi-threaded access might get sticky, especially if your stack objects are mutable!\n* Your queue is unbounded - memory?"
+    }
+  ]
+}

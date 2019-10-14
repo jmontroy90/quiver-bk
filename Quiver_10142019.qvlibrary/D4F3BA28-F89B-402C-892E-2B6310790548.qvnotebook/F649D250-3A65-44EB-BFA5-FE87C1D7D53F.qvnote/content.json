@@ -1,0 +1,9 @@
+{
+  "title": "Envoy - Specific Learning",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### HTTP Connection Management\nPerforms:\n* Routing (statically or dynamically via RDS)\n* Request / Response ID generation for tracing\n* Header manipulation / sanitization\n* Statistics\n* Access logging\n\nSupports HTTP/1.1, WebSockets, and HTTP/2. Codecs translate raw bytes into something HTTP/2 can understand.\n\n### External Authorization\ne.g. **ext-authz**\nIf the external authorization cluster deems something unauthorized:\n* Network (L3/L4) ext-authz will simply close the connection\n* HTTP ext-authz will return a _403 Forbidden_\n\nIf the external cluster is down, we need to ensure that \"failure_mode_allow\" isn't set to true -- we don't want an outage to open the floodgates."
+    }
+  ]
+}

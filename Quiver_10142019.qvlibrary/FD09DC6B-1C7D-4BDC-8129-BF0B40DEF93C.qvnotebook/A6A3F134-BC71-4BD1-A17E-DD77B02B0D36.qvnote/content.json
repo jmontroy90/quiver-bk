@@ -1,0 +1,9 @@
+{
+  "title": "Transparent Hugepages",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Transparent Hugepages: measuring the performance impact](https://alexandrnikitin.github.io/blog/transparent-hugepages-measuring-the-performance-impact/)\n\n* Virtual memory mapped into physical memory via the page tables data structure, accessed by the CPU's memory management unit (MMU)\n* Also a cached list of recently accessed pages stored in the Translation Lookaside Buffer (TLB)\n* TLB hit preferable - a page table scan is incurred on a miss; TLB only holds a few hundred pages at a time!\n* Transparent Hugepages - larger page size to reduce the number of pages needed to be held in the TLB! Quicker TLB scans.\n* Use some tools like `perf` to get CPU cycles spent waiting, working, fetching, etc.\n* Also remember: for a Java application, both the host JVM and host OS will have options for Transparent Hugepages!\n* AlwaysPreTouch - preallocation on heap to avoid runtime initialization costs\n* Compaction occurs as background kthread - can cause latency spikes like GC!\n\n\ncat /proc/buddyinfo\ncat /proc/pagetypeinfo\n\n\nCPU CYCLES:\n\tperf stat -e cycles \\\n\t>   -e cpu/event=0x08,umask=0x10,name=dcycles/ \\\n\t>   -e cpu/event=0x85,umask=0x10,name=icycles/ \\\n\t>   -a -I 1000\n\n\nMEMORY STATS:\n\tperf stat -e cpu/event=0xbc,umask=0x18,name=dreads/ \\\n\t>    -e cpu/event=0xbc,umask=0x28,name=ireads/ \\\n\t>    -a -I 1000\n\nOS Enabling:\n\techo always > /sys/kernel/mm/transparent_hugepage/enabled\n\techo always > /sys/kernel/mm/transparent_hugepage/defrag # consider other options too\n\nJVM Enabling:\n\t-XX:+UseTransparentHugePages -XX:+UseLargePagesInMetaspace -XX:+AlwaysPreTouch"
+    }
+  ]
+}

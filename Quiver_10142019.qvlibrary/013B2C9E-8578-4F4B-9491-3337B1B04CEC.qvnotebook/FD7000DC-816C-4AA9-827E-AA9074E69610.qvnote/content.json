@@ -1,0 +1,9 @@
+{
+  "title": "Admission Webhooks",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to article](https://banzaicloud.com/blog/k8s-admission-webhooks/)\n\nKubernetes admission controllers come in two forms: **validating** and **mutating**. They will perform some actions on objects in requests, and can accept or deny the request depending on their conditional logic.\n\nThese are bonafide controllers, e.g. to write new ones, you have to compile them into the `kube-apiserver`. This is inconvenient, so we have the concept of **webhooks** to allow dynamic linking of new admission logic. These webhooks themselves are added / called via special controllers, `MutatingAdmissionWebhook` and `ValidatingAdmissionWebhook` controllers. They fit in the k8s API request flow as follows:\n\n![IMAGE](quiver-image-url/064802A5C8900CE6828B60F93F959130.jpg =3836x1632)\n\nThis means that your admission webhooks can just be dead-simple HTTP servers that server RESTful requests involving resources on a given endpoint + route.\n\nMutating vs. admission webhooks are self-explanatory in their differences -- a cool use case of a mutating webhook is how Istio injects Envoy sidecars into its Pods!"
+    }
+  ]
+}
