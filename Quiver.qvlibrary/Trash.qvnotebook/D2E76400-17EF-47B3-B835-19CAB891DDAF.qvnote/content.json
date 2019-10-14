@@ -1,0 +1,9 @@
+{
+  "title": "Low-Level Doors",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## Core\n* **BROADCASTS** - Broadcasts underpin all explicit Broadcast variables _as well as_ all serialized Tasks. The current implementation for Broadcasts is the **TorrentBroadcast**, which is modelled after P2P networking. First check local for shuffle blocks, then check JVMs on the same node, then rack neighbors.\n    * Configuration of this is managed via: `spark.broadcast.blockSize`, `spark.broadcast.checksum`, `spark.broadcast.compress`."
+    }
+  ]
+}

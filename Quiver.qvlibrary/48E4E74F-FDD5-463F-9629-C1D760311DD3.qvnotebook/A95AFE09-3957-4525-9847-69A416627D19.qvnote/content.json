@@ -1,0 +1,9 @@
+{
+  "title": "Repo: sledge",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### Dependencies\n* All inventory is managed via Marquis and not Concord any more.\n* This repo is heavily tied to Marquis -- should probably relate to `mco-core` and have CI build hooks.\n* The `username:password` parsed format for creds is apparently a backwards compatibility concern."
+    }
+  ]
+}

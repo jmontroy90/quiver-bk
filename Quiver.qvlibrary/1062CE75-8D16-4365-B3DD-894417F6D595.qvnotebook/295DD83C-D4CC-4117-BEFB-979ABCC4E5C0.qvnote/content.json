@@ -1,0 +1,9 @@
+{
+  "title": "Elasticsearch",
+  "cells": [
+    {
+      "type": "text",
+      "data": "During patching, Elasticsearch locking is necessary to not redirect requests all to one shard."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Interfaces",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Interfaces are valueless. They don't exist. All you're saying is, \"does this concrete data conform to the behavior contract outlined by this interface?\". If yes, you're good."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 5 - Object-Oriented Programming",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This is about what we really get from OO.\n\nThree definitions:\n* \"The combination of data and function.\"\n* \"A way to model the real world.\"\n* \"encapsulation, inheritance, and polymorphism\"\n\nThe first two are vague and overblown, and the last one needs some examination.\n##### Encapsulation\nC had perfect encapsulation. Data and behavior was combined in a way that preserved privacy via header files - you'd get the method signatures of struct-related code, but know nothing about the internals of the struct nor the implementations of the methods.\n\nJava and friends broke this. Classes must be declared all at once. We know about the private fields. So encapsulation is great, but OO gets no credit for it.\n##### Inheritence\nC also had inheritence, but it was single inheritence involving trickery and casting. Modern OO gives us stronger, abstracted ways of performing both single and multiple inheritence. So that's good.\n##### Polymorphism\nThis is the real good stuff. We can always perform **Dependency Inversion** with polymorphism - different modules of code can be developed independently because dependencies can be polymorphically _plugged in_.\n\nThink of the Unix IO interface - `read`, `write`, and so on. The actual implementations are plugged in later on, and client code can always just refer to these functions. That's enabled by polymorphism, and that's beautiful."
+    }
+  ]
+}

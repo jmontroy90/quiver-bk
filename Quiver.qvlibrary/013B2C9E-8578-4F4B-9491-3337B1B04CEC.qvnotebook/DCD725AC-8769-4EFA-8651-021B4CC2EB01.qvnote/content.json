@@ -1,0 +1,9 @@
+{
+  "title": "API Client",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Exploring API objects](https://medium.com/programming-kubernetes/building-stuff-with-the-kubernetes-api-1-cc50a3642)\n\nExplore raw APIs via: `kubectl get --raw /`\nCan also pretend it's a RESTful HTTP API by doing `kube proxy`, which will start an HTTP server on localhost.\nLastly, access the API Server directly by getting the endpoint and a bearer token, which can be used for commands like `curl https://127.0.0.1:54820/api/v1 --header \"Authorization: Bearer $TOKEN\" --insecure`.\n\n[Using the Go Client](https://medium.com/programming-kubernetes/building-stuff-with-the-kubernetes-api-part-4-using-go-b1d0e3c1c899)\n\nThe `RESTClient` is always the foundation. The `clientset` builds commands for versioned resources + serializers based off the REST foundation.\n\nYou can get your k8s API client config from flags, or directly from the cluster if your code is running in one.\n\nWatching a resource is trivial, it's just ranging over a channel that delivers `runtime.Object`s that you can downcast into whatever your channel is about (in this article, PVCs). The watchers deliver events like \"ADDED\", \"MODIFIED\", \"DELETED\".\n\n[Using Go modules with Kubernetes API and client-go projects](https://medium.com/programming-kubernetes/using-go-modules-with-kubernetes-api-and-client-go-projects-2f3fdd5589a)\n\n"
+    }
+  ]
+}

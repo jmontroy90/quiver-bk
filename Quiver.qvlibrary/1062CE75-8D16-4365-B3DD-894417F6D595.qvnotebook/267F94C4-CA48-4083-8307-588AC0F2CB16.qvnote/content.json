@@ -1,0 +1,9 @@
+{
+  "title": "Kafka",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# Guardians-Specific\n\n[Kafka Consumer Lag Monitoring Alerting](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/612697328/Kafka+Consumer+Lag+Monitoring+Alerting)\n[Reset Consumer Group Offsets for a Topic](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/696714719/Reset+Consumer+Group+Offsets+for+a+Topic)\n[Kafka Operations](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/231801019/Kafka+Operations)\n[Kafka Clusters - Grafana](https://grafana.jet.network/d/SPkErMumz/kafka-clusters)\n\nTwo components:\n1) Auto-Approver (`golang-guardians-kafka-topic-autoapprover`)\n2) Auto-Syncer\n\nThe auto-approver runs on the `Devops` subscription, which has visibility into all regions. It pulls \n\nThe auto-syncer runs an instance per Kafka cluster per region, e.g. nomad-eastus2 has four instances for telemetry, shared, backfill, and walmart.\n\nLenses is considered Tier 1!\n\nJMX Exporter manages all logging and metrics shipped to Prometheus for further analysis and alerting. Exceptions are, for example, `ConsumerLag` which is blacklisted due to an overabundance of logging. This is why clients use Lenses for consumer lag monitoring (for offsets stored in Kafka), and is why Lenses. is Tier 1 on a node falling over.\n\n"
+    }
+  ]
+}

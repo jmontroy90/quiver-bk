@@ -1,0 +1,9 @@
+{
+  "title": "Terraform",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Terraform is an \"infrastructure as code\" provisioning tool. It makes use of:\n* Infrastructure as Code - think of Ansible provisioning with Jinja templating\n* Execution Plans - Terraform shows you its plan (like a visible dry run) before it does anything\n* Resource Graph - use a dependency graph between resources to figure out ways to parallelize your provisioning\n* Change Management - via the above\n\nTerraform uses `modules` as reusable components to source across different provisionable resources.\n\n[main,output,variables] in each terraform class (re: modules)\n\nterraform-azurerm-commons\nguardians-terraform\n\nterraform is hashicorp, not as robust templating language (less than jinja)\n\nlots of magic in current guardians repos, is going to change in addition to HDL 11 -> HDL 12\n\nterraform enterprise, more soon, used in part to store versioned terraform artifacts\n\n\nWhat is Concord? -- similar to Jenkins, just used for Terraform, probably going away"
+    }
+  ]
+}

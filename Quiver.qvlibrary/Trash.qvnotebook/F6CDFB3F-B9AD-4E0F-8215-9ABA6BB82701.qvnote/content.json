@@ -1,0 +1,9 @@
+{
+  "title": "Repo: k8s-torbit",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## Tech Debt\n* Retry logic was pushed to the Go SDK for Torbit's admind\n\n**MAIN POINTS**\n* Uses the Go Torbit admind-sdk as a vendored dependency.\n* Types are all separate from their implementing code, to bring up\n* If Torbit connectivity to the \"auth status\" endpoint drops, we fail.\n* We use [gjson](https://github.com/tidwall/gjson) for some JSON parsing\n* We use Avast's [retry-go](https://github.com/avast/retry-go) for retry logic.\n* This is all just a lot of JSON parsing on requests, checking resources with Torbit based on the CRD request, and validating. It seems very hard-coded, possibly brittle, somewhat readable due to a lack of code complexity which is nice.\n* Seems like atomicity on errors, code architecture and DRY principles, code coverage in general, all a little lacking.\n* I hate the lack of effects management, the code ends up reading so clunky.\n\n\n**QUESTIONS**\n* Standard way to vendor with Go modules? Gotta read!\n    > `go mod vendor`, woah dog\n* Custom API structs for requests, posts, etc. -- why not use Go HTTP?\n* If the tmp file liveness check fails, we just info log - how does K8s treat that?\n* Why are we logging this at fatal? `main.go:42`\n  ```\n  logger.Fatal(http.ListenAndServe(\n  \t\tfmt.Sprintf(\":%v\", config.HTTP.Port), router))\n  ```\n* Is this okay hard-coded?\n  ```\n  body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1*megabytes))\n  ```\n  \n**EXPLORE**\n* (L)GSLB - sync vs finalize endpoints\n\t\t"
+    }
+  ]
+}

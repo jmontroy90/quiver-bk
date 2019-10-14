@@ -1,0 +1,9 @@
+{
+  "title": "Vault",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# Guardians-Specific\n\n[Vault Usage Guide](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/246121039/Vault+Usage+Guide)\n\nUser AD credentials are associated with different Vault policies via the Vault CLI (one AD -> many policies), and the corresponding tokens are generated at login or manually. The \n\nDifferent policies have different ACLs for various secrets, whitelisted by path in Vault. This config is set up in HCL, a config language specific to HashiCorp.\n\nAuthenticate using the Vault CLI with your AD creds and it will generate a token for you there. The new Vault UI doesn't give you a token like Goldfish did.\n\nThe \"vault\" stanza in the service manifest defines a list of Vault policies to use. Nomad reaches out to Vault and generates a token with the corresponding policy permissions on it. It then grabs your `vault_vars` with that token and embeds them into your service's environment.\n\n**Vault Architecture**\n\n3 - 5 nodes per region / environment\nOne leader per region, leader electino process is same as Nomad's\nVault's storage back-end is Consul!\nWhen Vault is restarted, it loads up **sealed**, where no operations for anyone can occur. Must `unseal` before working with it normally."
+    }
+  ]
+}

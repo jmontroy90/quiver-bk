@@ -1,0 +1,9 @@
+{
+  "title": "Envoy - CICD",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "deploys to prod for nebula are manual, but all other deploys are cicd, and have corresponding branches / tags for them for all dev + qa\n\n1) What's the retention on VSTS version / build numbers? Aren't we going to have artifact collisions?\n2) Are all of these pipelines needed for Envoy services? Which ones let you promote and which ones don't?\n3) What's the difference between echoer, sleeper, and syncheck for Envoy test services?\n\t* echoer just echoes version info\n\t* sleeper sleeps 150 ms and also has a rand endpoint that sleeps up to 150 ms, then echoes version info\n\t* syncheck\n4) Which pipelines get manually promoted?\n\t* Ones that have phaser integration and have the field(s):\n\t\tManualApproval: true\n    \t\tBlockTimeout: 600\n    \t* I need to check this!\n 5) Does Jenkins2 Phaser service routing work for south central? It seems no.\n 6) How do new versions get deployed with routing to several options?\n    > If a service is deployed with the Jenkins2 Pipeline Generator, it'll be added to Phaser Core Service and will deploy its versioned service. This does NOT clean up prior versions."
+    }
+  ]
+}

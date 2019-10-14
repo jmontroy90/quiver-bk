@@ -7,7 +7,7 @@
     },
     {
       "type": "markdown",
-      "data": "Basic data types are what you'd expect. No unsigned integers originally.\n\nStructs, container types (list, set, map), exceptions, and services are all detailed as basic types (and have corresponding codegen to all supported languages). Field numbering is HIGHLY encouraged, but (at least in the original paper) can be omitted for auto-assigning.\n\nTransports are implemented across target languages for sockets (`TSocket`), files, memory, and so on. "
+      "data": "**High-level**: Thrift provides data types, a transport mechanism (agnostic to transfer mechanism - could be TCP sockets, could be over HTTP, could be files), a protocol for SerDe between types and transport representation, and versioning. It provides code generation in a bunch of languages, and is self-describing on the wire (with data types and field numbers).\n\nBasic data types are what you'd expect. No unsigned integers originally.\n\nStructs, container types (list, set, map), exceptions, and services are all detailed as basic types (and have corresponding codegen to all supported languages). Field numbering is HIGHLY encouraged, but (at least in the original paper) can be omitted for auto-assigning.\n\nTransports are implemented across target languages for sockets (`TSocket`), files, memory, and so on. \n\n\"Though Thrift is typically used on top of the TCP/IP stack with streaming sockets as the base layer of communication, there was no compelling reason to build that constraint into the system.\""
     }
   ]
 }

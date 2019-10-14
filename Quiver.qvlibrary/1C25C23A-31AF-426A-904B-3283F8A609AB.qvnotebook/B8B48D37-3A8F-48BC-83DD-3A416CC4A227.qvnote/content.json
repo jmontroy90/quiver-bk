@@ -1,0 +1,9 @@
+{
+  "title": "Components to Study",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "`k8s.io/client-go/tools/cache/shared_informer.go`"
+    }
+  ]
+}

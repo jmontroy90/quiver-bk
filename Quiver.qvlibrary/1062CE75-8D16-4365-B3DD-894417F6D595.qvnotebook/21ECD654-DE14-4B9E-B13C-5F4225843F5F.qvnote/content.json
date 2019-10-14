@@ -1,0 +1,9 @@
+{
+  "title": "Prometheus",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## NR Synthetics\n* Synthetics are used to healthcheck in different ways, specifying origins and destinations.\n* Minions are the service used to perform said checks, currently Minions run on a custom box that runs the healthcheck code.\n* Consul Healthchecks are the way to go for this, rather than Synthetics, BUT Synthetics are more powerful\n\n\n## Prometheus\n* Platform Box - has all Guardians metrics (Nomad, nginx, Envoy, smaller tools like Pipeline Generator)\n* App Team instances are smaller and running off Kubernetes\n* Prometheus uses Consul's Service Discovery info like everything else\n* Prometheus scrapes Consul SD every 15 seconds and filters down based on tags\n* Opt in in your Nomad Manifest\n* Different Metrics types: Counters, Gauges, Histograms, Summaries (but don't use Summaries)\n\t* Counters: count\n\t* Gauges: current state of a metric, think current memory, thread allocations, etc.\n* Sample PromQL query: irate(go_memstats_alloc_bytes_total{job=\"prometheus-exporter-grafana\"}[2m])\n* GorillaTSZ (Facebook paper)"
+    }
+  ]
+}

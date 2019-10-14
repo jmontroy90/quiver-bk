@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 9: Daemon Service",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "A daemonized service is any process that runs as a long-running, self-healing service -- it doesn't interact with the terminal / keyboard / user, and it usually starts at boot time and ends with a `d` e.g. `httpd`, `sshd`.\n\nThe Kubernetes equivalent of this is the `DaemonSet` - such pods will run on all cluster nodes to provide background services (think logging, metrics).\n\n"
+    }
+  ]
+}

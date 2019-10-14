@@ -1,0 +1,9 @@
+{
+  "title": "Phaser",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "The Phaser Services Routes API allows both user and programmatic access for configuring a service's routing. Think between build versions, blue / green deploys, canary deploys, etc.\n\nThere are Jenkins2 hooks (via the Pipeline Generator) that will interact with this API to configure routing for new services, based purely off Nomad manifest config. It USED to be all manual edits in Consul, but there was no validation for this process and it caused downtime - bad JSON, bad schema, non-existent / unhealthy upstreams (<- this one is huge!)."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Opinions",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "### Zero Values\n* Zero values basically defer your errors to more opinionated commands. It's like you've got a ticking time bomb, and any particular logging usually isn't as relevant to those zero-value time bombs."
+    }
+  ]
+}

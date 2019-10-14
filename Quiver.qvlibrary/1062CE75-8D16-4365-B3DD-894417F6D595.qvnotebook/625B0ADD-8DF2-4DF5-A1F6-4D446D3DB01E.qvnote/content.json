@@ -1,0 +1,9 @@
+{
+  "title": "Nginx",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# Guardians-Specific\n\nEach Nginx cluster manages a domain / subdomain.\n\nUpdog has two components:\n* **Server** - runs as standalone Nomad service, responsible for listening to Consul's Service Discovery, and on a given change, will write the SD changes to Consul KV to be picked up by the Updog client.\n* **Client** - runs on each Nginx node, responsible for listening to Consul KV Store changes, taking those configs and comparing to Nginx's current config. If they differ, test the new config, and apply if it works.\n\n"
+    }
+  ]
+}

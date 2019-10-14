@@ -1,0 +1,9 @@
+{
+  "title": "Eventstore",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "# Guardians-Specific\nhttps://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/664109253/Eventstore+Usage+Guide\nhttp://batman-eventstore-cluster.qa-west.jet.com:2113\nhttp://batman-proj.eventstore.eastus2.qa.jet.network:2113/web/index.html#/\n\nImagine Kafka's event sourcing attitude (append-only immutable logs as JSON blobs) with Cassandra's partitioning approach (fine-grained, user-specified e.g. cart id, user id).\n\nA `projection` is written on a `stream` to do normal stuff.\n\nArchitecture is Windows VMs, three-node cluster with a single master for RW and gossip for cluster membership. Writes, seeks, and request ACKs are all synchronous IO on a single Windows disk.\n\nadmin / changeit2"
+    }
+  ]
+}

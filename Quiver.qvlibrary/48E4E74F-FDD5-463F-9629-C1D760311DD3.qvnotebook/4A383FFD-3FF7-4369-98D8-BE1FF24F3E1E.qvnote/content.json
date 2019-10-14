@@ -1,0 +1,9 @@
+{
+  "title": "Questions and Answers",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "1) _What is the point of Marquis?_\n    > There are thousands of Walmart stores that will eventually run their own Kubernetes cluster on premise. Orchestration and lifecycle management for those clusters is required for a successful outcome. Marquis is meant for that.\n2) Do we use a network overlay with our Kubernetes deployments?\n    > Yes. We use [Calico](https://www.projectcalico.org/). Kubernetes has a default built-in overlay, but we don't use it. Flannel is another option.\n3) Is Kubernetes edge-triggered or level-triggered?\n    > Kubernetes is **level-triggered**. See [this article](https://hackernoon.com/level-triggering-and-reconciliation-in-kubernetes-1f17fe30333d) for more information."
+    }
+  ]
+}

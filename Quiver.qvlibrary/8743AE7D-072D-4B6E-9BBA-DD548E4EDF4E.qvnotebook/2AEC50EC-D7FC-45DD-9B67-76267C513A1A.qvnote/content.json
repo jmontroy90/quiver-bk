@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 16 - Independence",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "A good architecture must support:\n* The use cases and operation of the system.\n* The maintenance of the system.\n* The development of the system.\n* The deployment of the system.\n\n##### Use Cases\nThe architecture must represent its use cases. It should be blaringly obvious from a top-level, first-class perspective what kind of app the architecture is supporting. Yu shouldn't have to hunt for vital functionality.\n\n##### Operation\nA good architecture supports the operations of its use case. This could mean monolith, multi-threaded, or microservices. Could mean minimal throughput with high coordination, or high-throughput, trivially-parallelizable, idempotent stuff.\n\nTry to leave this open! If it's hard to move your components from one architecture to another (e.g. monolith -> microservices), that's an architecture smell.\n\n##### Development\nConway's Law:\n> Any organization that designs a system will produce a design whose structure is a copy of the organization’s communication structure.\n\nThus, your architecture should support your organizational structure and needs.\n\n##### Deployment\nIt should be trivial to deploy right after build. No tweaking of millions of shitty properties files.\n\n##### Decoupling Layers\n> Thus we find the system divided into decoupled horizontal layers—the UI, application-specific business rules, application-independent business rules, and the database, just to mention a few.\n\nA good architecture leaves options open! Decoupling is a way to achieve that, and \n\n\n"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "Chapter 2 - Mathematical Background",
+  "cells": [
+    {
+      "type": "latex",
+      "language": "latex",
+      "data": "Union is combining sets of simple events, whereas intersection is only the events that exist in both. Keep it tethered.\n\n$\nP(e_1 \\cup e_2) + P(e_1 \\cap e_2) = P(e_1) + P(e_2)\n$"
+    },
+    {
+      "type": "markdown",
+      "data": "**SITUATION 1**\n> four-sided die\ne1 = even\ne2 = odds\nP({2,4} + {1,3}) = P({1,2,3,4}) = 1\nP({2,4} intersect {1,3}) = P(null) = 0\nP({1,3}) = 0.5 = P({2,4})\nSo we're good.\n\n**SITUATION 2**\n> four-sided die\ne1 = even\ne2 = {2,3}\nP({2,4} + {2,3}) = P({2,3,4}) = 0.75\nP({2,4} intersect {2,3}) = P(2) = 0.25\nP({2,4}) = 0.5 + P({2,3}) = 1.0\nAll good."
+    },
+    {
+      "type": "markdown",
+      "data": "The intuition for this: say someone rolls two four-sided die. Ugh."
+    },
+    {
+      "type": "latex",
+      "language": "latex",
+      "data": "Conditional Probability:\n$\nP(e_1\\mid e_2)=\\frac{P(e_1 \\cap e_2)}{P(e_2)}\n$\n\nIn words, first pass: see how much the simple events overlap, and then divide by the probability of the second event's simple events happening in the first place.\n\nSecond pass: is it going to happen? If it does, is it going to happen within that? Almost a flowchart / DAG of actions - if step 1, then check out step 2! That's division, broh.\n\nThe divisor is the starting point for the flow chart! Let's see how that persists."
+    },
+    {
+      "type": "latex",
+      "language": "latex",
+      "data": "Bayes' Theorem:\n\n$\nP(e_1\\mid e_2) = \\frac{P(e_1)P(e_2\\mid e_1)}{P(e_2)}\n$"
+    },
+    {
+      "type": "markdown",
+      "data": "**SITUATION 2**\n> four-sided die\ne1 = even\ne2 = {2,3}\nP(e1) = 0.5\nP({2,4} intersect {2,3}) = P(2) = 0.25\nP({2,4}) = 0.5 + P({2,3}) = 1.0\nAll good."
+    },
+    {
+      "type": "latex",
+      "language": "latex",
+      "data": ""
+    }
+  ]
+}

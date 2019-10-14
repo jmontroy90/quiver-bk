@@ -1,9 +1,0 @@
-{
-  "title": "Day 24: The value object design pattern",
-  "cells": [
-    {
-      "type": "markdown",
-      "data": "This is the first of the behaviorial design patterns! A behaviorial design pattern is not concerned with design or linking components, \n\nThe **value object design pattern** is dead simple - it's just case classes. Why? To be a value object, we need two properties:\n* Immutability\n* Equality\n\nCase classes have this! They give us a `hashCode`, `equals` and `toString` for free, and are of course immutable. This is great because in Java, getting these properties wasn't so trivial at all. Scala is powerful!\n\nTuples also count as value objects, but they're harder to parse."
-    }
-  ]
-}

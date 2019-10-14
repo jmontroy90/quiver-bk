@@ -1,0 +1,9 @@
+{
+  "title": "MSP",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**REPORTING STRUCTURE**\nStrati (Srini)\n* Mohit: Cloud Delivery (CD)\n    * Jet Platform (Andrew Duch, Omar Haq)\n\t* Containers (Laura, Andrew)\n\t* Dublin Site Lead (Ross)\n* OneOps (Adwit)\n* CICD (Vilas)\n* Public Cloud (Gerald)\n\n**TO LEARN**\n* DNS refresher\n* SSL refresher -- DONE\n* Gophercises\n* Google SRE book\n* Kubernetes Patterns\n* Ultimate Go Programming\n"
+    }
+  ]
+}

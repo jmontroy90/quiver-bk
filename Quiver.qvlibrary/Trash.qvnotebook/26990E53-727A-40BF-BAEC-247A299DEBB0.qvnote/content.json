@@ -1,0 +1,9 @@
+{
+  "title": "Basics",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Kubernetes Objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)\n\nAll objects have **Spec** and **Status**. `spec` represents the desired state, and `status` represents actual state. The k8s control plane (via controllers) manages the constant reconciling of your status to match your spec."
+    }
+  ]
+}

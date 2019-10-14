@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 4 - Structured Programming",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This is about the death of `goto` and how it creates structured programming. \n\nDijkstra wanted to tether programming to proofs, i.e. let's prove that this code block does what we expect. Think lemmas and all that from math. \n\nEarly on, Dijkstra realized that `goto` made it impossible to decompose modules / functionality into smaller and smaller blocks, ones that could then be proven to have certain outcomes. \n\nSome `goto` was okay though, namely `goto` limited in scope -- `if`, `for`, even thrown exceptions or breaks are limited enough (although FP says a thrown exception breaks referential transparency, but I'm not educated enough yet).\n\nDijkstra said get rid of `goto`, and work on decomposing into small functions that feel provable. But no proofs ever came - programming is a science, not math. You can only prove the presence of bugs, not their absence.\n\nAll this defines **structured programming** -- programming with scope, without `goto`, in small, discrete units. It's everything we do now! Why? Because these small units are reusable and testable. We may not be able to prove it, but we can at least decouple things. Step one was recognizing that we need falsifiable chunks, and `goto` prevented that!"
+    }
+  ]
+}

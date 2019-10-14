@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 5: Managed Lifecycle",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Two ways to manage the lifecycle of your pods:\n* Process signals\n* Lifecycle hooks - `postStart` and `preStop`\n\nIf a container / pod fails a healthcheck or is otherwise shutting down, Kubernetes will first issue a SIGTERM for a gentle shutdown, and then after (a default of) 30 seconds it'll issue a SIGKILL.\n\nMeanwhile, `postStart` runs concurrently with the container process, and the container won't return turn from \"Pending\" to \"Ready\" until `postStart` completes successfully.\n\nLast - \"`preStop` is only a convenient alternative to a SIGTERM signal for graceful application shutdown and nothing more.\"\n\nThe alternative to these hooks are `init containers`, which will be described more in a later chapter. They run sequentially _before_ anything else runs, and they run a Pod-level granularity (as opposed to container-level for lifecycle hooks).\n"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Envoy - Meta",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "#### Jet Personnel\n\n#### Designs, Playbooks\n[Envoy](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/697762494/Envoy)\n[Envoy Design](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/343573814/Envoy+Design)\n[Envoy Playbook](https://my-jet.atlassian.net/wiki/spaces/DEVOPS/pages/530547791/Envoy+Playbook)\n\n#### TFS Repos\n[Guardians Envoy Extensions](https://jet-tfs.visualstudio.com/DefaultCollection/Jet/_git/guardians-envoy-extensions)\n[Guardians Envoy Nebula](https://jet-tfs.visualstudio.com/DefaultCollection/Jet/_git/guardians-envoy-nebula)\n[Guardians Midnight](https://jet-tfs.visualstudio.com/DefaultCollection/Jet/_git/guardians-midnight)\n[Envoy Echoer (sample service)](https://jet-tfs.visualstudio.com/DefaultCollection/Jet/_git/guardians-envoy-echoer)\n\n#### Grafana Dashboards\nhttps://grafana.jet.network/d/RzHeMgPik/envoy-summary-dashboard?orgId=1\nhttps://grafana.jet.network/d/HqI6GgEmk/envoy-service-dashboard?orgId=1\n\n"
+    }
+  ]
+}
