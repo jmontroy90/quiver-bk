@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "### Functionality\n* (10/1/2019) Secrets are pulled in from Concord on startup, and then are constantly reconciled (e.g. checked for existence, recreated as needed) with Concord on each `Reconcile` of a `Cluster`. This is fun, two-way sync stuff.\n\n### Code Quality\n* We have a lot of conditionals floating around that are frequently forgotten when adding / changing code. We should make use of better design patterns to centralize these kinds of common / enclosing behavior.\n\n### Concerns\n* All errors are logged, not handled. We need proper alerting to ensure we don't silently miss failed deletes.\n  * Example: all CRUD operators in `concord_sync.go`\n* No operations are atomic. This could lead to partial failures and incomplete state.\n  * Example: `concord_sync.go:syncClusters():154-155`"
+      "data": "### Code Quality\n* We have a lot of conditionals floating around that are frequently forgotten when adding / changing code. We should make use of better design patterns to centralize these kinds of common / enclosing behavior.\n\n### Concerns\n* All errors are logged, not handled. We need proper alerting to ensure we don't silently miss failed deletes.\n  * Example: all CRUD operators in `concord_sync.go`\n* No operations are atomic. This could lead to partial failures and incomplete state.\n  * Example: `concord_sync.go:syncClusters():154-155`"
     }
   ]
 }

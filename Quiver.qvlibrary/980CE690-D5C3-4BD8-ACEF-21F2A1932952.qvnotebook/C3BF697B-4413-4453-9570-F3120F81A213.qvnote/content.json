@@ -1,0 +1,9 @@
+{
+  "title": "json",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "If you implement `UnmarshalJSON` on a type, you'll be able to use `json.Unmarshal` any time on that type (provided your receiver is the correct type!!) to get your custom marshaller. Possibly extends to `json.Encode`, but I'm not 100% sure yet.\n\nIn order to implement a custom marshaller that still **mostly** makes use of the default marshaller behavior on a type, you need to avoid a stack overflow inside your marshal methods. Because `json.Marshal` / `json.Unmarshal` call a type's `UnmarshalJSON` method, you instantly get a endless recursive call if you're not careful. A quick workaround is to alias the type within the scope of your custom marshalling function, such that there's no circularity."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Changelog: marquis",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[STRCONTAIN-4219](https://gecgithub01.walmart.com/wce/marquis/pull/83)\n* Slow Azure autoscaling causes IPs to persist too long. Check Concord, Marquis, and the endpoint Cluster itself for health before admitting a ClusterNode resource -- we should admit them if tardiness is due to slow Azure autoscaling on an IP.\n\n\n\n* (10/1/2019) Secrets are pulled in from Concord on startup, and then are constantly reconciled (e.g. checked for existence, recreated as needed) with Concord on each `Reconcile` of a `Cluster`. This is fun, two-way sync stuff.\n\n"
+    }
+  ]
+}

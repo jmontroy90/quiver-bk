@@ -1,0 +1,9 @@
+{
+  "title": "Pointers",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "`unsafe.Pointer` gives you a raw pointer that you can manipulate with pointer arithmetic (and change?). So with something like:\n> addPtr := (*[8]string)(unsafe.Pointer(*(*uintptr)(address)))\n\nWe cast to a `uintptr` pointer type, deref it, cast as an `unsafe.Pointer`, then cast that as a pointer to an array, because ultimately pointers are just string bytes."
+    }
+  ]
+}

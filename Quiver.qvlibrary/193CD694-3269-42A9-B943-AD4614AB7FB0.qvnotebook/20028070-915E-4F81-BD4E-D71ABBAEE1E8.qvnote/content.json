@@ -1,0 +1,9 @@
+{
+  "title": "Lightning Talks",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## Kubernetes and Multitenancy\n\nOIDC, resource control (`ResourceQuota`, `LimitRange`, `NetworkPolicy`), policies via OPA\n\n## kubectl Productivity\n\nAutocomplete issues an HTTP request. Dur, but easy to forget.\n`kubectx` can create aliases itself with `kubectx short=long-name-sucks`\n\n## Sharing GPUs Across Containers\nFor GPUs: no cgroups, no virtual memory addressable like CPUs, time-sliced allocation.\nKubernetes is good at extending its schedulers and placement, but sharing devices on the backend is still hard, e.g. guarantees usually provided by cgroups.\n\n## OPA for CRD Validation\nOpenAPI V3 schemas provide basics, but wildcard / dynamic data gets tough. Plus existence checks are tough!\n\n## Instrument Operators\n`kube-state-metrics` is a library that allows you to instrument CRDs / Operators in a simple way to expose standard Prometheus metrics. There's standard metric exporting too, for existing operators."
+    }
+  ]
+}

@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "## Gotchas\n\n#### ARG / ENV\nYou can use `ARG` for build-time variables in things like `RUN`, `COPY`. `ENV` is for runtime, container-level environmental variables, for use in `CMD` or `ENTRYPOINT`.\n\nA given `ARG` must be scoped under some `FROM` statement -- `ARG`s do not propagate across images in multi-builds. The only exception to that is an `ARG` used specifically **in** the `FROM` statement -- those can be initialized outside of a `FROM`."
+      "data": "## Gotchas\n\n#### ARG / ENV\nYou can use `ARG` for build-time variables in things like `RUN`, `COPY`. `ENV` is for runtime, container-level environmental variables, for use in `CMD` or `ENTRYPOINT`. [General usage here.](https://vsupalov.com/docker-arg-env-variable-guide)\n\nA given `ARG` must be scoped under some `FROM` statement -- `ARG`s do not propagate across images in multi-builds. The only exception to that is an `ARG` used specifically **in** the `FROM` statement -- those can be initialized outside of a `FROM`."
     }
   ]
 }

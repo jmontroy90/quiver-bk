@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "1) Allocation vs. Initialization -- lazy, eager? Null handling, allocated but not initialized to a value?\n2) Pass-by-reference vs. pass-by-value -- copied on function calls? How to share memory?\n3) Heap vs. stack allocation -- controllable? Escape analysis? Unknown size at compile time -> heap?"
+      "data": "1) Allocation vs. Initialization -- lazy, eager? Null handling, allocated but not initialized to a value?\n2) Pass-by-reference vs. pass-by-value -- copied on function calls? How to share memory?\n3) Heap vs. stack allocation -- controllable? Escape analysis? Unknown size at compile time -> heap?\n4) Generics? Abstracting behaviors over types?"
     }
   ]
 }

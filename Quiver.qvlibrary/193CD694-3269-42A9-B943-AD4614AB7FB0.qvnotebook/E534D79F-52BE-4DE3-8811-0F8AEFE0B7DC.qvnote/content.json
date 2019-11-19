@@ -1,0 +1,9 @@
+{
+  "title": "Apache Samza on Kubernetes",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "#### Overview / Architecture\nMore info [here](https://cwiki.apache.org/confluence/display/SAMZA/SEP-20%3A+Samza+on+Kubernetes).\n\nSamza functions much like Spark Streaming -- events are emitted onto a queue like Kafka, and Samza performs transformations and aggregations in a streaming fashion. Samza can be deployed as standalone or YARN right now, but also now Kubernetes. It writes state for failure scenarios and provides at-least-once semantics.\n\nSamza works with streams. Streams are immutable, ordered, append-only logs of like records -- the upstream partitions of a message queue are mapped into one Samza `Task` each for parallelism.\n\n`kubelet` starts a Samza `Job Coordinator`, which can then request worker Pods from the API Server. These worker Pods get partition assignments from the Job Coordinator, and also can talk directly to external storage for state persistence as needed. This is pretty similar to how Spark runs on Kubernetes.\n\n**Question**: why read configs from a separate Coordinator Stream, rather than maybe a mounted ConfigMap or even CLI args / environment variables.\n\nSpark also runs on k8s -- it uses a Spark Operator to allow flexible deploys. Flink has a different approach, and uses the k8s Deployment primitive directly. Less expressive, more straight-forward. So the JobManager and TaskManager Deployments are separate YAMLs, which is cool in one sense but also is weird to treat them as independent entities."
+    }
+  ]
+}

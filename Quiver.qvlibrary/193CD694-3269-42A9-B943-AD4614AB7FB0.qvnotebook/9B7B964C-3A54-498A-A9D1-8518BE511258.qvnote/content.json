@@ -1,0 +1,9 @@
+{
+  "title": "Modernizing DNS",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Modern DNS for:\n* Multitenancy isolation + migrations\n* Built-in telemetry (for behaviorial analysis)\n* Filtering and further isolation: tenant A can't resolve tenant B's services (policy-based?)\n* Security -- upgrade basic TCP/UDP DNS to DoT / DoH (DNS-over-TLS / DNS-over-HTTPS) via middleware proxy\n\nCurrent state (`kube-dns`):\n* No tenant isolation\n* No dynamic config (search domains, nameservers)\n* None of the above things listed (filtering / policies, security [DoT])\n\n**Multitenancy**: potential `DnsPolicy` CRD: select a namespace via labels, select a nameserver to serve DNS for that namespace. An Envoy sidecar can capture DNS packets (filter chains) and forward it onto the appropriate nameserver.\n\n**Observability**: Envoy sidecar uses the Envoy stats module to aggregate and expose DNS metrics to Prometheus.\n\n**Filtering**: `DnsPolicy` provides `whitelist` / `blacklist` policies for Pods in a given namespace (talking to a given nameserver). Enabled _once again_ by an Envoy sidecar. Policies can be run on an external policy service and called out to via the `DnsPolicy`.\n\n**Evolution**: same thing as above. `DnsPolicy` allows you to upgrade to DoT / DoH specifying some upgrade service.\n\nThis is basically just \"use Envoy's functionality by attaching metadata to Deployments\". And oh yay, you can do xDS to apply new filter chains or whatever."
+    }
+  ]
+}

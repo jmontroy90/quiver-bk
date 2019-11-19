@@ -1,0 +1,9 @@
+{
+  "title": "Topics To Study",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**git**\n* git show (and all format directives)\n* git rev-list\n* git describe\n* git fetch\n* other greatest hits\n\n`[[ .. ]]` vs `[ .. ]`\n\n`find`, `perl` one-liners, `awk`, `tcpdump`"
+    }
+  ]
+}

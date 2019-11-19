@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "**Sqaud**: Multicluster Orchestration\n**Product**: Marquis\n\nMisc:\n\nSriram - San Bruno\nPatrick Dolan - Bentonville\nArchitects are broader-reaching devs.\nNicholas is based out of California, Bay Area-ish.\n\nInfrastructure: Stores (literally racks in the back of Walmart 1xx), Distribution Centers (same), Azure\n\n\nGlobal Load Balancer - deploy to multi-regions and multi-cluster and have one entrypoint\n\n\n**REPORTING STRUCTURE**\nStrati (Srini)\n* Mohit: Cloud Delivery (CD)\n    * Jet Platform (Andrew Duch, Omar Haq)\n\t* Containers (Laura, Andrew)\n\t* Dublin Site Lead (Ross)\n* OneOps (Adwit)\n* CICD (Vilas)\n* Public Cloud (Gerald)\n\n**TO LEARN**\n* DNS refresher\n* SSL refresher -- DONE\n* Gophercises\n* Google SRE book\n* Kubernetes Patterns -- DONE\n* Ultimate Go Programming -- DONE\n\n"
+      "data": "**Sqaud**: Multicluster Orchestration\n**Product**: Marquis\n\nMisc:\n\nSriram - San Bruno\nPatrick Dolan - Bentonville\nArchitects are broader-reaching devs.\nNicholas is based out of California, Bay Area-ish.\n\nInfrastructure: Stores (literally racks in the back of Walmart 1xx), Distribution Centers (same), Azure\n\nGlobal Load Balancer - deploy to multi-regions and multi-cluster and have one entrypoint\n\n\n**REPORTING STRUCTURE**\nStrati (Srini)\n* Mohit: Cloud Delivery (CD)\n    * Jet Platform (Andrew Duch, Omar Haq)\n\t* Containers (Laura, Andrew)\n\t* Dublin Site Lead (Ross)\n* OneOps (Adwit)\n* CICD (Vilas)\n* Public Cloud (Gerald)\n\n**TO LEARN**\n* DNS refresher\n* SSL refresher -- DONE\n* Gophercises\n* Google SRE book\n* Kubernetes Patterns -- DONE\n* Ultimate Go Programming -- DONE\n\n"
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "title": "Repo: k8s-torbit",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[errorIs](https://gecgithub01.walmart.com/wce/k8s-torbit/pull/45) -- this should be removed in favor of using normal Go 1.13 error handling -- wrap with `fmt.Errorf(\"...: %w\", err)`, do `errors.Is` and `errors.Unwrap` to do more."
+    }
+  ]
+}
