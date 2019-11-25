@@ -1,0 +1,9 @@
+{
+  "title": "Debugging",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "k logs -f --since=1m -n marquis-system marquis-controller-manager-0 -c manager\n\n"
+    }
+  ]
+}

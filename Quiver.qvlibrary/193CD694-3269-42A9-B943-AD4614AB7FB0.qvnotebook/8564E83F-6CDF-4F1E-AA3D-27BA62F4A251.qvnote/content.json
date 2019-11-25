@@ -1,0 +1,9 @@
+{
+  "title": "CoreDNS: Beyond Basics",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**DNSSEC**: recursive DNS servers -- able to check records recursively through zones to cryptographically validate them.\n\nSign on-the-fly -- Common Signing Key (with ECDSA algorithm) will create public keys and private keys. Add those keys to your zone and you're done. You can do a `+dnssec` in your `dig` in order to see `RRSIG` records.\n\nThe `sign` plugin -- Common Siging Key, adding to your zone database again but with the `sign` plugin and block in the data. I didn't get this too much.\n\n**DNS-over-TLS**: add a `tls` block to your data with a `tls://.` URI-looking thing. You can forward your requests to other DNS servers.\n\n**Dealing with Responses**\n\nCan use `template` blocks to generate DNS records for zones. You match against a regex and define response behaviors as you need.\n\nCan use `rewrite` to modify names and resonbses s.t. you can re-use rules and templates, e.g. you can have templates for both `example.com` and `example.org`, but rewrite all `.org` to `.com` to match templates.\n\nCan use `firewall` to validate data and metadata in requests, and also call out to things like OPA. Can use `edns0` metadata to log particular pieces of data on requests, and `firewall` can access stuff in that metadata.\n\nHis demo showed how he had to add `+ednsopt` for his eDNS metadata password, essentially.\n\nCould use these primitives for multi-tenant service discovery, which is cool -- it's just embedding metadata and doing firewall parsing on that."
+    }
+  ]
+}

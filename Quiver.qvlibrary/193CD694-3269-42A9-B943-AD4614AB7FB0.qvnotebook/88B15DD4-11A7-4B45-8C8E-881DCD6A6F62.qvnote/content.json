@@ -1,0 +1,9 @@
+{
+  "title": "Cluster Upgrades",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "`kubectl cordon`, `kubectl drain`, `k8s surge / maxSurge`, `k8s draining / maxDrainTime`, `PodDisruptionBudget`\n\nUpdate the cluster one node at a time, while the cluster remains healthy. How to define cluster health?\n\nThey have a ConfigMap trigger that either rotates (new images, max surge, etc.) or freezes updates on nodes. \n\nAll workloads on a node are drained, moved to the new updated node, and then the old node is deleted by a cloud provider call.\n\nIs there downtime built into this? Are you guaranteed that the drained workloads only land on the new updated node? What happens if node A upgrades successfully, and node B doesn't? Why do this all as a ConfigMap, instead of a CRD?"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Operator Patterns",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This was a good talk. He surveyed tons of open source projects to see KRM (Kubernetes Resource Management) in action, in particular CRDs. He found tons of things that fit into a couple patterns:\n* **Composite** -- CRD controller yields \"child\" CRD resource\n* **Provisioner** -- CRD controller yields non-CRD resource\n* **Governer** -- controller reconciles `status` perpetually to mark time kinda\n* **Enforcer** -- controller changes some attributes like `status` one time instead of perpetually, e.g. mutating admission hooks?\n\nWe conflate all these patterns together -- the speaker recommended maybe not doing that. However, aren't Pods (with their `status`) kinda both Governers and Provisioners? Need to read the Pod controller code.\n\nHe also talked about `X - XClass`, `X - XClaim` patterns, which are naming and schema conventions relating resources (think PV and PVC).\n\nI do wish it was a little more prescriptive."
+    }
+  ]
+}

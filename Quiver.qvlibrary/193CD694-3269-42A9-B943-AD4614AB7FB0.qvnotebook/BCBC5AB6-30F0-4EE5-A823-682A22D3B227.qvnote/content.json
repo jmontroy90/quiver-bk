@@ -1,0 +1,9 @@
+{
+  "title": "Liberating K8s from kube-proxy and iptables",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "`iptables` and `netfilter` are really expensive in terms of CPU. Cilium uses eBPF.\n\nUsing eBPF to replace existing `kube-proxy` primitives:\n1) `ClusterIP` (persistent virtual IP in-cluster)\n> If it's a service, select an IP and do DNAT. eBPF has maps. We can persist a `svc` hash map and an LRU `conntrack` map. How to update these? Cilium has an agent on each node that can watch Services and Endpoints in the API, and update the eBPF maps per node to make them useable.\n\n2) `NodePort`\n> Attach program to eth0, find the node of the pod, SNAT and route, then reverse DNAT and SNAT on the response. We can do DSR (direct server return) to bypass the extra return hop through the original routing node via eBPF.\n\nQuestion: how often do these eBPF maps sync up with Services and Endpoints in etcd?"
+    }
+  ]
+}

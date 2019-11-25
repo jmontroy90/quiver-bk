@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 1: Introduction",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "We focus most on **correctness** and **running-time guarantees** when designing algorithms. This focus allows us to compose and scale our algorithms, and can help us improve them by showing how much room for improvement we may have. We frequently design algorithms for best-case / worst-case running time analysis, as if someone was trying to make our algorithm slow.\n\nThe most obvious algorithm frequently isn't the best one. Basic multiplication could be just \"add N to itself M times\", but Karatsuba multiplication finds a clever way to divide-and-conquer the problem to a get a lower algorithmic complexity. Matrix multiplication is another great example -- normal methods yield `O(n^3)`, but a variation on Karatsuba's divide-and-conquer yields `O(n^2.83)`, while still being practical (space complexity?) to use.\n\nConsider also parallel hardware - you have to analyze your algorithms in their contexts, because an algorithm designed with serial evaluation in mind might not perform as well as it could on parallel hardware."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Kubernetes Operators: The Hard Parts",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "His stuff on reconcilers was fine.\n\nComparing objects for changes -- using hash annotations! These are built at creation time, avoiding defaults / status / meta. Useful, we should use this. `dsi.Annotations[ResourceHash]`.\n\nHis freestyle on StatefulSets isn't terribly relevant for me right now."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Dynamic Programming",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Dynamic programming is my kryptonite. It involves a strange sort of \"letting go\" that I haven't quite qualified. Trusting that the solution to subproblems will lead to an aggregate solution is hard to grok. Only way to really overcome this is to study it a lot, do a lot of problems, e.g. work it!\n\nLongest Common Subsequence is a basic example. The subproblems are: what to do when we match letters, vs what to do when we don't. Solve those and find the longest (e.g. max), and we're good!"
+    }
+  ]
+}

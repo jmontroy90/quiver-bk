@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 2: Asymptotic Analysis and Recurrences",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "O Ω Θ o\n\n### Asymptotic Analysis\nThis focuses not on lower-order terms and constants, but on the highest-order term and the curve it generates. Specifically, how does running time scale with the size of the input, e.g. input `n` vs. running time `T(n)`.\n\n"
+    }
+  ]
+}

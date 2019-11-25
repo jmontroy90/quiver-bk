@@ -1,9 +1,9 @@
 {
-  "title": "Helm, GitOps, CERN",
+  "title": "10 Ways to Blow Up Kubernetes",
   "cells": [
     {
       "type": "markdown",
-      "data": ""
+      "data": "Sidecars can leave CronJobs running after the main transient containers have terminated. Sidecars also can become over-opinionated in terms of health checks, readiness checks, and how those checks aggregate up to the pod as a whole.\n\nHAProxy sidecars take awhile to power down, even if new HAProxy containers are spinning up. This can lead a node to OOM!\n\nOrdering in sidecars is probably a much-needed feature to state dependencies.\n\nAfter 1.12 -- only controllers can change the status of an object. Iterating on the status subresource was done by introducing an `observedGeneration` and comparing it to the `ObjectMeta.generation`, which is what we do for our Operators too.\n\nOlder JDKs aren't aware of cgroups, which is why older JVMs don't understand resource allocation in a multi-tenancy environment (each JVM declares ownership of all node resources).\n\nAutoscalers are impacted by transient resource spikes on startup -- e.g. if you use a lot of CPU on startup, it feeds back into the autoscaler and says ahhhhh CPU is high! And adds more pods.\n\nRemember, the kube scheduler is just an image with some binary baked in -- you can swap in for different behavior!"
     }
   ]
 }

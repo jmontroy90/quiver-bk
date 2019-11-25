@@ -1,0 +1,9 @@
+{
+  "title": "Kubernetes Components - Secure Communications",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Most interactions end up going through `kube-apiserver`, `kubelet`, or `etcd`, so we focus on these.\n\nFocus on authorization (who are you), integrity (is your data right), and encryption (make data private in-transit, asymmetric / symmetric keys).\n\nmTLS uses certs to have each end of an interaction verify identity. CAs are used to have a trusted third party verify the certs in a session. K8s has private CAs. This is all PKI infrastructure, which would be good to review.\n\nThree CAs: kubernetes-ca, etcd-ca, kubernetes-front-proxy-ca\n\nWhen a new node spins up, `kubelet` needs a client cert signed by the kubernetes-ca. These are Certificate Signing Requests. Certs can be renewed and rotated automatically, this is a lot of `kubeadm` stuff.\n\n## Communications\nShe had a lot of good diagrams breaking down different communication paths between components, and how they auth, encrypt, etc. No use reproducing here, look at slides: [here](https://static.sched.com/hosted_files/kccncna19/72/KubeCon%20NA%202019%20-%20How%20Kubernetes%20components%20communicate%20securely%20in%20your%20cluster%20-%2020191121.pdf)"
+    }
+  ]
+}

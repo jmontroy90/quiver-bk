@@ -1,0 +1,9 @@
+{
+  "title": "Diffing",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "* Hashing for diffing (think K8s resources before and after they go into etcd)\n* Order-agnostic -- lists, maps?\n* Defaults\n* Timestamps and other moving targets"
+    }
+  ]
+}

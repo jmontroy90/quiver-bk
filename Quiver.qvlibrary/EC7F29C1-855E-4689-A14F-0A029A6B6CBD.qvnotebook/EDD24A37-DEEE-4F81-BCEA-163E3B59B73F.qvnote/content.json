@@ -3,31 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "[Link to paper](https://www.cs.cornell.edu/home/rvr/papers/flowgossip.pdf)\n\nThis paper dives into some basics of gossip protocals, which are lightweight synchronous protocals for synchronizing state without a need for a strong consistency guarantees. "
-    },
-    {
-      "type": "text",
-      "data": "<div><i>\"First, it presents a new state reconciliation mechanism that is designed both for minimal CPU overhead and for situations in which only limited bandwidth is available (Section 3). Second, it proposes and analyzes a flow control scheme for gossip.\"</i></div>"
-    },
-    {
-      "type": "markdown",
-      "data": "###GOSSIP BASICS\nTwo classes:\n* Anti-entropy - gossip until newer information arrives\n  * More reliable\n* Rumer-mongering - gossip for set period of time\n  * Some probability of conveying information"
-    },
-    {
-      "type": "markdown",
-      "data": "###3. RECONCILIATION"
-    },
-    {
-      "type": "markdown",
-      "data": "####3.1 PRECISE RECONCILITION\n\n\"Note that, if implemented, both these orderings would require a synchronized clock among the members and that all updates be timestamped with this clock.\""
-    },
-    {
-      "type": "markdown",
-      "data": "####3.2 SCUTTLEBUTT RECONCILIATION\n"
-    },
-    {
-      "type": "text",
-      "data": "DONE!!!! NEED TO WRITE NOTES!!!!"
+      "data": "[Link to paper](https://www.cs.cornell.edu/home/rvr/papers/flowgossip.pdf)\n\n**Gossip protocols** are good algorithms for replicating state when you don't also need strong consistency guarantees. It's well-modeled by epidemic analysis (think: \"not strong guarantees\" == \"may or may not get sick\"?). Under normal conditions, they guarantee delivery with some probability `P` within `N` rounds. The protocol presented here (Scuttlebutt) extends the literature by examining gossip under CPU / network limits by limiting gossip rate and packet size.\n\n## Gossip Basics\nTwo types of gossip:\n1) `Anti-entropy`\n2) `Rumor-mongering`\n\nAnti-entropy gossips until new information is available, and rumer-mongering gossips for a set amount of time to allow some probability of the state being propagated everywhere. This paper is on anti-entropy.\n\nThe paper sets up a fair bit of semi-pointless mathematical nomenclature that boils down to this: each node has state that consists of a bag of versioned KV pairs, e.g. `K -> (V,N)` where `N` is the version number. Two nodes can reconcile their states on like keys by comparing version numbers and then using a `merge` function -- here, `merge` is just \"take latest\".\n\nReconciliation can be `push-based` (here's my state, fix yourself), `pull-based` (here's what I have for keys and versions, gimme any later state you have), and `push-pull gossip`, which combines the two. Essentially:\n1) Node A sends a _digest_ of keys and their versions to node B.\n2) Node B figures out what keys it has with more recent state and sends those back to node A; it ALSO includes a set of keys it wants from node A, because it saw node A actually has more recent data than itself.\n3) Node A recieves the newer state, and the set of keys that node B requested for updating _its_ state. Node A sends node B all of the requested state.\n\nAny stable key will simply be propagated in time logarhythmic to the number of nodes. Dropped messages don't mess things up too much.\n\n## Reconciliation\nHigh update load does hurt things though, especially with limited network and CPU. Propagation time is logarhythmic, but message size can grow linearly in `N` nodes. We work here with a maximum size of `mtu` (maximum transmission unit) -- if `p` sends `q` a set of deltas (per `push-pull gossip`) that are larger than `mtu`, a subset is sent. A norderting criteria `>` is used to decide which deltas should be sent first. Further, the subset sent might be constrained by correctness, e.g. will we break our state machine's consistency between nodes if we send poorly? When correctness is chosen over performance, of course, we get different performance measurements.\n\nNow we go through two reconciliation techniques: **precise reconciliation** and the new one, **Sbuttlebutt** (used in Cassandra).\n\n#### Precise Reconciliation\nThis is basically what we've been describing so far. `Push-pull gossip` without values in the original `digest`, ordered either by \"most out of date\" or \"most recent\". This can be a lot of state. And note that this requires synchronized clocks in the node for correct timestamp comparisons.\n\n#### Scuttlebutt\n\n\n"
     },
     {
       "type": "latex",

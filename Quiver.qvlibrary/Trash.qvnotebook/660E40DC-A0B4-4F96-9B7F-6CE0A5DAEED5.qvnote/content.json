@@ -1,0 +1,9 @@
+{
+  "title": "SIG Multicluster",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Current projects: **kubefed**, **Cluster Registry**, **Cluster ID** **KubeMCI**\n\nPropagation status for `kubefed` is improved, look into this.\n\nClusterID is a durable id for clusters, probably contained in the Cluster Registry.\n"
+    }
+  ]
+}
