@@ -1,0 +1,9 @@
+{
+  "title": "Monitoring",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "* PagerDuty fatigue is real. Any good monitoring and alerting system must have high signal and low noise.\n* Avoid complex dependency hierarchies, e.g. \"if X happens, alert on this and scale this, but only if Y is also high\". Systems change, bugs are introduced with complexity. Keep your threshold- / causality-based monitoring rules as simple as possible, or as long-term as possible so that extreme outliers won't make your system go crazy."
+    }
+  ]
+}

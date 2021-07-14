@@ -1,0 +1,9 @@
+{
+  "title": "Command PATH security in Go",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[https://blog.golang.org/path-security](Link to article)\n\nApparently Windows `cmd` and search-path libs add `.` e.g. \"this directory\" to the `PATH` (where you search for executables) by default. Linux does not. This bad PATHing looked like `:/bin:/usr/bin` originally, where the leading `:` indicates empty space, e.g. `.` or \"this directory\".\n\nThis article details a wacky bug where `go get` might execute malicious, arbitrary code because `cgo` (called during `go get`) sometimes calls `gcc` like so:\n```\n// running in cgo in badpkg dir\ncmd := exec.Command(\"gcc\", \"tmpfile.c\")\ncmd.Run()\n```\nThat command will be run in the local directory, which means on Windows, it might pick up `./gcc.exe` instead of whichever secure `gcc` you want.\n\nThey fixed it by passing the absolute path to the C compiler (`gcc`), and also fixing `cgo` to not look in the local directory when it runs `gcc`."
+    }
+  ]
+}

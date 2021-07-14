@@ -1,0 +1,22 @@
+{
+  "title": "Week 2",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Basic set theory: {A, A, B} == {A, B} == {B, A}; {A, {A}} != {A}\n**Cartesian Product**: multiple set element-wise for `X x Y`\n**Union set**: union set contains de-duped elements from both sets (`X U Y`)\n**Subset**: X subset Y if each and every element in X is in Y\n**Binary relation**: A subset of the Cartesion product, e.g:"
+    },
+    {
+      "type": "latex",
+      "language": "latex",
+      "data": "$X \\subseteq S \\times S$"
+    },
+    {
+      "type": "markdown",
+      "data": "**Partial order**: "
+    },
+    {
+      "type": "text",
+      "data": ""
+    }
+  ]
+}

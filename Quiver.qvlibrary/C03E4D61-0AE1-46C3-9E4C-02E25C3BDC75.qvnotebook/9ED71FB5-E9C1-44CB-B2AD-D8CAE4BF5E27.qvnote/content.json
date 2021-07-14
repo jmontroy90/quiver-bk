@@ -1,9 +1,9 @@
 {
-  "title": "Focus Weeks",
+  "title": "Topics",
   "cells": [
     {
       "type": "markdown",
-      "data": "Each of these allocates 25 minutes of study and 5 minutes of prior-day review each work day. They should preferably have an accompanying blog post on Medium.\n\n* Maps (10/14/19 - 10/20/19)\n* Slices (10/28/19 - 11/3/19)\n* Interfaces (11/4/19 - 11/10/19)\n* Kubernetes Certificates (11/25/19 - 12/1/19)"
+      "data": "* 12-Factor App (flashcards)\n* Errors in Go (explanatory blog)\n* k8s-go: Label Selectors (useful blog)"
     }
   ]
 }

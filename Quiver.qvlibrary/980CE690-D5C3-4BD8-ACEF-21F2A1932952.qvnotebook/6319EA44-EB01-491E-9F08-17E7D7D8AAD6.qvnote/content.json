@@ -1,0 +1,9 @@
+{
+  "title": "Generics",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Ardan Labs: Generics Part 01](https://www.ardanlabs.com/blog/2020/07/generics-01-basic-syntax.html)\n\nUse [go2go playground](https://go2goplay.golang.org/) to try this stuff!\n\n```\nfunc printGeneric[type T](slice []T) {\n   fmt.Print(\"Generic: \")\n   for _, v := range slice {\n       fmt.Print(v, \" \")\n   }\n   fmt.Print(\"\\n\")\n}\n```\n\nThe square brackets indicate to the compiler, \"don't try to resolve this type `T` to an explicit type, but instead at compile time, check calls to this and get type information from that\". You can declare multiple generic type with whatever names you want.\n\nYou can call generic functions with or without explicit generic specification:\n```\n// both valid\nnumbers := []int{1, 2, 3}\nprintGeneric[int](numbers)\nprintGeneric(numbers)\n```\n\nNote: Go doesn't use angle brackets for backwards compatibility."
+    }
+  ]
+}

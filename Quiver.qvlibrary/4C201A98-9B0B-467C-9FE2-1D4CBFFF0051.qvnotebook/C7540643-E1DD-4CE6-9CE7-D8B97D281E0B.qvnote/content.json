@@ -1,0 +1,9 @@
+{
+  "title": "JWT Tokens",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to article](https://blog.angular-university.io/angular-jwt/)\n\nA JWT token is a JSON payload containing a particular claim (presumably an auth claim). In order to validate, you only need the token itself, no other service and maintenance of state. A JWT token consists of three parts: **Header**, **Payload**, and **Signature**.\n\nThe **payload** is just metadata about the context. It's unencrypted. The **Signature** is inspected to validate the payload, and we only know what kind of signature it is by looking at the **Header**, which might be like: `{\"alg\": \"RS256\", \"typ\": \"JWT\"}`\n\nTo produce the signature, you need the payload, header, and a given secret key. The process:\n1) User sends creds to auth server, which are validated. Auth server produces token with user and expiration, signs it using secret key and header info. Now the user can send that signed token with all its requests.\n2) Server receives request with signed token. It validates the signature corresponds to the expected secret key, and permits the request for the user.\n\nThe JWT token signature is what allows both the statelessness _and_ the separation between auth server and app server. This latter benefit is really great -- you can delegate auth for tons of apps to a single auth server, and no state is managed!\n\nThe payload (e.g. the **bearer token**) typically has these fields:\n```\n{\n    \"iss\": \"Identifier of our Authentication Server\",\n    \"iat\": 1504699136, \n    \"sub\": \"github|353454354354353453\",\n    \"exp\": 1504699256\n}\n```\n* `iss` == issuing auth server\n* `iat` == creation time in epoch seconds\n* `sub` == technical identifier of user\n* `exp` == token expiration in epoch seconds"
+    }
+  ]
+}

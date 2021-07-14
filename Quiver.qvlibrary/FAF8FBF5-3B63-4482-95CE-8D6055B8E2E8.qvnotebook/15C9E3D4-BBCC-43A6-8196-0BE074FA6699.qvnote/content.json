@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 7 - The Evolution of Automation at Google",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "You want automation. It allows consistency across operators, faster reaction times, and overall time-savings (and frustration, and mistakes).\n\n\"A team whose primary task is to speed up the current turnup has no incentive to reduce the technical debt of the service-owning team running the service in production later.\"\n\n\"A team not running automation has no incentive to build systems that are easy to automate.\"\n\n\"A product manager whose schedule is not affected by low-quality automation will always prioritize new features over simplicity and automation.\"\n\nThis chapter wasn't very useful."
+    }
+  ]
+}

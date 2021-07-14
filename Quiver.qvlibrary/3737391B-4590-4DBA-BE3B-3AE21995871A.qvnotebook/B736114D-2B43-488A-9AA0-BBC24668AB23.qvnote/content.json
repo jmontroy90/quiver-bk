@@ -1,0 +1,9 @@
+{
+  "title": "Quotables / Rhetoric",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Kernighan’s law: \"Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.\"\n\nParkinson's law of triviality, e.g. **bike-shedding**: \"a fictional committee whose job was to approve the plans for a nuclear power plant spending the majority of its time on discussions about relatively minor but easy-to-grasp issues, such as what materials to use for the staff bike shed, while neglecting the proposed design of the plant itself, which is far more important and a far more difficult and complex task.\"\n\nParkinson's Law: \"work expands so as to fill the time available for its completion.\"\n\n[eXtreme Go Horse](https://medium.com/@dekaah/22-axioms-of-the-extreme-go-horse-methodology-xgh-9fa739ab55b4)\n[Workaround-Driven Development](https://ilcocco.wordpress.com/2016/05/18/wdd/)"
+    }
+  ]
+}

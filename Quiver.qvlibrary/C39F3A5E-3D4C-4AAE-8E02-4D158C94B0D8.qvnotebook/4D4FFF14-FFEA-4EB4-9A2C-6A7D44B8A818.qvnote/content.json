@@ -1,0 +1,9 @@
+{
+  "title": "Go Anti-Patterns",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=ltqV6pDKZD8)\n\n[Go Proverbs](https://go-proverbs.github.io/)\n\n#### Tiny Package Syndrome\nLots of packages, few files per package, usually no tests. Keep your packages and APIs together.\n\n#### Premature Exportation\nDon't export unless you need to -- keep your package surface area small. \nMaximally DRY code sometimes leads to package explosion, which means tons of exports for these packages to talk. Don't fall into that trap. Use the `internal` folder where needed.\n\n#### The `util` Package\n`util` is meaningless. Don't jam stuff together. Package names should have meaning.\n\n#### Config Structs\nMassive Config structs couple together unrelated packages. Massive structs are confusing and hide complexity. Pass in exactly what you need, or use functional options.\n\n#### Pointers Everywhere\nPointers are about ownership and aren't necessarily faster. Stick to your meaning of pointers.\n\n#### Context.Value\n`Value()` and `WithValue()` are undocumented, typeless side channels for passing values. Use them minimally. `WithTimeout` / `WithDeadline` are still good.\n\n#### Asynchronous APIs\nThe Go `http` library is a good example of how to hide asynchronous APIs. Prefer synchronous, it's a lot harder to make an asychronous API synchronous.\n\n#### If - Then - Else\nHappy path is best path. When it's not possible, refactor.\n\n"
+    }
+  ]
+}

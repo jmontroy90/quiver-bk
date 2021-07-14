@@ -1,0 +1,9 @@
+{
+  "title": "io",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "`WriteTo` writes from your receiver to your arg. `ReadFrom` reads from your arg and writes it into your receiver.\n`bufio` is meant to wrap existing Readers into a buffered reader -- read from something expensive once, and buffer the results in memory.\nThings like `Read(..)` and `Write(...)` move internal slice indexes for things like `bytes` and `strings` implementations. So you can only run them once.\nAll sorts of things are Readers -- data like `bytes.Buffer`, or things like TCP connections, files, etc., anything where a naked `Read()` function makes sense (e.g. there's only one way to do it).\n\nThe difference between, say, `Read` (source -> dest) and `WriteTo` (also source -> dest) is that `WriteTo` works with interfaces, so you don't need to understand what you're really doing in order to use the stuff. `Read` and `Write` are lower-level -- they always deal with byte slices; `ReadFrom` and `WriteTo` work at the interface level.\n"
+    }
+  ]
+}

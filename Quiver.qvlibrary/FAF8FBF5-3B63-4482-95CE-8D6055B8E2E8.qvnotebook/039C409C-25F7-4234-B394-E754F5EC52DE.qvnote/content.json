@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 13 - Emergency Response",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Understand incident management. Where and how are incidents managed? What are the different options, teams, and escalation paths for managing an incident? Are all potentially impacted parties able to access this incident management? Are they being emailed? Slacked?\n\nRollback procedures are just important as the actual code changes. It's not an afterthought.\n\n\"Out-of-band communication\" -- how do you communicate and coordinate on an outage if your communication software is ALSO adversely impacted? Who gets a page if PagerDuty is down? Set up your systems and networks to minimize the blast radius of your changes!\n\nThis chapter wasn't very interesting."
+    }
+  ]
+}

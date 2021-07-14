@@ -1,0 +1,9 @@
+{
+  "title": "Nodes",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "https://kubernetes.io/docs/concepts/architecture/nodes/\n\nTwo ways to register Nodes:\n1) Kubelets self-register (can do so with taints)\n2) Nodes are created manually via `kubectl`\nEither way, the API Server checks for registered kubelets that match the Node name, and checks health endpoints accordingly.\n\n"
+    }
+  ]
+}

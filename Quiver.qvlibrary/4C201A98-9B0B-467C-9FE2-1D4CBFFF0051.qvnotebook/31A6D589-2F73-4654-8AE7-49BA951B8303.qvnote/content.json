@@ -1,0 +1,9 @@
+{
+  "title": "Istio Multicluster Routing",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "## Istio Multicluster\n\n(from KubeCon 2020)\n\nPreviously, two models: replicated control plane and shared control plane. Confusing!\nNow: **unified** model! Can choose:\n- Primary or remote Istio control planes\n- Selective visibility of services\n- Meshes all trust each other with common CA\n- Tenancy can be namespace or cluster (we do namespace tenancy)\n\n1) Control plane\n\t- Istiod can run with multiple primaries for clusters (think availability, one per region), or select a remote control plane.\n\t- You can also set up an istiod control plane outside of a mesh entirely! Separate control plane administration from meshes.\n2) Multiple networks\n\t- Meshes in different networks can communicate via Istio gateways\n\nScenarios:\n1) Multi-primary same network: install Istio resource, then just create \"remote secrets\" so clusters can talk\n2) Multi-primary multi-network: install Istio resource, create remote secrets, set up gateways for tunneling, expose user services\n3) Primary-remote same network: one Istio, remote secrets, gateways, expose\n4) Primary-remote multi-network: \n\nDemo: two IBM cloud clusters, two Google Cloud clusters, all with different primary/remote setups. Different topologies, different clouds, ONE mesh! Full Multicluster App possible, e.g. services and replicas routed seamlessly across clusters.\n\nVMs: can incorporate them via WorkloadGroups, use same gateway, use istiod as remote, can communicate with services as normal! Even supports autoscaling VM groups.\n\n"
+    }
+  ]
+}

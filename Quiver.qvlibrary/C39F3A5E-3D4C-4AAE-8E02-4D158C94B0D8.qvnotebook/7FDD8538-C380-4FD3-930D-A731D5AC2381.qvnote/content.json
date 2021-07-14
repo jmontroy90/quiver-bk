@@ -1,0 +1,9 @@
+{
+  "title": "Understanding Channels",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=KBZlN0izeiY)\n\n### Channel properties\n1) goroutine-safe\n2) FIFO semantics\n3) can block / unblock\n4) store / pass values between goroutines\n\n### The `hchan` structure\n\n![IMAGE](quiver-image-url/8ADDD97ECA52326FF3C43250219EF572.jpg =1182x552)\nNote  the `recvx` and `sendx` are both zero when `buf` is full -- that's the (informal) definition of a circular queue!\n\n`make` returns a pointer to a new `hchan` allocated on the heap!\n\n### Sends and Recieves\nWhen sending:\n1) Acquire lock\n2) Enqueue: copy into `buf`, copy by VALUE, nothing shared\n3) Release lock\n\nRecieving is the same but in reverse. So the only memory that is shared is the `hchan` itself, everything else is copied and thtus safe.\n\n### Blocks\nIf a channel is full, the Go scheduler steps in (`M:N` scheduling between Goroutines and OS threads).\n\nA send to a full channel calls `gopark` on the scheduler, s.t. the OS thread is free for more multiplexing.\n\nBut now: how do we **resume**?\n\n### Resuming Goroutines\nMore data structures within `hchan`!\n![IMAGE](quiver-image-url/859FE63EDE446FC948EC02F2E54BE006.jpg =1208x706)\nOn a wait, a sender will put something in the `sendq`, and the future reciever will use that information to resume, eventually calling `goready` in the scheduler. \n\n**Direct Send**: if a Goroutine is parked waiting to recieve from an empty channel, it'll add to the `recvq` structure, where `elem` is the variable waiting to recieve the channel value. When another goroutine writes to that empty channel, it can actually just write directly to `elem`, essentially writing into another goroutine's stack! This is an optimization.\n\n**Unbuffered** channels always work like direct send!"
+    }
+  ]
+}

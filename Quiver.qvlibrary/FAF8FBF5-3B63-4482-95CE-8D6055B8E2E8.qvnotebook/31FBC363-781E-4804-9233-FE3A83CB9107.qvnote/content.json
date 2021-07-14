@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 14 - Managing Incidents",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Several roles should emerge during an incident:\n\n1) Incident Command -- high-level state of incident. Delegates tasks, prioritizes.\n2) Operational Work -- does the actual work of mitigation. Should be the only ones doing it.\n3) Communication -- public face of incident. Sends out periodic updates, documents ongoing work.\n4) Planning - longer-term than ops; files bugs, deals with handoffs, tracks what's been done so far.\n\nHaving a stable communications channel and a live war room for incidents is key.\n\nIf an outage is visible to customers, unresolved after an hour, or involves multiple teams, it's an incident! Treat it as such!"
+    }
+  ]
+}

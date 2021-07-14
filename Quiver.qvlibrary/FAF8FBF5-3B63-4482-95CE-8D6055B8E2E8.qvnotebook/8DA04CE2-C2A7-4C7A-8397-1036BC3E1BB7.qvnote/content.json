@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 15 - Postmortem Culture",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Triggers for postmortems:\n* User-visible downtime or degradation beyond a certain threshold\n* Data loss of any kind\n* On-call engineer intervention (release rollback, rerouting of traffic, etc.)\n* A resolution time above some threshold\n* A monitoring failure (which usually implies manual incident discovery)\n\n> A blamelessly written postmortem assumes that everyone involved in an incident had good intentions and did the right thing with the information they had. If a culture of finger pointing and shaming individuals or teams for doing the \"wrong\" thing prevails, people will not bring issues to light for fear of punishment.\n\n> When postmortems shift from allocating blame to investigating the systematic reasons why an individual or team had incomplete or incorrect information, effective prevention plans can be put in place.\n\nWriting a postmortem without pointing fingers (identifying people behind particular bad moments) can be challenging, but it's very necessary.\n\n[Example postmortem from Google](https://landing.google.com/sre/sre-book/chapters/postmortem/)\n\nPostmortems should be on a platform with:\n* Real-time collaboration\n* Comments / annotations support\n* Notification systems for contributors / subscribers\n\nWays to get uptake:\n* \"Wheel of Misfortune\" -- replay a previous incident with that incident commander! Share best practices.\n* Celebrate people who do postmortems - shout-outs, applause, bonuses?!\n* Solicit feedback on postmortems -- how long does it take to do one? Is there toil? What tooling should exist?"
+    }
+  ]
+}

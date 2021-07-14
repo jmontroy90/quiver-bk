@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 8 - Release Engineering",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "**Useful Metrics**\n1) how much time it takes for a code change to be deployed into production (in other words, release velocity) \n2) statistics on what features are being used in build configuration files\n\n**Typical Best Practices**\n1) compiler flags\n2) formats for build identification tags\n3) required steps during a build\n\nRelease engineering must be:\n* **Self-service** -- automated build and deploy, independence between teams, no need for a release engineer\n* **High Velocity** -- frequent rebuilds, small changes between them; run test / benchmark suites and choose a release to push to production;\n* **Hermetic Builds** -- version your builds AND your build tools; if you need to cherry pick a fix, you should be able to completely reconstruct your application and its CI/CD pipeline. Reproducibility is crucial...kinda like atomicity.\n* **Policy-Driven** -- PR approvals, code owners, build approvals, new deploys, config changes, release notes -- all must have a clear audit trail, and be as automated as possible.\n\n"
+    }
+  ]
+}

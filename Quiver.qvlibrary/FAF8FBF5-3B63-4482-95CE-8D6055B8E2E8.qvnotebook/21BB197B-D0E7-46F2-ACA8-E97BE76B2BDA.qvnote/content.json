@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 16 - Tracking Outages",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "How do you track pages and outages over time? Not every incident gets a postmortem, and you need to be able questions like:\n> We can also get useful information from questions such as, \"How many alerts per on-call shift does this team get?\", \"What’s the ratio of actionable/nonactionable alerts over the last quarter?\", or even simply \"Which of the services this team manages creates the most toil?\"\n\nGoogle uses \"Outalator\" internally to allow for escalations, grouping, queue management, and so on. It also allows for tagging alerting events, with things like `cause:network:cable`, e.g. a lightweight, freeform hierarchical system.\n\nAnalysis is key too, e.g. for those questions above. Counts by team or service are important, but identifying cross-team dependencies and outages is equally important -- add semantic meaning to your analysis!\n\nIt can also enable handoffs and reports!\n> Of more immediate use to frontline SREs is the ability to select zero or more outalations and include their subjects, tags, and \"important\" annotations in an email to the next on-call engineer (and an arbitrary cc list) in order to pass on recent state between shifts. For periodic reviews of the production services (which occur weekly for most teams), the Outalator also supports a \"report mode,\" in which the important annotations are expanded inline with the main list in order to provide a quick overview of lowlights.\n\nFinally, cross-team visibility and escalation is crucial - no silos!"
+    }
+  ]
+}

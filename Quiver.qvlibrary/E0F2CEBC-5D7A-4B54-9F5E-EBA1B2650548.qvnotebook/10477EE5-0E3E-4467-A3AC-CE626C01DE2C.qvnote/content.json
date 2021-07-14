@@ -1,0 +1,9 @@
+{
+  "title": "Chapter 2: Communicating Sequential Processes",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "This chapter is mostly abstract and historical.\n\nGo has both locking primitives (mutex, `sync` package) and CSP primitives (channels, select). Choose the concurrency solution that best maps to your problem space. Some pointers:\n1. Anything to do with many goroutines handling multiple pieces of logic should point to channels. Channels are composable, allow for transfer for ownership, and can function as queues.\n2. Anything with critical sections that are hit by many goroutines is more mutex land. You're not sharing data, you're synchronizing access.\n3. Anything with internal state also screams mutexes. You want workers to have synchronized access to your state, so you lock in your exported methods. Again, the same data isn't being transferred to multiple workers; multiple workers are accessing the same data."
+    }
+  ]
+}

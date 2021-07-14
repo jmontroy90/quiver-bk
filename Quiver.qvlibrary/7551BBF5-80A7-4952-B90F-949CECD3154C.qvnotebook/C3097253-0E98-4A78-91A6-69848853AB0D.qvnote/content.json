@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "### Questions\n1) Does order matter?\n2) Are there duplicates?\n3) What is the domain of your inputs?\n4) Can we early-exit in our algorithm, e.g. discover we're done before the algorithm technically completes?\n  * Early-exit on a bubble sort pass if nothing was swapped"
+      "data": "### Questions\n1) Does order matter?\n2) Are there duplicates?\n3) What is the domain of your inputs?\n4) Can we early-exit in our algorithm, e.g. discover we're done before the algorithm technically completes?\n  * Early-exit on a bubble sort pass if nothing was swapped\n5) Do we have to cache state in our algorithm? Can we use just a `tmp` var? How about re-using the original allocated space?"
     }
   ]
 }

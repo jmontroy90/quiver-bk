@@ -1,0 +1,9 @@
+{
+  "title": "Pull Requests",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Four tiers of review, in order of importance:\n1) **Context**: what actual ticket is this related to? What business value is this adding?\n2) **Correctness**: does the code do what it's intended to do? Are there edge cases or bugs? Are there tests?\n3) **Structure**: is the code maintainable? Does it add more complexity than needed? Is it tactical or a refactor? Does it avoid anti-patterns?\n4) **Style**: is the code written according to best practices? Team standards? Is it documented?\n\nFor **correctness**:\n* Look for magic values that we switch on. Is that conditional exhaustive?\n* Look for partial failures / non-atomic operations. Are we good with all the possible failure modes?\n* Look for mutations and state management. Do we correctly track state in caches, or on slices, or in maps? Do we mutate a pointer receiver correctly if we're trying to?\n* Look for unguarded map access, bad nil handling, casts and assertions, swallowed errors. All nitty-gritty low-level errors.\n\nFor **structure**:\n* Does the code prefer functions over structs + methods? Why or why not?\n* Is the code going for incremental, tight-loop processing? Or more batch-oriented?\n\nFor **style** (e.g. \"_points of identity_\"):\n1) Understand my own identity and preference -- I like immutability and batch processing because of my Scala background.\n2) Does this really matter? How would I feel if someone pointed this out to me? Can it be cleaned up later?\n"
+    }
+  ]
+}

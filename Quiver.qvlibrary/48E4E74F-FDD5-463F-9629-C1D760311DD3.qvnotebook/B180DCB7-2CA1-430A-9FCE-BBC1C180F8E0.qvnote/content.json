@@ -1,0 +1,9 @@
+{
+  "title": "PagerDuty",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "\n\n## Debugging Legacy DC Clusters\n[DC Inventory](https://gecgithub01.walmart.com/wce/cluster-configs/tree/master/inventory)\n- ssh wce@wce-deploy-host.stage.wce-deploy-host.dfw1.qa.walmart.com)\n- export KUBECONFIG=/home/wce/dckubeconfig/config\n- k config use-context 07026c1\n\n\n[VMWare for DCs / Stores](https://confluence.walmart.com/pages/viewpage.action?spaceKey=STRKEIGHTS&title=Cluster+to+Vmware+Vcenter+server+mapping) (log in to phova72101usb.homeoffice.wal-mart.com)\n  - then check under the k8s pool for alerts\n\n## Scaling AZ scalesets outside the UI\naz vmss list --resource-group rg-eus2-prod-aperf2 --subscription sp-azrk8seastus2prod-perf-000\nkubectl scale deployment azure-cluster-autoscaler  -n kube-system  --replicas=0\n\n## General Tips\n* Reboots at various granularities (pod, kubelet, deployment, node) are unreasonably effective.\n* It's fine to just bounce unfriendly nodes via the Azure portal, apparently?\n\n## During Incidents\n* Ask yourself: fastest path to recovery?\n* Constantly search Confluence, Slack, and GitHub for keywords that come up (store, subject, IPs)\n    * Make sure you use partial keyword searches, to get zoomed-out, less granular details.\n* When in doubt on ownership, just ask: who owns this what team?\n\n## Teams\n* DDI / IPAM -- managing DNS for Walmart, stores and DCs."
+    }
+  ]
+}

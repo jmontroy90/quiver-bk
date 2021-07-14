@@ -1,0 +1,9 @@
+{
+  "title": "SOLID Go Design",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=zzAdEt3xZ1M)\n\n### Single Responsibility Principle\nThink Go packages - no catch-alls like `common`, `server`, `util`.\n\nTypes and funtions serve a single purpose!\n\n### Open-Closed Principle\nGo structs follow this via embedding. Methods are just functions with the receiver passed in, and Go doesn't do function overloading. So no risk of overrides changing entity behavior.\n\n### Liskov Substitution Principle\nInterfaces - small, single method!\n\nDependencies between packages should be interfaces, not types.\n\n### Interface Segregation Principle\n`func Save(f *os.File, doc *Document) error` -- this precludes different write locations and makes testing harder. We can do better!\n\nAlso: `os.File` defines behavior we don't need!\n\n\"Accept interfaces, return structs.\"\n\nOnly depend on behavior you need.\n\n### Dependency Inversion Principle\nDetails should depend on abstractions.\n\nYour import graph should be simple: wide and flat.\n\nAccepting interfaces moves dependencies from compile-time (manual imports) to runtime (we got some interface value, it knows what to do and we don't care and haven't imported it!).\n\n### Conclusion\n\nFocus on design, not frameworks or speed. Make code that is well-engineered, decoupled, reusable, and responsive."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Things to Bring Up in One-on-Ones",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "* When is rotation starting?\n* Retro feels way too much like \"team gives feedback, Luis defends himself\" -- Luis doesn't need to always be the first one to speak when a card comes up.\n* Please don't merge MY PRs or ignore my PR comments with a force merge.\n* Don't rush to fix things. We almost merged a catastrophic change into Helmsman because of your hasty PR. All of your PRs are additive, never healing."
+    }
+  ]
+}

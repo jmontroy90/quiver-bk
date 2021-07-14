@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "markdown",
-      "data": "### Design\n* Functions are for behavior. If your functions contain excessive state, ask yourself why the state isn't an argument. If referring to encapsulated state (methods), be careful on how transparent your use of that state is.\n\n### Mental Models\nHow much does the programmer need to keep in their head to successfully develop within your system? Can you keep 10k lines of code in your head?"
+      "data": "### Design\n* Functions are for behavior. If your functions contain excessive state, ask yourself why the state isn't an argument. If referring to encapsulated state (methods), be careful on how transparent your use of that state is.\n\n### Mental Models\nHow much does the programmer need to keep in their head to successfully develop within your system? Can you keep 10k lines of code in your head?\n\n### Separation of Concerns\nLack of imagination is not a good reason to choose an architecture. We architect knowing the future is uncertain, and how can we best keep our system maintainable on that principle alone.\n\n### Structs / Functions\nKeep state on your structs. Encapsulate sub-behaviors to make tests / mocking easier.\n\n### Testing\n* Test the smallest possible surface area at a time. If you find yourself managing a lot of state and mocking in one function, you probably should re-architect your code.\n* Be very careful when changing your code because of tests. Changing your code because of weaknesses surfaced by tests is good -- changing your code to make testing easier is not good. Subtle difference, but important."
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "title": "MultiClusterApp (Containers)",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "Two CRDs to remember:\n1) **MultiClusterApp**\n2) **ClusterGroup**\n\n#### MultiClusterApp\n*"
+    }
+  ]
+}

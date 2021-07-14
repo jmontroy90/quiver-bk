@@ -1,0 +1,13 @@
+{
+  "title": "The Scheduler Saga",
+  "cells": [
+    {
+      "type": "markdown",
+      "data": "[Link to video](https://www.youtube.com/watch?v=YHRO5WQGh0k)\n\nThe scheduler managers: scheduling, pausing, resuming goroutines; runtime tasks like GC, blocking system and network I/O calls\n\n**Why a scheduler?**\n* goroutines: user-space threads (green threads); managed totally by Go runtime; faster and smaller than kernel / OS threads\n* Scheduler schedules goroutines on kernel threads\n* When does it schedule: when things are created, block, or dealing with blocking I/O\n\n### Goals\n1) small number of kernel threads (they're more expensive)\n2) high concurrency; tons of goroutines\n3) leverage parallelism; use all N cores well by running up to N goroutines\n\n### BUILDING IT\n* **_runqueues_**: heap-allocated FIFO queue tracks runnable goroutines in your runtime\n* **_thread parking_**: put threads to sleep when not used; re-use when new work is available (e.g. a goroutine to to pop off runqueue)\n* **_idle threads list_**: where kernel threads with no goroutines scheduled on it live\n* **_limit number of new threads_**: too many threads contending on the shared runqueue (locking, serialism) is no good.\n  * best limit: number of CPU cores!\n* **_one shared runqueue is still a problem_**: let's create N runqueues, one per thread!\n* **_work-stealing_**: if a thread-local (per-core) runqueue is empty, steal half the work from another thread's runqueue!\n* **_blocked threads_**: background thread detects blocked threads with goroutines in its runqueue; via HANDOFF, a new thread is created (limits don't matter for blocked threads) that takes the blocked thread's runqueue\n* what about long-running, non-blocking goroutines? the go runtime implements **_cooperative pre-emption_**, where those long-running goroutines (>10ms) are put on a GLOBAL, low-priority runqueue.\n\n### IN SUM\n1) re-use threads\n2) limit # of threads\n3) work-stealing + hand-off\n"
+    },
+    {
+      "type": "text",
+      "data": "<div><br></div><div><br></div>"
+    }
+  ]
+}
